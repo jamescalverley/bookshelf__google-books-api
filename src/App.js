@@ -10,8 +10,8 @@ function App() {
     <Router>
       <div className="App">
       <NavBar />
-      <Route exact path={"/"} component={SearchPage}/>
-      <Route exact path={"/savedbooks"} component={SavedPage}/>
+      <Route exact path={"/"} component={SearchPage} />
+      <Route exact path={"/savedbooks"} component={SavedPage} />
     </div>
     </Router>
     
