@@ -6,7 +6,6 @@ function SearchPage(){
 
     const [resultsDisplay, setResultsDisplay] = useState(false);
 
-
     function handleApiCall(search){
         console.log("[handleApiCall]", search)
     };
@@ -15,7 +14,6 @@ function SearchPage(){
         setResultsDisplay(true)
     };
 
-
     return ( 
         <div className="search-page">
             <h1>SearchPage</h1>
@@ -23,10 +21,9 @@ function SearchPage(){
                 apiCall={handleApiCall}
                 showResults={showResults}
             />
-            {resultsDisplay && 
+            { resultsDisplay && 
                 <Results />
-            }
-            
+            }            
         </div>
     )
 };
