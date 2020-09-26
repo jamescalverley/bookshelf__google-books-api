@@ -8,7 +8,6 @@ function Input(props){
     ev.preventDefault();
     console.log(`[handleSearch] --- search: ${inputText}`);
     props.apiCall(inputText);
-    props.showResults();
   };
 
   function handleInputChange(ev){

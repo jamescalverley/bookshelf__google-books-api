@@ -4,7 +4,7 @@ const router = express.Router();
 const { getSearchResults } = require('../controllers/handleBooks');
 
 router
-  .route('/searchresults/:search')
+  .route('/search/:searchterm')
   .get( getSearchResults )
   
 

@@ -1,13 +1,15 @@
 import React from 'react';
 
-function Book(){
+function Book( {book} ){
+
+  console.log("BOOK", book)
 
   return (
     <div className="book-contatiner">
-      <h2>Book Title</h2>
-      <h3>Author</h3>
-      <p>Description</p>
-      <h5>Preview Link</h5>
+      <h2>{book.volumeInfo.title}</h2>
+      <h3>{book.volumeInfo.authors[0] || "no author"}</h3>
+      <p>{book.volumeInfo.description}</p>
+      <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener noreferrer">Preview</a>
     </div>
   )
 };
