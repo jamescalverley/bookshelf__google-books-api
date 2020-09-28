@@ -1,7 +1,7 @@
 import React from 'react';
 const axios = require('axios');
 
-function Book( props ){
+function SearchedBook( props ){
 
   const bookData = {
     bookID: props.bookID,
@@ -38,4 +38,4 @@ function Book( props ){
   )
 };
 
-export default Book;
+export default SearchedBook;

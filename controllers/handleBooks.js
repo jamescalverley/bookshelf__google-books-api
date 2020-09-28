@@ -54,5 +54,27 @@ async function saveBook(req,res){
   };
 };
 
-exports.getSearchResults = getSearchResults;
-exports.saveBook = saveBook;
+async function getSavedBooks(req,res){
+  console.log("[getSavedBooks]".bold.blue);
+  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
+  try {
+
+    const savedBooks = await SavedBook.find();
+    console.log("Saved Books: ".green, savedBooks.length)
+
+    return res.status(200).json({
+      success: true,
+      savedBooks: savedBooks
+    });
+
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "SERVER ERROR -- getSavedBooks", 
+      error: err})
+  };
+};
+
+
+module.exports = { getSearchResults, saveBook, getSavedBooks };
+

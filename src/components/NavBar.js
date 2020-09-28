@@ -13,7 +13,7 @@ return (
                     <Link to="/">Search</Link>
                 </li>
                 <li>
-                    <Link to="/savedBooks">Saved Books</Link>
+                    <Link to="/savedbooks">Saved Books</Link>
                 </li>
             </ul>
         </nav>

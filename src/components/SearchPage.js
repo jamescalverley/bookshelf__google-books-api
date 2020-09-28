@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Input from './Input';
-import Book from './Book';
+import SearchedBook from './SearchedBook';
 import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
@@ -16,7 +16,7 @@ function SearchPage(){
             console.log("LIST", resultsList); 
             setBooksList([...resultsList]);
         } catch (err) {
-            console.log("ERROR", err)
+            console.log("ERROR", err);
         };
     };
 
@@ -27,7 +27,7 @@ function SearchPage(){
             <h1>SearchPage</h1>
             <Input apiCall={handleApiCall} />
             { booksList.map( book => 
-                <Book 
+                <SearchedBook 
                     key={uuidv4()}
                     bookID={book.id} 
                     book={book}

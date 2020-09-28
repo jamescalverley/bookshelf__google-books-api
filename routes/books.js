@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getSearchResults, saveBook } = require('../controllers/handleBooks');
+const { getSearchResults, saveBook, getSavedBooks } = require('../controllers/handleBooks');
 
 router
   .route('/search/:searchterm')
@@ -10,6 +10,10 @@ router
 router 
   .route('/')
   .post( saveBook )
+
+router
+  .route('/savedbooks')
+  .get( getSavedBooks )
   
 
   module.exports = router;
