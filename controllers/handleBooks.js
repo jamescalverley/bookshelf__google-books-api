@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const SavedBook = require('../db/models/BookSchema');
+const SavedBooks = require('../db/models/BookSchema');
 require('dotenv').config();
 
 async function getSearchResults(req,res){
@@ -28,38 +28,12 @@ async function getSearchResults(req,res){
   }
 };
 
-async function saveBook(req,res){
-  console.log("[saveBook]".bold.blue);
-  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
-  console.log(req.body);
-  try {
-    const bookData = {
-      bookID: req.body.bookID, 
-      title: req.body.title, 
-      authors: req.body.authors,
-      description: req.body.description,
-      link: req.body.link
-    };
-    const savedBook = await SavedBook.create(bookData);
-    console.log(`Success -- book saved: ${savedBook}`.cyan);
-    return res.status(200).json({
-      success: true,
-      data: savedBook
-    });
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: "SERVER ERROR -- saveBook", 
-      error: err})
-  };
-};
-
 async function getSavedBooks(req,res){
   console.log("[getSavedBooks]".bold.blue);
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   try {
 
-    const savedBooks = await SavedBook.find();
+    const savedBooks = await SavedBooks.find();
     console.log("Saved Books: ".green, savedBooks.length)
 
     return res.status(200).json({
@@ -75,6 +49,58 @@ async function getSavedBooks(req,res){
   };
 };
 
+async function saveBook(req,res){
+  console.log("[saveBook]".bold.blue);
+  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
+  console.log(`Save Book: ${req.body.title} - ${req.body.bookID}`);
+  try {
+    const bookData = {
+      bookID: req.body.bookID, 
+      title: req.body.title, 
+      authors: req.body.authors,
+      description: req.body.description,
+      link: req.body.link
+    };
+    const savedBook = await SavedBooks.create(bookData);
+    console.log(`Success -- book saved: ${savedBook._id} - ${savedBook.bookID}`.cyan);
+    return res.status(200).json({
+      success: true,
+      data: savedBook
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "SERVER ERROR -- saveBook", 
+      error: err})
+  };
+};
 
-module.exports = { getSearchResults, saveBook, getSavedBooks };
+async function deleteBook(req,res){
+  console.log("[deleteBook]".bold.blue);
+  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
+  console.log(req.params)
+  try {
+  const deleteID = req.params.deleteID;
+  console.log("DELETE".red, deleteID)
+
+  const deleteBook = await SavedBooks.deleteOne({ bookID: deleteID });
+  console.log("SUCCESS".green, deleteBook.deletedCount )
+
+  return res.status(200).json({
+    success: true,
+    message: `Book: ${deleteID} deleted`
+  });
+
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "SERVER ERROR -- saveBook", 
+      error: err})
+
+  };
+
+ 
+};
+
+module.exports = { getSearchResults, getSavedBooks, saveBook, deleteBook };
 
