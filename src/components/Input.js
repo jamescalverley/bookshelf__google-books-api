@@ -12,7 +12,6 @@ function Input(props){
 
   function handleInputChange(ev){
     const searchText = ev.target.value;
-    console.log(searchText);
     setInputText(searchText);
   };
 

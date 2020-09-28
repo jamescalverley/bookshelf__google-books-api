@@ -4,8 +4,6 @@ import Book from './Book';
 import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
-
-
 function SearchPage(){
 
     const [booksList, setBooksList] = useState([]);
@@ -14,8 +12,7 @@ function SearchPage(){
         console.log("[handleApiCall]", searchTerm);
         try {
             const result = await axios.get(`/api/search/${searchTerm}`)
-            console.log("result", result);
-            const resultsList = result.data.data.items;
+            const resultsList = result.data.books;
             console.log("LIST", resultsList); 
             setBooksList([...resultsList]);
         } catch (err) {
@@ -23,12 +20,22 @@ function SearchPage(){
         };
     };
 
+    console.log("booksList", booksList)
+
     return ( 
         <div className="search-page">
             <h1>SearchPage</h1>
             <Input apiCall={handleApiCall} />
-            { booksList.map( bookResult => 
-                <Book book={bookResult} key={uuidv4()} />
+            { booksList.map( book => 
+                <Book 
+                    key={uuidv4()}
+                    bookID={book.id} 
+                    book={book}
+                    title={book.volumeInfo.title}
+                    authors={book.volumeInfo.authors}
+                    description={book.volumeInfo.description}
+                    infoLink={book.volumeInfo.infoLink}   
+                />
             )}            
         </div>
     )

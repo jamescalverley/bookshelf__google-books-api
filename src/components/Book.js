@@ -1,15 +1,39 @@
 import React from 'react';
+const axios = require('axios');
 
-function Book( {book} ){
+function Book( props ){
 
-  console.log("BOOK", book)
+  const bookData = {
+    bookID: props.bookID,
+    title: props.title,
+    authors: props.authors[0],
+    description: props.description, 
+    link: props.infoLink
+  };
+
+  console.log(bookData)
+
+  async function saveBook(){
+    try {
+      const result = await axios.post('/api', bookData);
+      console.log("Post Success", result)
+    } catch (err) {
+        console.log("POST ERROR", err)
+    };
+  };
+
+  function handleSave(){
+    console.log("Saving book: ", bookData)
+    saveBook();
+  };
 
   return (
     <div className="book-contatiner">
-      <h2>{book.volumeInfo.title}</h2>
-      <h3>{book.volumeInfo.authors[0] || "no author"}</h3>
-      <p>{book.volumeInfo.description}</p>
-      <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener noreferrer">Preview</a>
+      <h2>{props.title}</h2>
+      <h3>{props.authors[0]}</h3>
+      <p>{props.description}</p>
+      <button onClick={handleSave}>Save</button>
+      <a href={props.infoLink} target="_blank" rel="noopener noreferrer">Preview</a>
     </div>
   )
 };
