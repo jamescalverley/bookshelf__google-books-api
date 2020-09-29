@@ -20,7 +20,7 @@ function SearchPage(){
         };
     };
 
-    console.log("booksList", booksList)
+    
 
     return ( 
         <div className="search-page">
@@ -34,7 +34,8 @@ function SearchPage(){
                     title={book.volumeInfo.title}
                     authors={book.volumeInfo.authors}
                     description={book.volumeInfo.description}
-                    infoLink={book.volumeInfo.infoLink}   
+                    infoLink={book.volumeInfo.infoLink}
+                    image={book.volumeInfo.imageLinks.thumbnail}   
                 />
             )}            
         </div>

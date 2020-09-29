@@ -8,7 +8,8 @@ function SearchedBook( props ){
     title: props.title,
     authors: props.authors[0],
     description: props.description, 
-    link: props.infoLink
+    link: props.infoLink,
+    image: props.image
   };
 
   console.log(bookData)
@@ -29,11 +30,16 @@ function SearchedBook( props ){
 
   return (
     <div className="book-contatiner">
-      <h2>{props.title}</h2>
-      <h3>{props.authors[0]}</h3>
-      <p>{props.description}</p>
-      <button onClick={handleSave}>Save</button>
-      <a href={props.infoLink} target="_blank" rel="noopener noreferrer">Preview</a>
+      <div className="book-image">
+        <img src={props.image} alt="book-cover"/>        
+      </div>
+      <div className="book-info">
+        <h2>{props.title}</h2>
+        <h3>{props.authors[0]}</h3>
+        <p>{props.description}</p>
+        <button onClick={handleSave}>Save</button>
+        <a href={props.infoLink} target="_blank" rel="noopener noreferrer">Preview</a>
+      </div>
     </div>
   )
 };

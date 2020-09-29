@@ -37,6 +37,7 @@ function SavedPage(){
                     authors={book.authors}
                     description={book.description}
                     infoLink={book.infoLink}   
+                    image={book.image}
                 />
             )} 
         </div>

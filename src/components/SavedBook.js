@@ -29,11 +29,17 @@ function SavedBook(props){
     <>
     { display && 
       <div className="book-contatiner">
-        <h2>{props.title}</h2>
-        <h3>{props.authors}</h3>
-        <p>{props.description}</p>
-        <button onClick={handleDelete}>Remove</button>
-        <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
+        <div className="book-image">
+          <img src={props.image} alt="book-cover"/>
+        </div>
+        <div className="book-info">
+          <h2>{props.title}</h2>
+          <h3>{props.authors}</h3>
+          <p>{props.description}</p>
+          <button onClick={handleDelete}>Remove</button>
+          <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
+        </div>
+        
       </div>
     }
     </>
