@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 const axios = require('axios');
 
 function SavedBook(props){
+
+  const [display, setDisplay] = useState(true);
 
   const bookData = {
     deleteID: props.bookID
@@ -20,16 +22,29 @@ function SavedBook(props){
   function handleDelete(){
     console.log("DELETE BOOK --", bookData);
     deleteBook();
+    setDisplay(false);
   };
 
   return (
-    <div className="book-contatiner">
-      <h2>{props.title}</h2>
-      <h3>{props.authors}</h3>
-      <p>{props.description}</p>
-      <button onClick={handleDelete}>Remove</button>
-      <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
-    </div>
+    <>
+    { display && 
+      <div className="book-contatiner">
+        <h2>{props.title}</h2>
+        <h3>{props.authors}</h3>
+        <p>{props.description}</p>
+        <button onClick={handleDelete}>Remove</button>
+        <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
+      </div>
+    }
+    </>
+    
+    // <div className="book-contatiner">
+    //   <h2>{props.title}</h2>
+    //   <h3>{props.authors}</h3>
+    //   <p>{props.description}</p>
+    //   <button onClick={handleDelete}>Remove</button>
+    //   <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
+    // </div>
   )
 };
 
