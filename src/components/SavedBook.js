@@ -4,10 +4,7 @@ const axios = require('axios');
 function SavedBook(props){
 
   const [display, setDisplay] = useState(true);
-
-  const bookData = {
-    deleteID: props.bookID
-  }
+  const bookData = { deleteID: props.bookID };
 
   async function deleteBook(){
     try {
@@ -15,8 +12,7 @@ function SavedBook(props){
       console.log(result);
     } catch (err) {
       console.log("ERROR", err);
-  };
-
+    };
   };
 
   function handleDelete(){
@@ -44,13 +40,7 @@ function SavedBook(props){
     }
     </>
     
-    // <div className="book-contatiner">
-    //   <h2>{props.title}</h2>
-    //   <h3>{props.authors}</h3>
-    //   <p>{props.description}</p>
-    //   <button onClick={handleDelete}>Remove</button>
-    //   <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
-    // </div>
+
   )
 };
 

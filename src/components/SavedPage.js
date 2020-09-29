@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import SavedBook from './SavedBook';
+import NoBooks from './NoBooks';
 import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
 function SavedPage(){
     console.log("SavedPage loading")
-    
     const [booksList, setBooksList] = useState([]);
-
+    
     async function getSavedBooks(){
         console.log("[getSavedBooks] ----");
         try {
@@ -15,7 +15,6 @@ function SavedPage(){
             console.log(result);
             const savedBooks = result.data.savedBooks;
             setBooksList([...savedBooks]);
-
         } catch (err) {
             console.log("ERROR", err);
         };
@@ -27,21 +26,23 @@ function SavedPage(){
 
     return (
         <div className="saved-page">
-            <h1>SavedPage</h1>
-            { booksList.map( book => 
-                <SavedBook 
-                    key={uuidv4()}
-                    bookID={book.bookID} 
-                    book={book}
-                    title={book.title}
-                    authors={book.authors}
-                    description={book.description}
-                    infoLink={book.infoLink}   
-                    image={book.image}
-                />
-            )} 
-        </div>
-        
+            <h1>Saved Books</h1>
+            { booksList.length > 0 ?
+                booksList.map( book => 
+                    <SavedBook 
+                        key={uuidv4()}
+                        bookID={book.bookID} 
+                        book={book}
+                        title={book.title}
+                        authors={book.authors}
+                        description={book.description}
+                        infoLink={book.infoLink}   
+                        image={book.image}
+                    />)
+                : 
+                <NoBooks />
+            }
+        </div>  
     )
 };
 
