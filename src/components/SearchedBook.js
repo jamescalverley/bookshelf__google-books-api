@@ -12,7 +12,7 @@ function SearchedBook( props ){
     title: props.title,
     authors: props.authors[0],
     description: props.description, 
-    link: props.infoLink,
+    link: props.link,
     image: props.image
   };
 
@@ -51,6 +51,14 @@ function SearchedBook( props ){
       </div>
     </div>
   )
+};
+
+SearchedBook.defaultProps = {
+  title: "",
+  description: "",
+  image: "https://via.placeholder.com/150",
+  link: "",
+  authors: ""
 };
 
 export default SearchedBook;

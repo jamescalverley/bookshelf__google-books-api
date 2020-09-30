@@ -1,13 +1,28 @@
 .App {
   text-align: center;
 }
-
 nav ul {
   display: flex;
   list-style: none;
 }
-
 nav ul li{
   padding: 1rem;
 }
+.book-container {
+  margin: 1rem 4rem 0 4rem;
+}
+.save-button {
+  padding: 0.8rem 1.8rem;
+  margin-right: 0.5rem;
+}
+.saved {
+  background-color: blue;
+  color: aliceblue;
+}
+
+
+
+
+
+
 
