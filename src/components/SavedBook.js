@@ -24,7 +24,7 @@ function SavedBook(props){
   return (
     <>
     { display && 
-      <div className="book-contatiner">
+      <div className="book-container">
         <div className="book-image">
           <img src={props.image} alt="book-cover"/>
         </div>

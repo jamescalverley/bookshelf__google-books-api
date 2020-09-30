@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SaveBtn from './SaveBtn';
+import Saved from './Saved';
 const axios = require('axios');
 
 function SearchedBook( props ){
+
+  const [saved, setSaved] = useState(false)
 
   const bookData = {
     bookID: props.bookID,
@@ -26,10 +30,11 @@ function SearchedBook( props ){
   function handleSave(){
     console.log("Saving book: ", bookData)
     saveBook();
+    setSaved(true);
   };
 
   return (
-    <div className="book-contatiner">
+    <div className="book-container">
       <div className="book-image">
         <img src={props.image} alt="book-cover"/>        
       </div>
@@ -37,8 +42,12 @@ function SearchedBook( props ){
         <h2>{props.title}</h2>
         <h3>{props.authors[0]}</h3>
         <p>{props.description}</p>
-        <button onClick={handleSave}>Save</button>
-        <a href={props.infoLink} target="_blank" rel="noopener noreferrer">Preview</a>
+        { !saved ? 
+          <SaveBtn handleSave={handleSave} />
+          :
+          <Saved />
+        }
+        <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
       </div>
     </div>
   )

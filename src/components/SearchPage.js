@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import Input from './Input';
 import SearchedBook from './SearchedBook';
 import { v4 as uuidv4 } from 'uuid';
@@ -20,8 +20,6 @@ function SearchPage(){
         };
     };
 
-    
-
     return ( 
         <div className="search-page">
             <h1>SearchPage</h1>
@@ -34,7 +32,7 @@ function SearchPage(){
                     title={book.volumeInfo.title}
                     authors={book.volumeInfo.authors}
                     description={book.volumeInfo.description}
-                    infoLink={book.volumeInfo.infoLink}
+                    link={book.volumeInfo.infoLink}
                     image={book.volumeInfo.imageLinks.thumbnail}   
                 />
             )}            
