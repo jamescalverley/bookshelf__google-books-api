@@ -12,7 +12,7 @@ function App() {
       <div className="App">
       <NavBar />
       <ErrorBoundary>
-        <Route exact path={"/"} component={SearchPage} />
+        <Route exact path={["/", "/search"]} component={SearchPage} />
         <Route exact path={"/savedbooks"} component={SavedPage} />
       </ErrorBoundary>
     </div>

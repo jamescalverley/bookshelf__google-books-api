@@ -1,8 +1,10 @@
 import React from 'react';
 import '../App.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function NavBar(){
+
+    
 
 return (
     
@@ -10,10 +12,22 @@ return (
         <nav>
             <ul>
                 <li>
-                    <Link to="/">Search</Link>
+                    <NavLink 
+                        to="/search" 
+                        className="link"
+                        activeClassName="active"  
+                    >
+                        Search
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/savedbooks">Saved Books</Link>
+                    <NavLink 
+                        to="/savedbooks"
+                        className="link"
+                        activeClassName="active"     
+                    >
+                        Saved Books
+                    </NavLink>
                 </li>
             </ul>
         </nav>

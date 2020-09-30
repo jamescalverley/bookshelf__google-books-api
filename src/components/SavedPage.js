@@ -24,26 +24,32 @@ function SavedPage(){
         getSavedBooks();
     }, [])
 
-    return (
-        <div className="saved-page">
-            <h1>Saved Books</h1>
-            { booksList.length > 0 ?
-                booksList.map( book => 
-                    <SavedBook 
-                        key={uuidv4()}
-                        bookID={book.bookID} 
-                        book={book}
-                        title={book.title}
-                        authors={book.authors}
-                        description={book.description}
-                        infoLink={book.infoLink}   
-                        image={book.image}
-                    />)
-                : 
-                <NoBooks />
-            }
-        </div>  
-    )
+
+//! need to have it trigger on something other than booksList
+//! maybe use ternary operator
+
+    if ( booksList.length > 0  ) {
+        return (
+            <div className="saved-page">
+                <h1>Saved Books</h1>
+                    {booksList.map( book => 
+                        <SavedBook 
+                            key={uuidv4()}
+                            bookID={book.bookID} 
+                            book={book}
+                            title={book.title}
+                            authors={book.authors}
+                            description={book.description}
+                            infoLink={book.infoLink}   
+                            image={book.image}
+                        />
+                    )}
+            </div>  
+        )
+    } else {
+        return <NoBooks />  
+    }
+    
 };
 
 export default SavedPage;

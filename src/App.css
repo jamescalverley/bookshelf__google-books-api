@@ -8,6 +8,28 @@ nav ul {
 nav ul li{
   padding: 1rem;
 }
+
+.link {
+  color: black;
+  text-decoration: none;
+}
+.link:hover {
+  color: darkblue;
+  font-weight: bold;
+}
+
+.active {
+  color: blue;
+  font-weight: bold;
+  text-decoration: none;
+  pointer-events: none;
+}
+.active:hover {
+  color: blue;
+  font-weight: bold;
+  text-decoration: none;
+}
+
 .book-container {
   margin: 1rem 4rem 0 4rem;
 }
