@@ -25,9 +25,6 @@ function SavedPage(){
     }, [])
 
 
-//! need to have it trigger on something other than booksList
-//! maybe use ternary operator
-
     if ( booksList.length > 0  ) {
         return (
             <div className="saved-page">
