@@ -20,7 +20,7 @@ function SearchedBook( props ){
 
   async function saveBook(){
     try {
-      const result = await axios.post('/api', bookData);
+      const result = await axios.post('/api/savebook', bookData);
       console.log("Post Success", result)
     } catch (err) {
         console.log("POST ERROR", err)

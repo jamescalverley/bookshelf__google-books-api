@@ -6,10 +6,10 @@ async function getSearchResults(req,res){
   console.log("[getSearchResults]".bold.blue);
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   try {
-    const apiKey = process.env.API_KEY;
+    const apiKey = process.env.API_KEY_GB;
     const searchTerm = req.params.searchterm;
     console.log(`Search for: ${searchTerm}`.blue);
-    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&orderBy=newest&key=${apiKey}`
+    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&orderBy=newest&key=${apiKey}`;
     const apiResult = await fetch(apiURL)
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
@@ -26,6 +26,30 @@ async function getSearchResults(req,res){
         message: "SERVER ERROR -- getSearchResults", 
         error: err})
   }
+};
+
+async function nyTimesBookList(req,res){
+  console.log("[nyTimesBookList]".bold.blue);
+  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
+  try {
+    const apiKey = process.env.API_KEY_NY;
+    const apiURL = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-nonfiction.json?api-key=${apiKey}`;
+    const apiResult = await fetch( apiURL )
+      .then(res => res.json())
+      .catch(err => console.log("ERROR".red, err));
+      console.log("NYTIMES book data".green, apiResult.num_results)
+    return res.status(200).json({
+      success: true, 
+      data: apiResult
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false, 
+      message: "SERVER ERROR -- nyTimesDisplay", 
+      error: err
+    })
+  }; 
+
 };
 
 async function getSavedBooks(req,res){
@@ -103,5 +127,5 @@ async function deleteBook(req,res){
  
 };
 
-module.exports = { getSearchResults, getSavedBooks, saveBook, deleteBook };
+module.exports = { getSearchResults, nyTimesBookList, getSavedBooks, saveBook, deleteBook };
 

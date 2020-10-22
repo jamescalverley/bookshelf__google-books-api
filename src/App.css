@@ -42,6 +42,23 @@ nav ul li{
   color: aliceblue;
 }
 
+.nyt-results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.nyt-book {
+  width: 300px;
+  height: 300px;
+  margin: 1.5rem;
+}
+.nyt-image img {
+  width: auto;
+  height: 80px;
+}
+
+
+
 
 
 

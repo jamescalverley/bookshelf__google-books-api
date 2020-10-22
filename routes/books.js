@@ -1,14 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-const { getSearchResults, getSavedBooks, saveBook, deleteBook } = require('../controllers/handleBooks');
+const { nyTimesBookList, getSearchResults, getSavedBooks, saveBook, deleteBook } = require('../controllers/handleBooks');
+
+router 
+  .route('/')
+  .get( nyTimesBookList )
 
 router
   .route('/search/:searchterm')
   .get( getSearchResults )
 
 router 
-  .route('/')
+  .route('/savebook')
   .post( saveBook )
 
 router 
