@@ -2,12 +2,9 @@ import React from 'react';
 import '../App.css';
 import { NavLink } from 'react-router-dom';
 
-function NavBar(){
-
-    
+function NavBar(props){
 
 return (
-    
     <div className="navbar">
         <nav>
             <ul>
@@ -27,14 +24,12 @@ return (
                         activeClassName="active"     
                     >
                         Saved Books
-                    </NavLink>
+                    </NavLink> 
                 </li>
             </ul>
         </nav>
     </div>
-    
-    
-)
+    )
 };
 
 export default NavBar;

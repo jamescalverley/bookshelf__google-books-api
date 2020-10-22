@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import NyTimesBook from './NyTimesBook';
 const axios = require('axios');
 
-function SearchPage(){
+function SearchPage(props){
 
     const [booksList, setBooksList] = useState([]);
     const [nytDisplayAll, setNytDisplayAll] = useState(false);
@@ -43,14 +43,17 @@ function SearchPage(){
         setNytDisplayAll(prev => !prev);
     };
 
-    useEffect(() => {
+    useEffect((props) => {
         getNyTimesBooks();
     }, [])
 
     return ( 
         <div className="search-page">
             <div className="nyt-container">
-                <h2>New York Times Bestseller List</h2>
+                <div className="nyt-header">
+                    <h2>New York Times Bestseller List</h2>
+                    <button onClick={handleDisplayChange}>{ !nytDisplayAll ? "View All" : "View Less" }</button>
+                </div>
                 { !nytDisplayAll ? 
                     <div className="nyt-results top5">
                         { nytTop5.map( nytbook => 
@@ -79,9 +82,7 @@ function SearchPage(){
                             />
                         )}
                     </div>
-                }
-                <button onClick={handleDisplayChange}>{ !nytDisplayAll ? "Show All" : "Show Less" }</button>
-                 
+                }     
             </div>
             <div className="search-container">
                 <h1>SearchPage</h1>
@@ -95,7 +96,8 @@ function SearchPage(){
                         authors={book.volumeInfo.authors}
                         description={book.volumeInfo.description}
                         link={book.volumeInfo.infoLink}
-                        image={book.volumeInfo.imageLinks.thumbnail}   
+                        //image={book.volumeInfo.imageLinks.thumbnail}
+                        setSavedNum={props.setSavedNum}   
                     />
                 )}
             </div>

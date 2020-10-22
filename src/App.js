@@ -7,19 +7,19 @@ import SavedPage from './components/SavedPage';
 import ErrorBoundary from './components/errors/ErrorBoundary';
 
 function App() {
+
+ 
   return (
     <Router>
       <div className="App">
       <NavBar />
       <ErrorBoundary>
-        <Route 
-          exact path={["/", "/search"]} 
-          component={SearchPage} 
-        />
-        <Route 
-          exact path={"/savedbooks"} 
-          component={SavedPage} 
-        />
+        <Route exact path={["/", "/search"]}>
+          <SearchPage />
+        </Route>
+        <Route exact path={"/savedbooks"}>
+          <SavedPage />
+        </Route>
       </ErrorBoundary>
     </div>
     </Router>

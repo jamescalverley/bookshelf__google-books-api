@@ -7,14 +7,14 @@ function NyTimesBook(props){
       <div className="nyt-image">
         <img className="nyt=image" src={props.image} alt="book-cover"/>        
       </div>
-      <div className="book-metrics">
+      {/* <div className="book-metrics">
         <p>Rank: {props.rank}</p>
         <p>Weeks on List: {props.weeks}</p>
-      </div>
+      </div> */}
       <div className="book-info">
-        <h4>{props.title}</h4>
-        <h4>{props.author}</h4>
-        <p>{props.description}</p>
+        <p>{props.title}</p>
+        <p>{props.author}</p>
+        {/* <p>{props.description}</p> */}
       </div>
       
     </div>
