@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import NavBar from './NavBar';
 import SavedBook from './SavedBook';
 import NoBooks from './NoBooks';
 import { v4 as uuidv4 } from 'uuid';
@@ -25,28 +26,28 @@ function SavedPage(){
     }, [])
 
 
-    if ( booksList.length > 0  ) {
-        return (
-            <div className="saved-page">
-                <h1>Saved Books</h1>
-                    {booksList.map( book => 
-                        <SavedBook 
-                            key={uuidv4()}
-                            bookID={book.bookID} 
-                            book={book}
-                            title={book.title}
-                            authors={book.authors}
-                            description={book.description}
-                            infoLink={book.infoLink}   
-                            image={book.image}
-                        />
-                    )}
-            </div>  
-        )
-    } else {
-        return <NoBooks />  
-    }
-    
+
+
+    return (
+        <>
+            <NavBar />
+            { booksList.length > 0 ? 
+                booksList.map( book => 
+                    <SavedBook 
+                        key={uuidv4()}
+                        bookID={book.bookID} 
+                        book={book}
+                        title={book.title}
+                        authors={book.authors}
+                        description={book.description}
+                        infoLink={book.infoLink}   
+                        image={book.image}
+                    />)
+                : 
+                    <NoBooks />
+            }
+        </>
+    ); 
 };
 
 export default SavedPage;

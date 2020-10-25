@@ -5,10 +5,13 @@ import { NavLink } from 'react-router-dom';
 function NavBar(props){
 
 return (
-    <div className="navbar">
-        <nav>
-            <ul>
-                <li>
+    <>
+        
+        <div className="navbar">
+            <div className="logo-container">LOGO</div>
+            <nav>
+                
+                <a href='./search'>
                     <NavLink 
                         to="/search" 
                         className="link"
@@ -16,19 +19,19 @@ return (
                     >
                         Search
                     </NavLink>
-                </li>
-                <li>
+                </a>
+                <a href='./search'>
                     <NavLink 
-                        to="/savedbooks"
+                        to="/savedbooks" 
                         className="link"
-                        activeClassName="active"     
+                        activeClassName="active"  
                     >
-                        Saved Books
-                    </NavLink> 
-                </li>
-            </ul>
-        </nav>
-    </div>
+                        SavedBooks
+                    </NavLink>
+                </a>
+            </nav>
+        </div>
+    </>
     )
 };
 

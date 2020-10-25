@@ -1,11 +1,24 @@
 
-nav ul {
+.navbar {
+  padding: 1rem 4rem 1rem 4rem;
   display: flex;
-  list-style: none;
+  flex-direction: row;
 }
-nav ul li{
-  padding: 1rem;
+.logo-container {
+  padding: 0.5rem;
 }
+
+nav {
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
 
 .link {
   color: black;
@@ -13,7 +26,7 @@ nav ul li{
 }
 .link:hover {
   color: darkblue;
-  font-weight: bold;
+  
 }
 
 .active {
@@ -26,6 +39,21 @@ nav ul li{
   color: blue;
   font-weight: bold;
   text-decoration: none;
+}
+
+.search-form-container {
+  width:100vw;
+  background-color: khaki;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+.search-form-container form {
+
+  background-color: green;
+  width: 50%;
+  
+  padding: 1rem;
 }
 
 .book-container {
@@ -80,12 +108,14 @@ nav ul li{
   height: auto;
   margin: 0.5rem 0.8rem 0 0.8rem;
   padding: 0.5rem;
- 
-  
 }
 .nyt-book p {
   margin: 0.3rem 0 0 0;
 }
+.nyt-book:hover {
+  cursor: pointer;
+}
+
 
 .book-info {
   padding: 0rem 0.5rem 0rem 0.5rem;
@@ -98,6 +128,11 @@ nav ul li{
   width: auto;
   height: 120px;
   border-radius: 5%;
+  transition: transform 2s ease-in-out;
+
+}
+.nyt-image:hover {
+  transform: rotate(2deg); 
 }
 
 

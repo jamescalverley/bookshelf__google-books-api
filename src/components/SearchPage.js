@@ -1,4 +1,5 @@
 import React, { useEffect, useState} from 'react';
+import NavBar from './NavBar';
 import Input from './Input';
 import SearchedBook from './SearchedBook';
 import { v4 as uuidv4 } from 'uuid';
@@ -49,6 +50,8 @@ function SearchPage(props){
 
     return ( 
         <div className="search-page">
+            <NavBar />
+            <Input apiCall={handleApiCall} />
             <div className="nyt-container">
                 <div className="nyt-header">
                     <h2>New York Times Bestseller List</h2>
@@ -86,7 +89,7 @@ function SearchPage(props){
             </div>
             <div className="search-container">
                 <h1>SearchPage</h1>
-                <Input apiCall={handleApiCall} />
+                
                 { booksList.map( book => 
                     <SearchedBook 
                         key={uuidv4()}

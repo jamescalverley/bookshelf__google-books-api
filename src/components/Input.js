@@ -16,10 +16,13 @@ function Input(props){
   };
 
   return (
-    <form onSubmit={handleSearch}>
-      <input onChange={handleInputChange} type="text"/>
-      <button>Search</button>
-    </form>
+    <div className="search-form-container">
+      <form onSubmit={handleSearch}>
+        <input onChange={handleInputChange} type="text"/>
+        <button>Search</button>
+      </form>
+    </div>
+    
   )
 };
 
