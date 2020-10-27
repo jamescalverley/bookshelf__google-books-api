@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import SearchPage from './components/SearchPage';
 import SavedPage from './components/SavedPage';
 import ErrorBoundary from './components/errors/ErrorBoundary';
+import BookDetails from './components/BookDetails';
 
 function App() {
 
@@ -20,6 +21,9 @@ function App() {
         <Route exact path={"/savedbooks"}>
           <SavedPage />
         </Route>
+        <Route path={"/book/:book"}>
+          <BookDetails />
+        </Route>
       </ErrorBoundary>
     </div>
     </Router>
@@ -28,3 +32,4 @@ function App() {
 }
 
 export default App;
+

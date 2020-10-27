@@ -11,7 +11,7 @@ function NyTimesBook(props){
         <p>Rank: {props.rank}</p>
         <p>Weeks on List: {props.weeks}</p>
       </div> */}
-      <div className="book-info">
+      <div className="nyt-book-info">
         <p>{props.title}</p>
         <p>{props.author}</p>
         {/* <p>{props.description}</p> */}

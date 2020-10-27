@@ -1,6 +1,6 @@
 
 .navbar {
-  padding: 1rem 4rem 1rem 4rem;
+  padding: 0.4rem 4rem 0.4rem 4rem;
   display: flex;
   flex-direction: row;
 }
@@ -26,7 +26,6 @@ nav a {
 }
 .link:hover {
   color: darkblue;
-  
 }
 
 .active {
@@ -43,18 +42,22 @@ nav a {
 
 .search-form-container {
   width:100vw;
-  background-color: khaki;
   display: flex;
   justify-content: center;
-  padding: 1rem;
+  
 }
 .search-form-container form {
-
-  background-color: green;
-  width: 50%;
-  
-  padding: 1rem;
+  width: 800px;
+  padding: 0.5rem;
+} 
+.search-form-container input { 
+  width: 80%;
 }
+
+.search-form-container button { 
+  margin-left: 2rem;
+}
+
 
 .book-container {
   margin: 1rem 4rem 0 4rem;
@@ -83,14 +86,12 @@ nav a {
   display: inline-block;
   margin-left: 4rem;
 }
-
 .nyt-header button {
   display: inline-end;
   position: relative;
   float: right;
   margin-right: 4rem;
   margin-top: 2rem;
-  
 }
 .nyt-results {
   padding: 1.2rem 1rem 1rem 1rem;
@@ -115,21 +116,16 @@ nav a {
 .nyt-book:hover {
   cursor: pointer;
 }
-
-
-.book-info {
+.nyt-book-info {
   padding: 0rem 0.5rem 0rem 0.5rem;
   max-width: 12rem;
 }
-
-
 
 .nyt-image img {
   width: auto;
   height: 120px;
   border-radius: 5%;
   transition: transform 2s ease-in-out;
-
 }
 .nyt-image:hover {
   transform: rotate(2deg); 

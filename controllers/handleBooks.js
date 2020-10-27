@@ -28,6 +28,31 @@ async function getSearchResults(req,res){
   }
 };
 
+async function getBookDetails(req,res){
+  console.log("[getBookDetails]".bold.blue);
+  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
+  try {
+    const apiKey = process.env.API_KEY_GB;
+    const bookISBN = req.params.book;
+    console.log("looking for book:".green, bookISBN );
+    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${bookISBN}&orderBy=newest&key=${apiKey}`;
+    const apiResult = await fetch(apiURL)
+      .then(res => res.json())
+      .catch(err => console.log("ERROR".red, err))
+    console.log("RESULT".blue, apiResult.items.length);
+    return res.status(200).json({
+      success: true,
+      message: "BOOK FOUND",
+      book: apiResult.items[0]
+    })
+  } catch (err) {
+      return res.status(500).json({
+        success: false,
+        message: "SERVER ERROR -- getBookDetails", 
+        error: err})
+  }
+};
+
 async function nyTimesBookList(req,res){
   console.log("[nyTimesBookList]".bold.blue);
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
@@ -49,22 +74,18 @@ async function nyTimesBookList(req,res){
       error: err
     })
   }; 
-
 };
 
 async function getSavedBooks(req,res){
   console.log("[getSavedBooks]".bold.blue);
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   try {
-
     const savedBooks = await SavedBooks.find();
     console.log("Saved Books: ".green, savedBooks.length)
-
     return res.status(200).json({
       success: true,
       savedBooks: savedBooks
     });
-
   } catch (err) {
     return res.status(500).json({
       success: false,
@@ -121,11 +142,8 @@ async function deleteBook(req,res){
       success: false,
       message: "SERVER ERROR -- saveBook", 
       error: err})
-
   };
-
- 
 };
 
-module.exports = { getSearchResults, nyTimesBookList, getSavedBooks, saveBook, deleteBook };
+module.exports = { getSearchResults, getBookDetails, nyTimesBookList, getSavedBooks, saveBook, deleteBook };
 

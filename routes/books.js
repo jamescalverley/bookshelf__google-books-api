@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { nyTimesBookList, getSearchResults, getSavedBooks, saveBook, deleteBook } = require('../controllers/handleBooks');
+const { nyTimesBookList, getSearchResults, getBookDetails, saveBook, deleteBook, getSavedBooks } = require('../controllers/handleBooks');
 
 router 
   .route('/')
@@ -10,6 +10,10 @@ router
 router
   .route('/search/:searchterm')
   .get( getSearchResults )
+
+router 
+  .route('/book/:book')
+  .get( getBookDetails )
 
 router 
   .route('/savebook')

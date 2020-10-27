@@ -7,11 +7,13 @@ import NyTimesBook from './NyTimesBook';
 const axios = require('axios');
 
 function SearchPage(props){
-
+    // book states
     const [booksList, setBooksList] = useState([]);
-    const [nytDisplayAll, setNytDisplayAll] = useState(false);
     const [nytList, setNytList] = useState([]);
     const [nytTop5, setNytTop5] = useState([]);
+    // display states
+    const [featuredDisplay, setFeaturedDisplay] = useState(true);
+    const [nytDisplayAll, setNytDisplayAll] = useState(false);
 
     async function getNyTimesBooks(){
         try {
@@ -50,60 +52,64 @@ function SearchPage(props){
 
     return ( 
         <div className="search-page">
-            <NavBar />
-            <Input apiCall={handleApiCall} />
-            <div className="nyt-container">
-                <div className="nyt-header">
-                    <h2>New York Times Bestseller List</h2>
-                    <button onClick={handleDisplayChange}>{ !nytDisplayAll ? "View All" : "View Less" }</button>
+            <NavBar  />
+            <Input apiCall={handleApiCall} setFeaturedDisplay={setFeaturedDisplay}/>
+            { featuredDisplay &&
+                <div className="nyt-container">
+                    <div className="nyt-header">
+                        <h2>New York Times Bestseller List</h2>
+                        <button onClick={handleDisplayChange}>{ !nytDisplayAll ? "View All" : "View Less" }</button>
+                    </div>
+                    { !nytDisplayAll ? 
+                        <div className="nyt-results top5">
+                            { nytTop5.map( nytbook => 
+                                <NyTimesBook 
+                                    key={uuidv4()}
+                                    title={nytbook.title}
+                                    author={nytbook.author}
+                                    description={nytbook.description}
+                                    rank={nytbook.rank}
+                                    weeks={nytbook.weeks_on_list}
+                                    image={nytbook.book_image}
+                                />
+                            )}
+                        </div>
+                    : 
+                        <div className="nyt-results all">
+                            { nytList.map( nytbook => 
+                                <NyTimesBook 
+                                    key={uuidv4()}
+                                    title={nytbook.title}
+                                    author={nytbook.author}
+                                    description={nytbook.description}
+                                    rank={nytbook.rank}
+                                    weeks={nytbook.weeks_on_list}
+                                    image={nytbook.book_image}
+                                />
+                            )}
+                        </div>
+                    }     
                 </div>
-                { !nytDisplayAll ? 
-                    <div className="nyt-results top5">
-                        { nytTop5.map( nytbook => 
-                            <NyTimesBook 
-                                key={uuidv4()}
-                                title={nytbook.title}
-                                author={nytbook.author}
-                                description={nytbook.description}
-                                rank={nytbook.rank}
-                                weeks={nytbook.weeks_on_list}
-                                image={nytbook.book_image}
-                            />
-                        )}
-                    </div>
-                : 
-                    <div className="nyt-results all">
-                        { nytList.map( nytbook => 
-                            <NyTimesBook 
-                                key={uuidv4()}
-                                title={nytbook.title}
-                                author={nytbook.author}
-                                description={nytbook.description}
-                                rank={nytbook.rank}
-                                weeks={nytbook.weeks_on_list}
-                                image={nytbook.book_image}
-                            />
-                        )}
-                    </div>
-                }     
-            </div>
-            <div className="search-container">
-                <h1>SearchPage</h1>
-                
-                { booksList.map( book => 
-                    <SearchedBook 
-                        key={uuidv4()}
-                        bookID={book.id} 
-                        book={book}
-                        title={book.volumeInfo.title}
-                        authors={book.volumeInfo.authors}
-                        description={book.volumeInfo.description}
-                        link={book.volumeInfo.infoLink}
-                        //image={book.volumeInfo.imageLinks.thumbnail}
-                        setSavedNum={props.setSavedNum}   
-                    />
-                )}
-            </div>
+            }
+            { !featuredDisplay && 
+                <div className="search-container">
+                    <h1>SearchPage</h1>
+                    { booksList.map( book => 
+                        <SearchedBook 
+                            key={uuidv4()}
+                            bookID={book.id} 
+                            book={book}
+                            title={book.volumeInfo.title}
+                            authors={book.volumeInfo.authors}
+                            description={book.volumeInfo.description}
+                            link={book.volumeInfo.infoLink}
+                            //image={book.volumeInfo.imageLinks.thumbnail}
+                            setSavedNum={props.setSavedNum}   
+                        />
+                    )}
+                </div>
+            
+            } 
             
                         
         </div>

@@ -8,6 +8,7 @@ function Input(props){
     ev.preventDefault();
     console.log(`[handleSearch] --- search: ${inputText}`);
     props.apiCall(inputText);
+    props.setFeaturedDisplay(false);
   };
 
   function handleInputChange(ev){
