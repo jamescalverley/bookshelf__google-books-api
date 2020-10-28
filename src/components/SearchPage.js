@@ -71,6 +71,7 @@ function SearchPage(props){
                                     rank={nytbook.rank}
                                     weeks={nytbook.weeks_on_list}
                                     image={nytbook.book_image}
+                                    isbn={nytbook.isbns[0].isbn10}
                                 />
                             )}
                         </div>
@@ -85,6 +86,7 @@ function SearchPage(props){
                                     rank={nytbook.rank}
                                     weeks={nytbook.weeks_on_list}
                                     image={nytbook.book_image}
+                                    isbn={nytbook.isbns[0].isbn10}
                                 />
                             )}
                         </div>
@@ -101,10 +103,12 @@ function SearchPage(props){
                             book={book}
                             title={book.volumeInfo.title}
                             authors={book.volumeInfo.authors}
+                            textsnippet={book.searchInfo.textSnippet}
                             description={book.volumeInfo.description}
                             link={book.volumeInfo.infoLink}
                             //image={book.volumeInfo.imageLinks.thumbnail}
                             setSavedNum={props.setSavedNum}   
+                            isbn={book.volumeInfo.industryIdentifiers}
                         />
                     )}
                 </div>

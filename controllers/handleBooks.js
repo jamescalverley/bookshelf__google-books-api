@@ -103,9 +103,11 @@ async function saveBook(req,res){
       bookID: req.body.bookID, 
       title: req.body.title, 
       authors: req.body.authors,
+      textsnippet: req.body.textsnippet,
       description: req.body.description,
       link: req.body.link,
-      image: req.body.image
+      image: req.body.image,
+      isbn: req.body.isbn
     };
     const savedBook = await SavedBooks.create(bookData);
     console.log(`Success -- book saved: ${savedBook._id} - ${savedBook.bookID}`.cyan);

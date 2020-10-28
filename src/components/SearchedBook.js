@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import SaveBtn from './SaveBtn';
 import Saved from './Saved';
+import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 function SearchedBook( props ){
 
-  const [saved, setSaved] = useState(false)
-
+  const [saved, setSaved] = useState(false);
+  
   const bookData = {
     bookID: props.bookID,
     title: props.title,
     authors: props.authors[0],
+    textsnippet: props.textsnippet,
     description: props.description, 
     link: props.link,
-    image: props.image
+    image: props.image,
+    isbn: props.isbn[0].identifier
   };
 
-  console.log(bookData)
+  console.log(bookData);
 
   async function saveBook(){
     try {
@@ -35,20 +38,22 @@ function SearchedBook( props ){
 
   return (
     <div className="book-container">
-      <div className="book-image">
-        <img src={props.image} alt="book-cover"/>        
-      </div>
-      <div className="book-info">
-        <h2>{props.title}</h2>
-        <h3>{props.authors[0]}</h3>
-        <p>{props.description}</p>
-        { !saved ? 
-          <SaveBtn handleSave={handleSave} />
-          :
-          <Saved />
-        }
-        <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
-      </div>
+      <Link to={`book/${bookData.isbn}`}>
+        <div className="book-image">
+          <img src={props.image} alt="book-cover"/>        
+        </div>
+        <div className="book-info">
+          <h2>{props.title}</h2>
+          <h3>{props.authors[0]}</h3>
+          <p>{props.textsnippet}</p>
+          { !saved ? 
+            <SaveBtn handleSave={handleSave} />
+            :
+            <Saved />
+          }
+          <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
+        </div>
+      </Link>
     </div>
   )
 };
