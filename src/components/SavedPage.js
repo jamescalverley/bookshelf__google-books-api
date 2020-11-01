@@ -31,12 +31,13 @@ function SavedPage(){
                     <SavedBook 
                         key={uuidv4()}
                         bookID={book.bookID} 
-                        book={book}
                         title={book.title}
                         authors={book.authors}
+                        textsnippet={book.textsnippet}
                         description={book.description}
                         infoLink={book.infoLink}   
                         image={book.image}
+                        isbn={book.isbn}
                     />)
                 : 
                     <NoBooks />

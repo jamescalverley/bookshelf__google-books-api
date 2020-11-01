@@ -18,16 +18,17 @@ function BookDetails(props){
       console.log(`Getting book data for ${ISBN}`)
       const result = await axios.get(`/api/book/${ISBN}`);
       const bookData = result.data.book;
-      console.log("RESULT".blue, bookData);
+      console.log("RESULT", bookData);
       setBook({
         bookID: bookData.id,
         title: bookData.volumeInfo.title,
         subtitle: bookData.volumeInfo.subtitle,
         authors: bookData.volumeInfo.authors[0],
-        textsnippet: bookData.searchInfo.textsnippet,
+        textsnippet: bookData.searchInfo.textSnippet,
         description: bookData.volumeInfo.description, 
         link: bookData.volumeInfo.infoLink,
-        image: bookData.volumeInfo.imageLinks.thumbnail
+        image: bookData.volumeInfo.imageLinks.thumbnail, 
+        isbn: bookData.volumeInfo.industryIdentifiers[0].identifier
       });
     } catch (err) {
       console.log("ERROR", err)
@@ -65,7 +66,7 @@ function BookDetails(props){
       <div className="book-details-container">
         <h2>{book.title}</h2>
         <p>{book.subtitle}</p>
-        <p>{book.author}</p>
+        <p>{book.authors}</p>
         <p>{book.description}</p> 
         <div className="book-links">
           { !saved ? 
@@ -73,7 +74,7 @@ function BookDetails(props){
             :
             <Saved />
           }
-          <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
+          <a href={book.link} target="_blank" rel="noopener noreferrer">Preview</a>
         </div>    
       </div>
     </div>
