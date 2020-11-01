@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import NavBar from './NavBar';
 import SavedBook from './SavedBook';
 import NoBooks from './NoBooks';
 import { v4 as uuidv4 } from 'uuid';
@@ -25,12 +24,8 @@ function SavedPage(){
         getSavedBooks();
     }, [])
 
-
-
-
     return (
-        <>
-            <NavBar />
+        <>            
             { booksList.length > 0 ? 
                 booksList.map( book => 
                     <SavedBook 

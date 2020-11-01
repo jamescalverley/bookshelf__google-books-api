@@ -33,9 +33,9 @@ async function getBookDetails(req,res){
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   try {
     const apiKey = process.env.API_KEY_GB;
-    const bookISBN = req.params.book;
-    console.log("looking for book:".green, bookISBN );
-    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${bookISBN}&orderBy=newest&key=${apiKey}`;
+    const ISBN = req.params.book;
+    console.log("looking for book:".green, ISBN );
+    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${ISBN}&orderBy=newest&key=${apiKey}`;
     const apiResult = await fetch(apiURL)
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err))
@@ -43,6 +43,7 @@ async function getBookDetails(req,res){
     return res.status(200).json({
       success: true,
       message: "BOOK FOUND",
+      count: apiResult.items.length,
       book: apiResult.items[0]
     })
   } catch (err) {
@@ -98,6 +99,7 @@ async function saveBook(req,res){
   console.log("[saveBook]".bold.blue);
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   console.log(`Save Book: ${req.body.title} - ${req.body.bookID}`);
+  console.log(req.body);
   try {
     const bookData = {
       bookID: req.body.bookID, 

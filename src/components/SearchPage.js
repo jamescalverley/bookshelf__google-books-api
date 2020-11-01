@@ -1,5 +1,4 @@
 import React, { useEffect, useState} from 'react';
-import NavBar from './NavBar';
 import Input from './Input';
 import SearchedBook from './SearchedBook';
 import { v4 as uuidv4 } from 'uuid';
@@ -52,7 +51,6 @@ function SearchPage(props){
 
     return ( 
         <div className="search-page">
-            <NavBar  />
             <Input apiCall={handleApiCall} setFeaturedDisplay={setFeaturedDisplay}/>
             { featuredDisplay &&
                 <div className="nyt-container">
@@ -102,22 +100,21 @@ function SearchPage(props){
                             bookID={book.id} 
                             book={book}
                             title={book.volumeInfo.title}
+                            subtitle={book.volumeInfo.subtitle}
                             authors={book.volumeInfo.authors}
                             textsnippet={book.searchInfo.textSnippet}
                             description={book.volumeInfo.description}
                             link={book.volumeInfo.infoLink}
                             //image={book.volumeInfo.imageLinks.thumbnail}
                             setSavedNum={props.setSavedNum}   
-                            isbn={book.volumeInfo.industryIdentifiers}
+                            isbn={book.volumeInfo.industryIdentifiers[0].identifier}
                         />
                     )}
                 </div>
-            
-            } 
-            
-                        
+            }            
         </div>
     )
 };
+
 
 export default SearchPage;

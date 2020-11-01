@@ -12,6 +12,10 @@ const BookSchema = new Schema({
     trim: true, 
     required: true
   },
+  subtitle: {
+    type: String, 
+    trim: true
+  },
   authors: {
     type: String, 
     trim: true, 
@@ -20,7 +24,6 @@ const BookSchema = new Schema({
   textsnippet: {
     type: String, 
     trim: true, 
-    required: true
   },
   description: {
     type: String, 

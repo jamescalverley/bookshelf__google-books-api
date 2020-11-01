@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-      {/* <NavBar /> */}
+      <NavBar />
       <ErrorBoundary>
         <Route exact path={["/", "/search"]}>
           <SearchPage />

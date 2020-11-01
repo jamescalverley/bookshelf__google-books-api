@@ -11,12 +11,13 @@ function SearchedBook( props ){
   const bookData = {
     bookID: props.bookID,
     title: props.title,
+    subtitle: props.subtitle,
     authors: props.authors[0],
     textsnippet: props.textsnippet,
     description: props.description, 
     link: props.link,
     image: props.image,
-    isbn: props.isbn[0].identifier
+    isbn: props.isbn
   };
 
   console.log(bookData);
@@ -46,6 +47,9 @@ function SearchedBook( props ){
           <h2>{props.title}</h2>
           <h3>{props.authors[0]}</h3>
           <p>{props.textsnippet}</p>
+        </div>
+      </Link>
+        <div className="book-links">
           { !saved ? 
             <SaveBtn handleSave={handleSave} />
             :
@@ -53,7 +57,6 @@ function SearchedBook( props ){
           }
           <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
         </div>
-      </Link>
     </div>
   )
 };
@@ -63,7 +66,9 @@ SearchedBook.defaultProps = {
   description: "",
   image: "https://via.placeholder.com/150",
   link: "",
-  authors: ""
+  authors: "", 
+  textsnippet: "", 
+  isbn: ""
 };
 
 export default SearchedBook;
