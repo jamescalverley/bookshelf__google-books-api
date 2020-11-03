@@ -17,19 +17,19 @@ function BookDetails(props){
     try {
       console.log(`Getting book data for ${ISBN}`)
       const result = await axios.get(`/api/book/${ISBN}`);
-      const bookData = result.data.book;
-      console.log("RESULT", bookData);
+      const book = result.data.book;
+      console.log("RESULT", book);
       setBook({
-        bookID: bookData.id,
-        title: bookData.volumeInfo.title,
-        subtitle: bookData.volumeInfo.subtitle,
-        authors: bookData.volumeInfo.authors[0],
-        textsnippet: bookData.searchInfo.textSnippet,
-        description: bookData.volumeInfo.description, 
-        link: bookData.volumeInfo.infoLink,
-        image: bookData.volumeInfo.imageLinks.thumbnail, 
-        isbn: bookData.volumeInfo.industryIdentifiers[0].identifier
-      });
+        bookID: book.id ? book.id : null,
+        title: book.volumeInfo.title ? book.volumeInfo.title : "",
+        subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : "",
+        authors: book.volumeInfo.authors ? book.volumeInfo.authors : [],
+        textSnippet: book.searchInfo ? book.searchInfo.textSnippet : "",
+        description: book.volumeInfo.description ? book.volumeInfo.description : "", 
+        link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
+        image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
+        isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : false
+        });
     } catch (err) {
       console.log("ERROR", err)
     };
@@ -63,6 +63,9 @@ function BookDetails(props){
   return (
     <div className="book-details-page">
       <button onClick={handleBack}>Back</button>
+      <div className="book-details-image">
+        <img src={book.image} alt="book-cover"/>        
+      </div>
       <div className="book-details-container">
         <h2>{book.title}</h2>
         <p>{book.subtitle}</p>

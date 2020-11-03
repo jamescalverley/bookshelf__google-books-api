@@ -14,15 +14,6 @@ function SearchPage(props){
     const [featuredDisplay, setFeaturedDisplay] = useState(true);
     const [nytDisplayAll, setNytDisplayAll] = useState(false);
 
-    // checks if book data being passed contains a thumbnail image
-    function undefinedCheck( obj ){
-        if( obj.imageLinks ){
-            return obj.imageLinks.thumbnail
-        } else {
-            return "https://via.placeholder.com/150"
-        };
-    };
-
     console.log("BOOKSLIST", booksList)
 
     async function getNyTimesBooks(){
@@ -48,15 +39,15 @@ function SearchPage(props){
             console.log("LIST", resultsList); 
             let checkedList = [];
             resultsList.map( book => checkedList.push( {
-                bookID: book.id,
-                title: book.volumeInfo.title,
-                subtitle: book.volumeInfo.subtitle,
-                authors: book.volumeInfo.authors,
-                textsnippet: book.searchInfo.textSnippet,
-                description: book.volumeInfo.description, 
-                link: book.volumeInfo.infoLink,
-                image: undefinedCheck( book.volumeInfo ),
-                isbn: book.volumeInfo.industryIdentifiers[0].identifier
+                bookID: book.id ? book.id : null,
+                title: book.volumeInfo.title ? book.volumeInfo.title : "",
+                subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : "",
+                authors: book.volumeInfo.authors ? book.volumeInfo.authors : [],
+                textSnippet: book.searchInfo ? book.searchInfo.textSnippet : "",
+                description: book.volumeInfo.description ? book.volumeInfo.description : "", 
+                link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
+                image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
+                isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : false
                 }) 
             )
             setBooksList( checkedList );
@@ -125,7 +116,7 @@ function SearchPage(props){
                             title={book.title}
                             subtitle={book.subtitle}
                             authors={book.authors}
-                            textsnippet={book.textSnippet}
+                            textSnippet={book.textSnippet}
                             description={book.description}
                             link={book.infoLink}
                             image={book.image}

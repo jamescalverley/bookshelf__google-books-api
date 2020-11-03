@@ -13,7 +13,7 @@ function SearchedBook( props ){
     title: props.title,
     subtitle: props.subtitle,
     authors: props.authors[0],
-    textsnippet: props.textsnippet,
+    textSnippet: props.textSnippet,
     description: props.description, 
     link: props.link,
     image: props.image,
@@ -46,7 +46,7 @@ function SearchedBook( props ){
         <div className="book-info">
           <h2>{props.title}</h2>
           <h3>{props.authors[0]}</h3>
-          <p>{props.textsnippet}</p>
+          <p>{props.textSnippet}</p>
         </div>
       </Link>
         <div className="book-links">
@@ -62,7 +62,7 @@ function SearchedBook( props ){
 };
 
 SearchedBook.defaultProps = {
-  title: "Hello",
+  title: "",
   description: "",
   image: "",
   link: "",
