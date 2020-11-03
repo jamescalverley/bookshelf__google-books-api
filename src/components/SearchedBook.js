@@ -20,7 +20,7 @@ function SearchedBook( props ){
     isbn: props.isbn
   };
 
-  console.log(bookData);
+  console.log(`Title: ${bookData.title}___ image: ${bookData.image}`);
 
   async function saveBook(){
     try {
@@ -62,9 +62,9 @@ function SearchedBook( props ){
 };
 
 SearchedBook.defaultProps = {
-  title: "",
+  title: "Hello",
   description: "",
-  image: "https://via.placeholder.com/150",
+  image: "",
   link: "",
   authors: "", 
   textsnippet: "", 
