@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "book-library",
+  "name": "book-library-react",
   "icons": [],
   "start_url": ".",
   "display": "standalone",

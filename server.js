@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const dbConnection = require('./db/config/db');
 // eslint-disable-next-line no-unused-vars
 const colors = require('colors');
@@ -13,7 +14,14 @@ require('dotenv').config();
 //connects mongoDB
 dbConnection();
 
-app.use('/*', express.static('public'));
+//app.use('/*', express.static('public'));
+
+app.get('/', (req, res) => {
+  const options = {
+    root: path.join(__dirname, 'public'),
+  };
+  res.sendFile('index.html', options);
+})
 
 const bookSearch = require('./routes/books');
 const localstorageSet = require('./routes/localstorage');
