@@ -13,12 +13,7 @@ require('dotenv').config();
 //connects mongoDB
 dbConnection();
 
-app.get('/api/test/:search', (req,res) => {
-  console.log("INCOMING REQUEST");
-  const search = req.params
-  console.log(search)
-  res.send({message: "test"})
-});
+app.use('/*', express.static('public'));
 
 const bookSearch = require('./routes/books');
 const localstorageSet = require('./routes/localstorage');
