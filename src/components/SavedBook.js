@@ -5,7 +5,7 @@ const axios = require('axios');
 function SavedBook(props){
 
   const [display, setDisplay] = useState(true);
-  const bookData = { deleteID: props.bookID };
+  const bookData = { deleteID: props.dbID };
 
   async function deleteBook(){
     try {
@@ -33,7 +33,7 @@ function SavedBook(props){
           <div className="book-info">
             <h2>{props.title}</h2>
             <h3>{props.authors}</h3>
-            <p>{props.textsnippet}</p>
+            <p>{props.textSnippet}</p>
           </div>
         </Link>
         <div className="book-links">

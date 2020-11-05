@@ -80,8 +80,10 @@ async function nyTimesBookList(req,res){
 async function getSavedBooks(req,res){
   console.log("[getSavedBooks]".bold.blue);
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
+  console.log(`USER ID >>> ${req.params.userID}`)
   try {
-    const savedBooks = await SavedBooks.find();
+    const userID = req.params.userID;
+    const savedBooks = await SavedBooks.find( { "savedBy": userID });
     console.log("Saved Books: ".green, savedBooks.length)
     return res.status(200).json({
       success: true,
@@ -99,13 +101,15 @@ async function saveBook(req,res){
   console.log("[saveBook]".bold.blue);
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   console.log(`Save Book: ${req.body.title} - ${req.body.bookID}`);
+  console.log("USER ID: ", req.params )
   console.log(req.body);
   try {
     const bookData = {
+      savedBy: req.params.userID,
       bookID: req.body.bookID, 
       title: req.body.title, 
       authors: req.body.authors,
-      textsnippet: req.body.textsnippet,
+      textSnippet: req.body.textSnippet,
       description: req.body.description,
       link: req.body.link,
       image: req.body.image,
@@ -133,7 +137,7 @@ async function deleteBook(req,res){
   const deleteID = req.params.deleteID;
   console.log("DELETE".red, deleteID)
 
-  const deleteBook = await SavedBooks.deleteOne({ bookID: deleteID });
+  const deleteBook = await SavedBooks.deleteOne({ _id: deleteID });
   console.log("SUCCESS".green, deleteBook.deletedCount )
 
   return res.status(200).json({

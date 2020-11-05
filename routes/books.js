@@ -16,7 +16,7 @@ router
   .get( getBookDetails )
 
 router 
-  .route('/savebook')
+  .route('/savebook/:userID')
   .post( saveBook )
 
 router 
@@ -24,7 +24,7 @@ router
   .delete( deleteBook )
 
 router
-  .route('/savedbooks')
+  .route('/savedbooks/:userID')
   .get( getSavedBooks )
   
 

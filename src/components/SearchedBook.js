@@ -7,6 +7,12 @@ const axios = require('axios');
 function SearchedBook( props ){
 
   const [saved, setSaved] = useState(false);
+
+  function getUserID(){
+    console.log("getting userID from local storage");
+    const localID = JSON.parse( localStorage.getItem("userID") );
+    return localID 
+  };
   
   const bookData = {
     bookID: props.bookID,
@@ -24,7 +30,9 @@ function SearchedBook( props ){
 
   async function saveBook(){
     try {
-      const result = await axios.post('/api/savebook', bookData);
+      const userID = await getUserID();
+      console.log(`Saving book with userID -- ${userID}`)
+      const result = await axios.post(`/api/savebook/${userID}`, bookData);
       console.log("Post Success", result)
     } catch (err) {
         console.log("POST ERROR", err)

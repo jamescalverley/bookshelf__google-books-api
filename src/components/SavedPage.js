@@ -8,10 +8,17 @@ function SavedPage(){
     console.log("SavedPage loading")
     const [booksList, setBooksList] = useState([]);
     
+    function getUserID(){
+        console.log("getting userID from local storage");
+        const localID = JSON.parse( localStorage.getItem("userID") );
+        return localID 
+      };
+
     async function getSavedBooks(){
         console.log("[getSavedBooks] ----");
         try {
-            const result = await axios.get('/api/savedbooks');
+            const userID = await getUserID();
+            const result = await axios.get(`/api/savedbooks/${userID}`);
             console.log(result);
             const savedBooks = result.data.savedBooks;
             setBooksList([...savedBooks]);
@@ -22,6 +29,7 @@ function SavedPage(){
 
     useEffect( () => {
         getSavedBooks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -30,10 +38,11 @@ function SavedPage(){
                 booksList.map( book => 
                     <SavedBook 
                         key={uuidv4()}
+                        dbID={book._id}
                         bookID={book.bookID} 
                         title={book.title}
                         authors={book.authors}
-                        textsnippet={book.textsnippet}
+                        textSnippet={book.textSnippet}
                         description={book.description}
                         infoLink={book.infoLink}   
                         image={book.image}

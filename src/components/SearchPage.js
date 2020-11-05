@@ -112,13 +112,13 @@ function SearchPage(props){
                     { booksList.map( book => 
                         <SearchedBook 
                             key={uuidv4()}
-                            bookID={book.id} 
+                            bookID={book.bookID} 
                             title={book.title}
                             subtitle={book.subtitle}
                             authors={book.authors}
                             textSnippet={book.textSnippet}
                             description={book.description}
-                            link={book.infoLink}
+                            link={book.link}
                             image={book.image}
                             //setSavedNum={props.setSavedNum}   
                             isbn={book.isbn}

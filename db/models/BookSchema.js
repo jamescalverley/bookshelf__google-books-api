@@ -21,7 +21,7 @@ const BookSchema = new Schema({
     trim: true, 
     required: true
   },
-  textsnippet: {
+  textSnippet: {
     type: String, 
     trim: true, 
   },
@@ -43,6 +43,11 @@ const BookSchema = new Schema({
   isbn: {
     type: String, 
     trim: true 
+  },
+  savedBy: {
+    type: String,
+    trim: true, 
+    required: true
   },
   createdAt: {
     type: Date, 

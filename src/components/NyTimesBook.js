@@ -8,8 +8,6 @@ function NyTimesBook(props){
   .map( (word) =>  word.charAt(0).toUpperCase() + word.substring(1) )
   .join(' ')
   
-  console.log("ISBN", props.isbn)
-
   return (
     <div className="nyt-book">
       <Link to={`book/${props.isbn}`}>
