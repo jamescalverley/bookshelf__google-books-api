@@ -58,8 +58,7 @@ async function nyTimesBookList(req,res){
   console.log("[nyTimesBookList]".bold.blue);
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   try {
-    //const apiKey = process.env.API_KEY_NY;
-    const apiKey = "3GnPjIbKRWYmF8fEX8DbPs2OGYcvmklh";
+    const apiKey = process.env.API_KEY_NY;
     const apiURL = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-nonfiction.json?api-key=${apiKey}`;
     const apiResult = await fetch( apiURL )
       .then(res => res.json())
