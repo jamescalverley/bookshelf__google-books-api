@@ -1,8 +1,8 @@
 import React, { useEffect, useState} from 'react';
-import Input from './Input';
-import SearchedBook from './SearchedBook';
+import Input from '../Input/Input';
+import SearchedBook from '../SearchedBook/SearchedBook';
 import { v4 as uuidv4 } from 'uuid';
-import NyTimesBook from './NyTimesBook';
+import NyTimesBook from '../NyTimesBook/NyTimesBook';
 const axios = require('axios');
 
 function SearchPage(props){

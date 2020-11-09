@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import SearchPage from './components/SearchPage';
-import SavedPage from './components/SavedPage';
 import ErrorBoundary from './components/errors/ErrorBoundary';
-import BookDetails from './components/BookDetails';
+import NavBar from './components/NavBar/NavBar';
+import SearchPage from './components/SearchPage/SearchPage';
+import SavedPage from './components/SavedPage/SavedPage';
+
+import BookDetails from './components/BookDetails/BookDetails';
 const axios = require('axios');
 
 function App() {

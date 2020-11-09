@@ -1,5 +1,6 @@
 import React from 'react';
-import '../App.css';
+import '../../App.css';
+import './NavBar.css'
 import { NavLink } from 'react-router-dom';
 
 function NavBar(props){
@@ -8,7 +9,7 @@ return (
     <>
         
         <div className="navbar">
-            <div className="logo-container">LOGO</div>
+            <div className="logo-container">--LOGO--</div>
             <nav>
                 
                 <a href='./search'>

@@ -1,0 +1,45 @@
+
+.navbar {
+  width: 100vw;
+  height: 94px;
+  padding: 0rem 4rem 0rem 4rem;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 8px 14px 2px rgba(109,114,120,0.23);
+}
+.logo-container {
+  padding: 0.5rem;
+  border: black solid 1px;
+}
+nav {
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  color: #000000;
+  font-family: Montserrat;
+  font-size: 17px;
+  letter-spacing: -0.24px;
+  line-height: 27px;
+}
+nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+}
+nav a:hover {
+  text-decoration: none;
+  color: #ED696A;
+}
+.link {
+  color: black;
+}
+.active {
+  color: #ED696A;
+  font-weight: bold;
+  pointer-events: none;
+}
+.active:hover {
+  color: #ED696A;
+  font-weight: bold;
+  text-decoration: none;
+}

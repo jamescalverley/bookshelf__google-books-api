@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SaveBtn from './SaveBtn';
-import Saved from './Saved';
+import SaveBtn from '../SaveBtn/SaveBtn';
+import Saved from '../Saved/Saved';
 import { Link } from 'react-router-dom';
 const axios = require('axios');
 

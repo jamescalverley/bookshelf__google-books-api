@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import SaveBtn from './SaveBtn';
-import Saved from './Saved';
+import SaveBtn from '../SaveBtn/SaveBtn';
+import Saved from '../Saved/Saved';
 const axios = require('axios');
 
 function BookDetails(props){

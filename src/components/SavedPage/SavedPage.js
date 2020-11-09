@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import SavedBook from './SavedBook';
-import NoBooks from './NoBooks';
+import SavedBook from '../SavedBook/SavedBook';
+import NoBooks from '../NoBooks/NoBooks';
 import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
