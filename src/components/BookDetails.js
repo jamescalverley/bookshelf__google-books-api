@@ -12,6 +12,11 @@ function BookDetails(props){
 
   console.log("BOOK ----> ", book)
 
+  function getUserID(){
+    console.log("getting userID from local storage");
+    const localID = JSON.parse( localStorage.getItem("userID") );
+    return localID 
+  };
 
   async function getBookData(){
     try {
@@ -23,7 +28,7 @@ function BookDetails(props){
         bookID: book.id ? book.id : null,
         title: book.volumeInfo.title ? book.volumeInfo.title : "",
         subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : "",
-        authors: book.volumeInfo.authors ? book.volumeInfo.authors : [],
+        authors: book.volumeInfo.authors ? book.volumeInfo.authors[0] : "",
         textSnippet: book.searchInfo ? book.searchInfo.textSnippet : "",
         description: book.volumeInfo.description ? book.volumeInfo.description : "", 
         link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
@@ -37,7 +42,9 @@ function BookDetails(props){
 
   async function saveBook(){
     try {
-      const result = await axios.post('/api/savebook', book);
+      const userID = await getUserID();
+      console.log(`Saving book with userID -- ${userID}`);
+      const result = await axios.post(`/api/savebook/${userID}`, book);
       console.log("Post Success", result)
     } catch (err) {
         console.log("POST ERROR", err)
