@@ -1,4 +1,5 @@
 import React, { useEffect, useState} from 'react';
+import './SearchPage.css';
 import Input from '../Input/Input';
 import SearchedBook from '../SearchedBook/SearchedBook';
 import { v4 as uuidv4 } from 'uuid';
@@ -66,7 +67,12 @@ function SearchPage(props){
 
     return ( 
         <div className="search-page">
-            <Input apiCall={handleApiCall} setFeaturedDisplay={setFeaturedDisplay}/>
+            <div className="hero-container">
+                <div className="headline">
+                    Find your next great book.
+                </div>
+                <Input apiCall={handleApiCall} setFeaturedDisplay={setFeaturedDisplay}/>
+            </div>
             { featuredDisplay &&
                 <div className="nyt-container">
                     <div className="nyt-header">

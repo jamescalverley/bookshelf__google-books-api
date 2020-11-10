@@ -1,23 +1,4 @@
 
-.search-form-container {
-  width:100vw;
-  display: flex;
-  justify-content: center;
-  
-}
-.search-form-container form {
-  width: 800px;
-  padding: 0.5rem;
-} 
-.search-form-container input { 
-  width: 80%;
-}
-
-.search-form-container button { 
-  margin-left: 2rem;
-}
-
-
 .book-container {
   margin: 1rem 4rem 0 4rem;
 }
@@ -30,66 +11,6 @@
   color: aliceblue;
 }
 
-.nyt-container {
-  /* background-color: darkgray; */
-}
-.nyt-container h2{
-  padding: 1rem;
-  margin-left: 1rem;
-}
-.nyt-header {
-  width: 100vw;
-}
-.nyt-header h2 {
-  width: auto;
-  display: inline-block;
-  margin-left: 4rem;
-}
-.nyt-header button {
-  display: inline-end;
-  position: relative;
-  float: right;
-  margin-right: 4rem;
-  margin-top: 2rem;
-}
-.nyt-results {
-  padding: 1.2rem 1rem 1rem 1rem;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  text-align: center;
-  /* background-color: #F3E7DD; */
-  margin: 0 4rem 0 4rem;
-  border-radius: 20px;
-  border: solid black 1px;
-}
-.nyt-book {
-  width: auto;
-  height: auto;
-  margin: 0.5rem 0.8rem 0 0.8rem;
-  padding: 0.5rem;
-}
-.nyt-book p {
-  margin: 0.3rem 0 0 0;
-}
-.nyt-book:hover {
-  cursor: pointer;
-}
-.nyt-book-info {
-  padding: 0rem 0.5rem 0rem 0.5rem;
-  max-width: 12rem;
-}
-
-.nyt-image img {
-  width: auto;
-  height: 120px;
-  border-radius: 5%;
-  transition: transform 2s ease-in-out;
-}
-.nyt-image:hover {
-  transform: rotate(2deg); 
-}
 
 
 

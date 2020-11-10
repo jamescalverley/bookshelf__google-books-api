@@ -1,4 +1,5 @@
 import React from 'react';
+import './NyTimesBook.css';
 import { Link } from 'react-router-dom';
 
 function NyTimesBook(props){
@@ -10,7 +11,7 @@ function NyTimesBook(props){
   
   return (
     <div className="nyt-book">
-      <Link to={`book/${props.isbn}`}>
+      <Link className="nyt-book-link" to={`book/${props.isbn}`}>
         <div className="nyt-image">
           <img className="nyt=image" src={props.image} alt="book-cover"/>        
         </div>
@@ -19,9 +20,8 @@ function NyTimesBook(props){
           <p>Weeks on List: {props.weeks}</p>
         </div> */}
         <div className="nyt-book-info">
-          <p>{displayTitle}</p>
+          <h5>{displayTitle}</h5>
           <p>{props.author}</p>
-          {/* <p>{props.description}</p> */}
         </div>
       </Link>  
       
