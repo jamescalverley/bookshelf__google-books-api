@@ -1,7 +1,8 @@
 .search-page {
-  height: 100vh;
+  height: 100%;
   justify-content: center;
 }
+
 .hero-container {
   padding: 150px 0 50px 0;
 }
@@ -10,7 +11,7 @@
   width: auto;
   color: #222222;
   font-family: "Playfair Display";
-  font-size: 48px;
+  font-size: 52px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 53px;
@@ -46,15 +47,26 @@
   margin-right: 4rem;
   margin-top: 2rem;
 }
-
 .nyt-results {
-  padding: 1.2rem 1rem 1rem 1rem;
+  padding: 0rem 1rem 1rem 1rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   text-align: center;
   margin: 0 4rem 0 4rem;
-  border-radius: 20px;
-  border: solid black 1px;
 }
+.search-container {
+  max-width: 900px;
+  margin: auto;  
+}
+.search-container h1 {
+  font-family: "Playfair Display";
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 48px;
+}
+
+
+

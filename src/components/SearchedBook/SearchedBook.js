@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SearchedBook.css';
 import SaveBtn from '../SaveBtn/SaveBtn';
 import Saved from '../Saved/Saved';
 import { Link } from 'react-router-dom';
@@ -47,24 +48,37 @@ function SearchedBook( props ){
 
   return (
     <div className="book-container">
-      <Link to={`book/${bookData.isbn}`}>
-        <div className="book-image">
-          <img src={props.image} alt="book-cover"/>        
-        </div>
-        <div className="book-info">
-          <h2>{props.title}</h2>
-          <h3>{props.authors[0]}</h3>
-          <p>{props.textSnippet}</p>
-        </div>
-      </Link>
-        <div className="book-links">
-          { !saved ? 
-            <SaveBtn handleSave={handleSave} />
-            :
-            <Saved />
-          }
-          <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
-        </div>
+      
+        
+          
+          <div className="book-info-container">
+            <div className="book-image">
+              <img src={props.image} alt="book-cover"/>        
+            </div>
+            
+            <div className="book-info">
+              <div className="save-button-container">
+                { !saved ? 
+                    <SaveBtn handleSave={handleSave} />
+                    :
+                    <Saved />
+                }
+              </div>
+              <h2>{props.title}</h2>
+              <h3>{props.authors[0]}</h3>
+              <p>{props.textSnippet}</p>
+              <div className="book-links">
+                <Link to={`book/${bookData.isbn}`} className="searched-book-link">
+                  <button>Book Details</button>
+                </Link>
+                
+              </div>
+            </div>
+            
+          </div>
+        
+      
+      
     </div>
   )
 };

@@ -63,6 +63,9 @@ function SearchPage(props){
 
     useEffect((props) => {
         getNyTimesBooks();
+        // for UI testing
+        handleApiCall('obama');
+        setFeaturedDisplay();
     }, [])
 
     return ( 
@@ -114,7 +117,7 @@ function SearchPage(props){
             }
             { !featuredDisplay && 
                 <div className="search-container">
-                    <h1>SearchPage</h1>
+                    <h1>Search Results</h1>
                     { booksList.map( book => 
                         <SearchedBook 
                             key={uuidv4()}

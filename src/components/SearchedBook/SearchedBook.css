@@ -1,0 +1,62 @@
+.book-container {
+  margin-top: 2rem;
+}
+.searched-book-link {
+  color: #000000;
+  padding: 0;
+  margin: 0;
+}
+.searched-book-link:hover {
+  color: #000000;
+  text-decoration: none;
+}
+.searched-book-link button {
+  height: auto;
+  width: auto;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  border-radius: 30.5px;
+  background-color: #FFFFFF;
+  border: solid #000000 1px;
+  color: #000000;
+  font-family: "Open Sans";
+  font-size: 14px;
+  letter-spacing: 0;
+}
+.searched-book-link button:hover {
+  border: solid #ED696A 1px;
+  color: #ED696A;
+  
+}
+
+.book-info-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.book-image {
+  width: fit-content
+}
+.book-image img {
+  width: 120px;
+  height: 160px;
+  border-radius: 5%;
+}
+.book-info {
+  width: auto;
+  padding: 0rem 1rem 1rem 3rem;
+  color: #333333;
+  font-family: Lato;
+  
+}
+.book-info h2 {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+.book-info h3 {
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 17px;
+}
