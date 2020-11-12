@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './BookDetails.css';
 import { useParams, useHistory } from 'react-router-dom';
 import SaveBtn from '../SaveBtn/SaveBtn';
 import Saved from '../Saved/Saved';
@@ -69,24 +70,31 @@ function BookDetails(props){
 
   return (
     <div className="book-details-page">
-      <button onClick={handleBack}>Back</button>
-      <div className="book-details-image">
-        <img src={book.image} alt="book-cover"/>        
-      </div>
+      <button className="backBtn" onClick={handleBack}>Back</button>
       <div className="book-details-container">
-        <h2>{book.title}</h2>
-        <p>{book.subtitle}</p>
-        <p>{book.authors}</p>
-        <p>{book.description}</p> 
-        <div className="book-links">
-          { !saved ? 
-            <SaveBtn handleSave={handleSave} />
-            :
-            <Saved />
-          }
-          <a href={book.link} target="_blank" rel="noopener noreferrer">Preview</a>
-        </div>    
+        <div className="book-details-image">
+          <img src={book.image} alt="book-cover"/>        
+        </div>
+        <div className="book-details">
+          <h2>{book.title}</h2>
+          <h3>{book.subtitle}</h3>
+          <h4>{book.authors}</h4>
+          <p>{book.description}</p> 
+          <div className="book-links">
+            { !saved ? 
+              <SaveBtn handleSave={handleSave} />
+              :
+              <Saved />
+            }
+            <a href={book.link} target="_blank" rel="noopener noreferrer">Preview</a>
+          </div>    
+        </div>
+
+
+
       </div>
+      
+     
     </div>
   )
 };
