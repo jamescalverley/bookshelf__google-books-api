@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SavedBook.css';
 import { Link } from 'react-router-dom';
 const axios = require('axios');
 
@@ -24,30 +25,29 @@ function SavedBook(props){
 
   return (
     <>
-    { display && 
-      <div className="book-container">
-        <Link to={`book/${props.isbn}`}>
-          <div className="book-image">
-            <img src={props.image} alt="book-cover"/>
+      { display && 
+        <div className="saved-book-container">
+          <div className="saved-book-header">
+            <div className="saved-book-image">
+              <img src={props.image} alt="book-cover"/>
+            </div>
+            <div className="saved-book-info">
+              <h2>{props.title}</h2>
+              <h3>{props.authors}</h3>
+              <Link to={`book/${props.isbn}`} className="saved-book-link">
+                <button>Book Details</button>
+              </Link>
+              <div className="remove-button">
+                <button onClick={handleDelete}>Remove</button> 
+              </div>
+              {/* <p>{props.textSnippet}</p> */}
+            </div>
           </div>
-          <div className="book-info">
-            <h2>{props.title}</h2>
-            <h3>{props.authors}</h3>
-            <p>{props.textSnippet}</p>
-          </div>
-        </Link>
-        <div className="book-links">
-          <button onClick={handleDelete}>Remove</button>
-          <a href={props.link} target="_blank" rel="noopener noreferrer">Preview</a>
-        </div>
           
-        
-        
-      </div>
-    }
+            
+        </div>
+      }
     </>
-    
-
   )
 };
 

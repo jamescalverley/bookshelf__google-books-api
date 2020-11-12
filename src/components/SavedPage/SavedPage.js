@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './SavedPage.css';
 import SavedBook from '../SavedBook/SavedBook';
 import NoBooks from '../NoBooks/NoBooks';
 import { v4 as uuidv4 } from 'uuid';
@@ -33,25 +34,28 @@ function SavedPage(){
     }, [])
 
     return (
-        <>            
-            { booksList.length > 0 ? 
-                booksList.map( book => 
-                    <SavedBook 
-                        key={uuidv4()}
-                        dbID={book._id}
-                        bookID={book.bookID} 
-                        title={book.title}
-                        authors={book.authors}
-                        textSnippet={book.textSnippet}
-                        description={book.description}
-                        infoLink={book.infoLink}   
-                        image={book.image}
-                        isbn={book.isbn}
-                    />)
-                : 
-                    <NoBooks />
-            }
-        </>
+        <div className="savedpage">
+            <h2>Saved Books</h2> 
+            <div className="saved-books-container">    
+                { booksList.length > 0 ? 
+                    booksList.map( book => 
+                        <SavedBook 
+                            key={uuidv4()}
+                            dbID={book._id}
+                            bookID={book.bookID} 
+                            title={book.title}
+                            authors={book.authors}
+                            textSnippet={book.textSnippet}
+                            description={book.description}
+                            infoLink={book.infoLink}   
+                            image={book.image}
+                            isbn={book.isbn}
+                        />)
+                    : 
+                        <NoBooks />
+                }
+            </div>
+        </div>
     ); 
 };
 

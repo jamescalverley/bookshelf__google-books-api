@@ -64,8 +64,8 @@ function SearchPage(props){
     useEffect((props) => {
         getNyTimesBooks();
         // for UI testing
-        handleApiCall('obama');
-        setFeaturedDisplay();
+        //handleApiCall('obama');
+        //setFeaturedDisplay();
     }, [])
 
     return ( 

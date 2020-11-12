@@ -1,5 +1,6 @@
-.book-container {
+.searched-book-container {
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .searched-book-link {
   color: #000000;
@@ -25,19 +26,18 @@
 .searched-book-link button:hover {
   border: solid #ED696A 1px;
   color: #ED696A;
-  
 }
-
-.book-info-container {
+.searched-book-info-container {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: flex-start;
 }
-.book-image {
-  width: fit-content
+.searched-book-image {
+  width: fit-content;
+  margin-right: 2rem;
 }
-.book-image img {
+.searched-book-image img {
   width: 120px;
   height: 160px;
   border-radius: 5%;
@@ -47,15 +47,14 @@
   padding: 0rem 1rem 1rem 3rem;
   color: #333333;
   font-family: Lato;
-  
 }
-.book-info h2 {
+.searched-book-info h2 {
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 22px;
 }
-.book-info h3 {
+.searched-book-info h3 {
   font-size: 14px;
   letter-spacing: 0;
   line-height: 17px;
