@@ -2,10 +2,12 @@
   width: auto;
   max-width: 400px;
   height: auto;
-  padding: 1rem 1.2rem 1rem 1rem;
+  padding: 2rem 2rem 2rem 2rem;
   border-radius: 3%;
   margin: 1rem;
-  background-color: #DBD2D0;
+  background-color: #f7f3f2;
+  border-radius: 22.33px;
+  box-shadow: 20px 26px 16px 0 rgba(0,0,0,0.21);
   /* border: solid black 1px; */
 }
 .saved-book-header {
@@ -44,7 +46,7 @@
   margin-top: 1rem;
   padding: 0.2rem 1rem 0.2rem 1rem;
   border-radius: 30.5px;
-  background-color: #DBD2D0;
+  background-color: #f7f3f2;
   border: solid #000000 1px;
   color: #000000;
   font-family: "Open Sans";
@@ -57,7 +59,7 @@
 }
 .remove-button button {
   border: none;
-  background-color: #DBD2D0;
+  background-color: #f7f3f2;
   font-family: "Open Sans";
   font-size: 14px;
   letter-spacing: 0;
