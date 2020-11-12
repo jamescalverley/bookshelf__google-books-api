@@ -35,7 +35,9 @@ function SavedPage(){
 
     return (
         <div className="savedpage">
-            <h2>Saved Books</h2> 
+            { booksList.length > 0 &&
+                <h2>Saved Books</h2> 
+            }
             <div className="saved-books-container">    
                 { booksList.length > 0 ? 
                     booksList.map( book => 

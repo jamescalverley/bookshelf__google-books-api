@@ -3,9 +3,9 @@
   width: auto;
   padding: 0.2rem 1rem 0.2rem 1rem;
   border-radius: 30.5px;
-  background-color: #ED696A;
-  border: none;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  border: solid #ED696A 1px;
+  color: #ED696A;
   font-family: "Open Sans";
   font-weight: bold;
   font-size: 14px;
@@ -13,5 +13,6 @@
   float: inline-end;
 }
 .save-button:hover {
-  background-color: #00AABE;
+  background-color: #ED696A;
+  color: #FFFFFF;
 }
