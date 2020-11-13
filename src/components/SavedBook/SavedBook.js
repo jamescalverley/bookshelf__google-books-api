@@ -22,6 +22,7 @@ function SavedBook(props){
     deleteBook();
     setDisplay(false);
     props.setNumber(prev => prev - 1);
+    props.setBooksDisplay(prev => prev - 1)
   };
 
   return (

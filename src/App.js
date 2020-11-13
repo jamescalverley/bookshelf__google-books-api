@@ -47,7 +47,7 @@ function App() {
           <SearchPage setNumber={setNumber}/>
         </Route>
         <Route exact path={"/savedbooks"}>
-          <SavedPage setNumber={setNumber} />
+          <SavedPage setNumber={setNumber} number={number} />
         </Route>
         <Route path={"/book/:book"}>
           <BookDetails setNumber={setNumber} />

@@ -11,8 +11,6 @@ function BookDetails(props){
   const [book, setBook] = useState({});
   const [saved, setSaved] = useState(false);
 
-  console.log("BOOK ----> ", book)
-
   function getUserID(){
     console.log("getting userID from local storage");
     const localID = JSON.parse( localStorage.getItem("userID") );
@@ -21,7 +19,6 @@ function BookDetails(props){
 
   async function getBookData(){
     try {
-      console.log(`Getting book data for ${ISBN}`)
       const result = await axios.get(`/api/book/${ISBN}`);
       const book = result.data.book;
       console.log("RESULT", book);
@@ -44,16 +41,14 @@ function BookDetails(props){
   async function saveBook(){
     try {
       const userID = await getUserID();
-      console.log(`Saving book with userID -- ${userID}`);
+      // eslint-disable-next-line no-unused-vars
       const result = await axios.post(`/api/savebook/${userID}`, book);
-      console.log("Post Success", result)
     } catch (err) {
         console.log("POST ERROR", err)
     };
   };
 
   function handleSave(){
-    console.log("Saving book: ", book)
     saveBook();
     setSaved(true);
     props.setNumber(prev => prev + 1)
