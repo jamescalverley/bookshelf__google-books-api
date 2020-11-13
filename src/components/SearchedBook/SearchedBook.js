@@ -27,8 +27,6 @@ function SearchedBook( props ){
     isbn: props.isbn
   };
 
-  console.log(`Title: ${bookData.title}___ image: ${bookData.image}`);
-
   async function saveBook(){
     try {
       const userID = await getUserID();
@@ -44,6 +42,7 @@ function SearchedBook( props ){
     console.log("Saving book: ", bookData)
     saveBook();
     setSaved(true);
+    props.setNumber(prev => prev + 1)
   };
 
   return (

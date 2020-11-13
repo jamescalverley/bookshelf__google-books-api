@@ -134,17 +134,14 @@ async function deleteBook(req,res){
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   console.log(req.params)
   try {
-  const deleteID = req.params.deleteID;
-  console.log("DELETE".red, deleteID)
-
-  const deleteBook = await SavedBooks.deleteOne({ _id: deleteID });
-  console.log("SUCCESS".green, deleteBook.deletedCount )
-
+    const deleteID = req.params.deleteID;
+    console.log("DELETE".red, deleteID)
+    const deleteBook = await SavedBooks.deleteOne({ _id: deleteID });
+    console.log("SUCCESS".green, deleteBook.deletedCount )
   return res.status(200).json({
     success: true,
     message: `Book: ${deleteID} deleted`
   });
-
   } catch (err) {
     return res.status(500).json({
       success: false,
@@ -153,5 +150,25 @@ async function deleteBook(req,res){
   };
 };
 
-module.exports = { getSearchResults, getBookDetails, nyTimesBookList, getSavedBooks, saveBook, deleteBook };
+async function bookCount(req,res){
+  console.log("[bookCount]".bold.blue);
+  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
+  console.log(req.params);
+  try {
+    const userID = req.params.userID;
+    const dbCount = await SavedBooks.find({ "savedBy" : userID }).countDocuments();
+    console.log("Result found");
+    return res.status(200).json({
+      success: true,
+      bookCount: dbCount
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "SERVER ERROR -- bookCount", 
+      error: err})
+  }
+};
+
+module.exports = { getSearchResults, getBookDetails, nyTimesBookList, getSavedBooks, saveBook, deleteBook, bookCount };
 

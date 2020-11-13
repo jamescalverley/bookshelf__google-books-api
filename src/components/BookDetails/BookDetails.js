@@ -56,6 +56,7 @@ function BookDetails(props){
     console.log("Saving book: ", book)
     saveBook();
     setSaved(true);
+    props.setNumber(prev => prev + 1)
   };
 
   let history = useHistory();
@@ -89,12 +90,7 @@ function BookDetails(props){
             <a href={book.link} target="_blank" rel="noopener noreferrer">Preview</a>
           </div>    
         </div>
-
-
-
       </div>
-      
-     
     </div>
   )
 };

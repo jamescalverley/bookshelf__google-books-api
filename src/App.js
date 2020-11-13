@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ErrorBoundary from './components/errors/ErrorBoundary';
 import NavBar from './components/NavBar/NavBar';
 import SearchPage from './components/SearchPage/SearchPage';
 import SavedPage from './components/SavedPage/SavedPage';
-
 import BookDetails from './components/BookDetails/BookDetails';
 const axios = require('axios');
 
 function App() {
+  
+  const [number, setNumber] = useState(0);
 
   async function getUserID(){
     const result = await axios.get('/api/user/setID');
@@ -40,16 +41,16 @@ function App() {
   return (
     <Router>
       <div className="App">
-      <NavBar />
+      <NavBar number={number} />
       <ErrorBoundary>
         <Route exact path={["/", "/search"]}>
-          <SearchPage />
+          <SearchPage setNumber={setNumber}/>
         </Route>
         <Route exact path={"/savedbooks"}>
-          <SavedPage />
+          <SavedPage setNumber={setNumber} />
         </Route>
         <Route path={"/book/:book"}>
-          <BookDetails />
+          <BookDetails setNumber={setNumber} />
         </Route>
       </ErrorBoundary>
     </div>

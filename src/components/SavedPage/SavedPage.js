@@ -5,7 +5,7 @@ import NoBooks from '../NoBooks/NoBooks';
 import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
-function SavedPage(){
+function SavedPage (props){
     console.log("SavedPage loading")
     const [booksList, setBooksList] = useState([]);
     
@@ -52,6 +52,7 @@ function SavedPage(){
                             infoLink={book.infoLink}   
                             image={book.image}
                             isbn={book.isbn}
+                            setNumber={props.setNumber}
                         />)
                     : 
                         <NoBooks />
@@ -60,5 +61,6 @@ function SavedPage(){
         </div>
     ); 
 };
-
-export default SavedPage;
+const memoSavedPage = React.memo( SavedPage );
+export default memoSavedPage;
+//export default SavedPage;

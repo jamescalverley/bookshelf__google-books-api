@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { nyTimesBookList, getSearchResults, getBookDetails, saveBook, deleteBook, getSavedBooks } = require('../controllers/handleBooks');
+const { nyTimesBookList, getSearchResults, getBookDetails, saveBook, deleteBook, getSavedBooks, bookCount } = require('../controllers/handleBooks');
 
 router 
   .route('/')
@@ -26,6 +26,10 @@ router
 router
   .route('/savedbooks/:userID')
   .get( getSavedBooks )
+
+router 
+  .route('/bookcount/:userID')
+  .get( bookCount )
   
 
   module.exports = router;
