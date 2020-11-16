@@ -2,15 +2,15 @@ import React from 'react';
 import '../../App.css';
 import './NavBar.css';
 import SavedBookNum from '../SavedBookNum/SavedBookNum';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 function NavBar(props){
 
-return (
-  <>
+  return (
     <div className="navbar">
-      <div className="logo-container">--LOGO--</div>
-        
+      <Link to="/" className="link">
+        <div className="logo-container">--LOGO--</div>
+      </Link>
       <nav>
         <a href='./search'>
           <NavLink 
@@ -32,8 +32,7 @@ return (
         </a>
       </nav>
     </div>
-  </>
-  )
+    )
 };
 
 export default NavBar;

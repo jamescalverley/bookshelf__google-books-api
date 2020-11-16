@@ -61,7 +61,7 @@ function SearchedBook( props ){
           <h3>{props.authors[0]}</h3>
           <p>{props.textSnippet}</p>
           <div className="searched-book-links">
-            <Link to={`book/${bookData.isbn}`} className="searched-book-link">
+            <Link to={`/book/${bookData.isbn}`} className="searched-book-link">
               <button>Book Details</button>
             </Link>
           </div>

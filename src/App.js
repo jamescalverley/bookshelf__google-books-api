@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ErrorBoundary from './components/errors/ErrorBoundary';
 import NavBar from './components/NavBar/NavBar';
+import HomePage from './components/HomePage/HomePage';
 import SearchPage from './components/SearchPage/SearchPage';
 import SavedPage from './components/SavedPage/SavedPage';
 import BookDetails from './components/BookDetails/BookDetails';
@@ -41,19 +42,22 @@ function App() {
   return (
     <Router>
       <div className="App">
-      <NavBar number={number} />
-      <ErrorBoundary>
-        <Route exact path={["/", "/search"]}>
-          <SearchPage setNumber={setNumber}/>
-        </Route>
-        <Route exact path={"/savedbooks"}>
-          <SavedPage setNumber={setNumber} number={number} />
-        </Route>
-        <Route path={"/book/:book"}>
-          <BookDetails setNumber={setNumber} />
-        </Route>
-      </ErrorBoundary>
-    </div>
+        <NavBar number={number} />
+        <ErrorBoundary>
+          <Route exact path={"/"}>
+            <HomePage />
+          </Route>      
+          <Route path={"/search/:searchterm?"}>
+            <SearchPage setNumber={setNumber} />
+          </Route>
+          <Route exact path={"/savedbooks"}>
+            <SavedPage setNumber={setNumber} number={number} />
+          </Route>
+          <Route path={"/book/:book"}>
+            <BookDetails setNumber={setNumber} />
+          </Route>
+        </ErrorBoundary>
+      </div>
     </Router>
     
   );

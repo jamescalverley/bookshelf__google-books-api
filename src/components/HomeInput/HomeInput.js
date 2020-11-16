@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
-import './Input.css';
+import { Link } from 'react-router-dom';
+import './HomeInput.css';
 
-function Input(props){
+function HomeInput(props){
 
   const [inputText, setInputText] = useState("");
 
   function handleSearch(ev){
     ev.preventDefault();
     console.log(`[handleSearch] --- search: ${inputText}`);
-    props.apiCall(inputText);
-    props.setFeaturedDisplay(false);
   };
 
   function handleInputChange(ev){
@@ -21,11 +20,12 @@ function Input(props){
     <div className="search-form-container">
       <form onSubmit={handleSearch}>
         <input onChange={handleInputChange} type="text"/>
-        <button>Search</button>
+        <Link to={`/search/${inputText}`}>
+          <button>Search</button>
+        </Link>
       </form>
     </div>
-    
   )
 };
 
-export default Input;
+export default HomeInput;
