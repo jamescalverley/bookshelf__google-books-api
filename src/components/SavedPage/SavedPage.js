@@ -9,6 +9,7 @@ function SavedPage (props){
   console.log("SavedPage loading")
   const [booksList, setBooksList] = useState([]);
   const [booksDisplay, setBooksDisplay] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   function getUserID(){
     console.log("getting userID from local storage");
@@ -25,6 +26,7 @@ function SavedPage (props){
       setBooksList([...savedBooks]);
       const bookCount = savedBooks.length;
       setBooksDisplay( bookCount );
+      setLoading(false);
     } catch (err) {
       console.log("ERROR", err);
     };
@@ -34,6 +36,12 @@ function SavedPage (props){
     getSavedBooks();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [booksDisplay])
+
+  if (loading) {
+    return (
+      <></>
+    );
+  };
 
   return (
     <div className="savedpage">

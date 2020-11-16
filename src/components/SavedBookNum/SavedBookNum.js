@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import './SavedBookNum.css';
 const axios = require('axios');
 
 function SavedBookNum(props){
@@ -31,14 +32,14 @@ function SavedBookNum(props){
     //   Saved {bookCount}
     // </a>
     <a href='./search'>
-    <NavLink 
-      to="/savedbooks" 
-      className="link"
-      activeClassName="active"  
-    >
-      Saved {bookCount}
-    </NavLink>
-  </a>
+      <NavLink 
+        to="/savedbooks" 
+        className="link"
+        activeClassName="active"  
+      >
+        Saved <span className="bookcount">{bookCount}</span>
+      </NavLink>
+    </a>
   );
 };
 
