@@ -1,0 +1,18 @@
+.featured-book {
+  margin: 0.5rem 3rem 1.4rem 0;
+  width: fit-content;
+}
+.featured-image img {
+  width: 140px;
+  height: 200px;
+  border-radius: 5%;
+  border: none;
+  transition: transform 2s ease-in-out;
+}
+.featured-image:hover {
+  /* transform: rotate(2deg);  */
+  transform: scale(1.02);
+}
+.featured-book:hover {
+  cursor: pointer;
+}

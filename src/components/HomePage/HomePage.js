@@ -2,17 +2,48 @@ import React, { useEffect, useState} from 'react';
 import './HomePage.css';
 import HomeInput from '../HomeInput/HomeInput';
 import { v4 as uuidv4 } from 'uuid';
+import FeaturedBook from '../FeaturedBook/FeaturedBook';
+import TopBook from '../TopBook/TopBook';
 import NyTimesBook from '../NyTimesBook/NyTimesBook';
 const axios = require('axios');
 
 function HomePage(props){
     // book states
+    const [featuredBooks, setFeaturedBooks] = useState([]);
+    const [topBooks, setTopBooks] = useState([]);
     const [nytNonFiction, setNytNonFiction] = useState([]);
     const [t5NonFiction, setT5NonFiction] = useState([]);
     const [nytFiction, setNytFiction] = useState([]);
     const [t5Fiction, setT5Fiction] = useState([]);
     // display states
     const [nonFictionDisplay, setNonFictionDisplay] = useState(false);
+
+    console.log("---", featuredBooks)
+
+    async function getFeatured(){
+      try {
+        const result = await axios.get('/api/featured');
+        console.log(result)
+        const resultsList = result.data.data.results.books.slice(0,6);
+        console.log("FEATURED", resultsList);
+        setFeaturedBooks( [...resultsList] );
+      }
+       catch (err) {
+        console.log("ERROR", err)
+      };
+    };
+
+    async function getTopBooks(){
+      try {
+        const result = await axios.get('/api/topbooks');
+        const resultsList = result.data.data;
+        console.log("TOP BOOKS", resultsList);
+        setTopBooks([...resultsList])
+      }
+       catch (err) {
+        console.log("ERROR", err)
+      };
+    };
 
     async function getNytNonFiction(){
       try {
@@ -22,10 +53,9 @@ function HomePage(props){
         setNytNonFiction([...resultsList]);
         setT5NonFiction([...nytTop5]);
       } catch (err) {
-        console.log("ERROR", err)
+          console.log("ERROR", err)
       } 
     };
-
     async function getNytFiction(){
       try {
         const result = await axios.get('/api/nytfiction');
@@ -33,19 +63,22 @@ function HomePage(props){
         const nytTop5 = resultsList.slice(0,5);
         setNytFiction([...resultsList]);
         setT5Fiction([...nytTop5]);
-        console.log("---result", resultsList);
       } catch (err) {
-        console.log("ERROR", err)
+          console.log("ERROR", err)
       }
     };
-  
-    function handleDisplayChange(){
-      setNonFictionDisplay(prev => !prev);
-    };
+
+    // view all button hidden for now
+
+    // function handleDisplayChange(){
+    //   setNonFictionDisplay(prev => !prev);
+    // };
 
     useEffect(() => {
-        getNytNonFiction();
-        getNytFiction();
+      getTopBooks();
+      getFeatured();
+      getNytNonFiction();
+      getNytFiction();
     }, [])
 
     return ( 
@@ -57,11 +90,33 @@ function HomePage(props){
           <HomeInput />
         </div>
         <div className="main-content-container">
-          <div className="nyt-container">
-            <div className="nyt-header">
-              <h2>NY Times Best Sellers - Non-Fiction</h2>
-              <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button>
+          <div className="highlighted-books">
+            <div className="featured-container">
+              <div className="featured-header">
+                <h2>Featured Books</h2>
+              </div>
+              <div className="featured-flex">
+                { featuredBooks.map( book => 
+                  <FeaturedBook 
+                    key={uuidv4()}
+                    book={book}
+                  />
+                )}
+              </div>
             </div>
+            <div className="topbooks-container">
+              <h2>Top Books</h2>
+              { topBooks.map( book => 
+                <TopBook
+                  key={uuidv4()}
+                  book={book.items[0]}
+                />
+              )}
+            </div>
+          </div>
+          <div className="nyt-container">
+              <h2>NY Times Best Sellers - Non-Fiction</h2>
+              {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
               { !nonFictionDisplay ? 
                 <div className="nyt-results top5">
                   { t5NonFiction.map( nytbook => 

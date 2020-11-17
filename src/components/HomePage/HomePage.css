@@ -18,22 +18,42 @@
   text-align: center;
 }
 .main-content-container {
-  padding: 0 4rem 0 4rem;
+  padding: 0 6rem 8rem 6rem;
   max-width: 1200px;
 }
-
-.nyt-header {
+.main-content-container h2 {
   width: 100%;
-}
-.nyt-header h2 {
-  width: auto;
-  display: inline-block;
+  padding: 1rem 1rem 1.5rem 0;
+  margin: 0;
   color: #222222;
   font-family: "Playfair Display";
   font-size: 36px;
   font-weight: bold;
   letter-spacing: 0;
-  line-height: 48px;
+  line-height: 36px;
+}
+.highlighted-books {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+}
+.featured-container {
+  width: 45%;
+}
+.featured-header h2 {
+  padding: 1rem 1rem 1.5rem 0;
+  line-height: 36px;
+}
+.featured-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.topbooks-container {
+  width: 55%;
+  padding: 0 2rem 0 2rem;
+  background-color: #FFF3ED;
+  border-radius: 3%;
 }
 .nyt-header button {
   background-color: #FFFFFF;
@@ -48,7 +68,7 @@
   margin-top: 2rem;
 }
 .nyt-results {
-  padding: 0rem 1rem 1rem 1rem;
+  padding: 0rem 0rem 1rem 0rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

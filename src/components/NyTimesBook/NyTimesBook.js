@@ -13,7 +13,7 @@ function NyTimesBook(props){
     <div className="nyt-book">
       <Link className="nyt-book-link" to={`book/${props.isbn}`}>
         <div className="nyt-image">
-          <img className="nyt=image" src={props.image} alt="book-cover"/>        
+          <img className="nyt-image" src={props.image} alt="book-cover"/>        
         </div>
         {/* <div className="book-metrics">
           <p>Rank: {props.rank}</p>

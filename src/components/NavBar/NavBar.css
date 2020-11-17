@@ -8,8 +8,14 @@
   box-shadow: 0 8px 14px 2px rgba(109,114,120,0.23);
 }
 .logo-container {
-  padding: 0.5rem;
-  border: black solid 1px;
+  padding: 0.5rem; 
+}
+.wordmark {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: Lato;
+  color: #ED696A;
+  margin-right: 0.5rem;
 }
 nav {
   height: auto;
@@ -32,6 +38,9 @@ nav a:hover {
 }
 .link {
   color: black;
+}
+.link:hover {
+  text-decoration: none;
 }
 .active {
   color: #ED696A;

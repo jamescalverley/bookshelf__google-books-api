@@ -1,8 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const { nytNonFiction, nytFiction, getSearchResults, getBookDetails, saveBook, deleteBook, getSavedBooks, bookCount } = require('../controllers/handleBooks');
+const { nytNonFiction, nytFiction, getSearchResults, getBookDetails, saveBook, deleteBook, getSavedBooks, bookCount, featuredBooks, topBooks } = require('../controllers/handleBooks');
 
+router 
+  .route('/featured')
+  .get( featuredBooks )
+
+router 
+  .route('/topbooks')
+  .get( topBooks )
+  
 router 
   .route('/nytnonfiction')
   .get( nytNonFiction )

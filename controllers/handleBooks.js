@@ -3,8 +3,6 @@ const SavedBooks = require('../db/models/BookSchema');
 require('dotenv').config();
 
 async function getSearchResults(req,res){
-  console.log("[getSearchResults]".bold.blue);
-  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   try {
     const apiKey = process.env.API_KEY_GB;
     const searchTerm = req.params.searchterm;
@@ -29,8 +27,6 @@ async function getSearchResults(req,res){
 };
 
 async function getBookDetails(req,res){
-  console.log("[getBookDetails]".bold.blue);
-  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   try {
     const apiKey = process.env.API_KEY_GB;
     const ISBN = req.params.book;
@@ -54,9 +50,67 @@ async function getBookDetails(req,res){
   }
 };
 
+async function featuredBooks(req,res){
+  try {
+    const apiKey = process.env.API_KEY_NY;
+    const apiURL = `https://api.nytimes.com/svc/books/v3/lists/current/mass-market-paperback.json?api-key=${apiKey}`;
+    const apiResult = await fetch( apiURL )
+      .then(res => res.json())
+      .catch(err => console.log("ERROR".red, err));
+      console.log("FEATURED BOOKS".green, apiResult.num_results);
+    return res.status(200).json({
+      success: true, 
+      data: apiResult
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false, 
+      message: "SERVER ERROR -- featuredBooks", 
+      error: err
+    })
+  };
+};
+
+async function topBooksAPICall( isbn ){
+  try {
+    const apiKey = process.env.API_KEY_GB;
+    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${isbn}&orderBy=newest&key=${apiKey}`;
+    const apiResult = await fetch( apiURL )
+      .then(res => res.json())
+      .catch(err => console.log("ERROR".red, err));
+      console.log("TOP BOOKS".green, apiResult);
+    return apiResult
+  } catch (err) {
+    console.log("ERROR", err)
+  }
+};
+
+async function topBooks(req,res){
+  try {
+    // hardcoded top books
+    const bookISBNs = ['0525536299', '152475921X', '1459746392'];
+    console.log("looking for books:".green, bookISBNs );
+    const top3Books = [];
+    let i;
+    for( i = 0 ; i < bookISBNs.length; i++) {
+      const book = await topBooksAPICall( bookISBNs[i]);
+      top3Books.push( book );
+    }
+    console.log("top3Books array", top3Books.length);
+    return res.status(200).json({
+      success: true, 
+      data: top3Books
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false, 
+      message: "SERVER ERROR -- featuredBooks", 
+      error: err
+    })
+  };
+};
+
 async function nytNonFiction(req,res){
-  console.log("[nytNonFiction]".bold.blue);
-  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   try {
     const apiKey = process.env.API_KEY_NY;
     const apiURL = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-nonfiction.json?api-key=${apiKey}`;
@@ -78,8 +132,6 @@ async function nytNonFiction(req,res){
 };
 
 async function nytFiction(req, res){
-  console.log("[nytFiction]".bold.blue);
-  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   try {
     const apiKey = process.env.API_KEY_NY;
     const apiURL = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${apiKey}`;
@@ -102,8 +154,6 @@ async function nytFiction(req, res){
 };
 
 async function getSavedBooks(req,res){
-  console.log("[getSavedBooks]".bold.blue);
-  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   console.log(`USER ID >>> ${req.params.userID}`)
   try {
     const userID = req.params.userID;
@@ -122,9 +172,6 @@ async function getSavedBooks(req,res){
 };
 
 async function saveBook(req,res){
-  console.log("[saveBook]".bold.blue);
-  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
-  console.log(`Save Book: ${req.body.title} - ${req.body.bookID}`);
   console.log("USER ID: ", req.params )
   console.log(req.body);
   try {
@@ -154,8 +201,6 @@ async function saveBook(req,res){
 };
 
 async function deleteBook(req,res){
-  console.log("[deleteBook]".bold.blue);
-  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   console.log(req.params)
   try {
     const deleteID = req.params.deleteID;
@@ -175,8 +220,6 @@ async function deleteBook(req,res){
 };
 
 async function bookCount(req,res){
-  console.log("[bookCount]".bold.blue);
-  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   console.log(req.params);
   try {
     const userID = req.params.userID;
@@ -197,6 +240,8 @@ async function bookCount(req,res){
 module.exports = { 
   getSearchResults, 
   getBookDetails, 
+  featuredBooks,
+  topBooks,
   nytNonFiction, 
   nytFiction, 
   getSavedBooks, 
