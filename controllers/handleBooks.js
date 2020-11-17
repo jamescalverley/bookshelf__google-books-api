@@ -54,8 +54,8 @@ async function getBookDetails(req,res){
   }
 };
 
-async function nyTimesBookList(req,res){
-  console.log("[nyTimesBookList]".bold.blue);
+async function nytNonFiction(req,res){
+  console.log("[nytNonFiction]".bold.blue);
   console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
   try {
     const apiKey = process.env.API_KEY_NY;
@@ -63,7 +63,7 @@ async function nyTimesBookList(req,res){
     const apiResult = await fetch( apiURL )
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
-      console.log("NYTIMES book data".green, apiResult.num_results)
+      console.log("NYT NONFICTION".green, apiResult.num_results);
     return res.status(200).json({
       success: true, 
       data: apiResult
@@ -71,10 +71,34 @@ async function nyTimesBookList(req,res){
   } catch (err) {
     return res.status(500).json({
       success: false, 
-      message: "SERVER ERROR -- nyTimesDisplay", 
+      message: "SERVER ERROR -- nytNonFiction", 
       error: err
     })
   }; 
+};
+
+async function nytFiction(req, res){
+  console.log("[nytFiction]".bold.blue);
+  console.log(`Incoming URL: ${req.url} M: ${req.method}`.blue);
+  try {
+    const apiKey = process.env.API_KEY_NY;
+    const apiURL = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${apiKey}`;
+    const apiResult = await fetch( apiURL )
+      .then(res => res.json())
+      .catch(err => console.log("ERROR".red, err));
+      console.log("NYT FICTION".green, apiResult.num_results);
+    return res.status(200).json({
+      success: true, 
+      data: apiResult
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false, 
+      message: "SERVER ERROR -- nytFiction", 
+      error: err
+    })
+
+  }
 };
 
 async function getSavedBooks(req,res){
@@ -170,5 +194,14 @@ async function bookCount(req,res){
   }
 };
 
-module.exports = { getSearchResults, getBookDetails, nyTimesBookList, getSavedBooks, saveBook, deleteBook, bookCount };
+module.exports = { 
+  getSearchResults, 
+  getBookDetails, 
+  nytNonFiction, 
+  nytFiction, 
+  getSavedBooks, 
+  saveBook, 
+  deleteBook, 
+  bookCount 
+};
 
