@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './SearchedBook.css';
 import SaveBtn from '../SaveBtn/SaveBtn';
 import Saved from '../Saved/Saved';
@@ -6,8 +6,13 @@ import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 function SearchedBook( props ){
-
+  console.log("rendering book", props.title);
+  
   const [saved, setSaved] = useState(false);
+  const [bookData, setBookData] = useState({});
+
+
+  console.log("SAVED", saved)
 
   function getUserID(){
     console.log("getting userID from local storage");
@@ -15,7 +20,7 @@ function SearchedBook( props ){
     return localID 
   };
   
-  const bookData = {
+  const passedData = {
     bookID: props.bookID,
     title: props.title,
     subtitle: props.subtitle,
@@ -27,21 +32,35 @@ function SearchedBook( props ){
     isbn: props.isbn
   };
 
+  function bookInit(){
+    setBookData( ...passedData );
+  };
+
   async function saveBook(){
     try {
       const userID = await getUserID();
-      const result = await axios.post(`/api/savebook/${userID}`, bookData);
-      console.log("Post Success", result)
+      const result = await axios.post(`/api/savebook/${userID}`, passedData);
+      console.log("Post Success", result);
     } catch (err) {
-        console.log("POST ERROR", err)
+        console.log("POST ERROR", err);
     };
   };
 
+
+
   function handleSave(){
+    console.log("handling save");
     saveBook();
+    console.log("setting SAVED");
     setSaved(true);
-    props.setNumber(prev => prev + 1)
+    console.log("---save set", saved)
+    //props.setNumber(prev => prev + 1);
+    //props.setNumber();
   };
+
+  useEffect( () => {
+    //bookInit();
+  }, []);
 
   return (
     <div className="searched-book-container">
@@ -71,14 +90,8 @@ function SearchedBook( props ){
   )
 };
 
-SearchedBook.defaultProps = {
-  title: "",
-  description: "",
-  image: "",
-  link: "",
-  authors: "", 
-  textsnippet: "", 
-  isbn: ""
-};
 
+
+//const memoSearchedBook = React.memo( SearchedBook );
+//export default memoSearchedBook
 export default SearchedBook;

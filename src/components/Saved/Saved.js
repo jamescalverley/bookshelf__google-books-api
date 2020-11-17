@@ -9,4 +9,6 @@ function Saved(){
   )
 };
 
+//const memoSaved = React.memo( Saved );
+//export default memoSaved;
 export default Saved;

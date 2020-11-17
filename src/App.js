@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ErrorBoundary from './components/errors/ErrorBoundary';
@@ -11,7 +11,11 @@ const axios = require('axios');
 
 function App() {
   
-  const [number, setNumber] = useState(0);
+  // const [number, setNumber] = useState(0);
+
+  // const numberInc = useCallback( () => {
+  //   setNumber(prev => prev + 1)
+  // }, [setNumber]);
 
   async function getUserID(){
     const result = await axios.get('/api/user/setID');
@@ -40,25 +44,45 @@ function App() {
   }, []); 
 
   return (
-    <Router>
-      <div className="App">
-        <NavBar number={number} />
-        <ErrorBoundary>
-          <Route exact path={"/"}>
-            <HomePage />
-          </Route>      
-          <Route path={"/search/:searchterm?"}>
-            <SearchPage setNumber={setNumber} />
-          </Route>
-          <Route exact path={"/savedbooks"}>
-            <SavedPage setNumber={setNumber} number={number} />
-          </Route>
-          <Route path={"/book/:book"}>
-            <BookDetails setNumber={setNumber} />
-          </Route>
-        </ErrorBoundary>
-      </div>
-    </Router>
+    // <Router>
+    //   <div className="App">
+    //     <NavBar number={number} />
+    //     <ErrorBoundary>
+    //       <Route exact path={"/"}>
+    //         <HomePage />
+    //       </Route>      
+    //       <Route path={"/search/:searchterm?"}>
+    //         <SearchPage setNumber={numberInc} />
+    //       </Route>
+    //       <Route exact path={"/savedbooks"}>
+    //         <SavedPage setNumber={setNumber} number={number} />
+    //       </Route>
+    //       <Route path={"/book/:book"}>
+    //         <BookDetails setNumber={setNumber} />
+    //       </Route>
+    //     </ErrorBoundary>
+    //   </div>
+    // </Router>
+
+  <Router>
+  <div className="App">
+    <NavBar />
+    <ErrorBoundary>
+      <Route exact path={"/"}>
+        <HomePage />
+      </Route>      
+      <Route path={"/search/:searchterm?"}>
+        <SearchPage />
+      </Route>
+      <Route exact path={"/savedbooks"}>
+        <SavedPage />
+      </Route>
+      <Route path={"/book/:book"}>
+        <BookDetails />
+      </Route>
+    </ErrorBoundary>
+  </div>
+  </Router>
     
   );
 }

@@ -51,7 +51,7 @@ function BookDetails(props){
   function handleSave(){
     saveBook();
     setSaved(true);
-    props.setNumber(prev => prev + 1)
+    //props.setNumber(prev => prev + 1)
   };
 
   let history = useHistory();

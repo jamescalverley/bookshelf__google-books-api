@@ -27,7 +27,8 @@ function NavBar(props){
             className="link"
             activeClassName="active"  
           >
-            <SavedBookNum number={props.number}/>
+            Saved Books - 
+            {/* <SavedBookNum number={props.number}/> */}
           </NavLink>
         </a>
       </nav>
