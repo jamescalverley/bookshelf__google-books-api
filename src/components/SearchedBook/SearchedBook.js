@@ -6,13 +6,11 @@ import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 function SearchedBook( props ){
-  console.log("rendering book", props.title);
+  
   
   const [saved, setSaved] = useState(false);
   const [bookData, setBookData] = useState({});
 
-
-  console.log("SAVED", saved)
 
   function getUserID(){
     console.log("getting userID from local storage");
