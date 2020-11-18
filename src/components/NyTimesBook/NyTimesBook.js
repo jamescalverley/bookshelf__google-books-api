@@ -8,10 +8,12 @@ function NyTimesBook(props){
   .split(' ')
   .map( (word) =>  word.charAt(0).toUpperCase() + word.substring(1) )
   .join(' ')
+
+  const isbn = props.isbn || props.isbnP
   
   return (
     <div className="nyt-book">
-      <Link className="nyt-book-link" to={`book/${props.isbn}`}>
+      <Link className="nyt-book-link" to={`book/${isbn}`}>
         <div className="nyt-image">
           <img className="nyt-image" src={props.image} alt="book-cover"/>        
         </div>

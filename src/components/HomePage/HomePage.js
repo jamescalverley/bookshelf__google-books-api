@@ -21,14 +21,11 @@ function HomePage(props){
     const [fictionDisplay, setFictionDisplay] = useState(false);
     const [nonFictionDisplay, setNonFictionDisplay] = useState(false);
 
-    console.log("---", featuredBooks)
-
     async function getFeatured(){
       try {
         const result = await axios.get('/api/featured');
         console.log(result)
         const resultsList = result.data.data.results.books.slice(0,6);
-        console.log("FEATURED", resultsList);
         setFeaturedBooks( [...resultsList] );
         setApiBookDisplay(true);
       }
@@ -41,7 +38,6 @@ function HomePage(props){
       try {
         const result = await axios.get('/api/topbooks');
         const resultsList = result.data.data;
-        console.log("TOP BOOKS", resultsList);
         setTopBooks([...resultsList])
       }
        catch (err) {
@@ -54,6 +50,7 @@ function HomePage(props){
         const result = await axios.get('/api/nytnonfiction');
         const resultsList = result.data.data.results.books;
         const nytTop5 = resultsList.slice(0,5);
+        console.log("NYT", nytTop5)
         setNytNonFiction([...resultsList]);
         setT5NonFiction([...nytTop5]);
       } catch (err) {
@@ -134,6 +131,7 @@ function HomePage(props){
                         weeks={nytbook.weeks_on_list}
                         image={nytbook.book_image}
                         isbn={nytbook.isbns[0].isbn10}
+                        isbnP={nytbook.primary_isbn10}
                       />
                     )}
                   </div>
@@ -149,6 +147,7 @@ function HomePage(props){
                         weeks={nytbook.weeks_on_list}
                         image={nytbook.book_image}
                         isbn={nytbook.isbns[0].isbn10}
+                        isbnP={nytbook.primary_isbn10}
                       />
                     )}
                   </div>
@@ -170,6 +169,7 @@ function HomePage(props){
                     weeks={nytbook.weeks_on_list}
                     image={nytbook.book_image}
                     isbn={nytbook.isbns[0].isbn10}
+                    isbnP={nytbook.primary_isbn10}
                   />
                 )}
               </div>
