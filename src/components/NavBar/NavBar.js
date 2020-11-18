@@ -33,7 +33,7 @@ function NavBar(props){
             className="link"
             activeClassName="active"  
           >
-            Saved Books - 
+            Saved Books
             {/* <SavedBookNum number={props.number}/> */}
           </NavLink>
         </a>

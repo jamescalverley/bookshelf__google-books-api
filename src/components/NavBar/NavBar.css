@@ -2,7 +2,7 @@
 .navbar {
   width: 100vw;
   height: 94px;
-  padding: 0rem 4rem 0rem 4rem;
+  padding: 0rem 6rem 0rem 4rem;
   display: flex;
   flex-direction: row;
   box-shadow: 0 8px 14px 2px rgba(109,114,120,0.23);

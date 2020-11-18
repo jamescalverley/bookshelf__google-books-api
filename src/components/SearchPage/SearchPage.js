@@ -52,29 +52,28 @@ function SearchPage(props){
         <div className="search-header-container">
           <SearchInput apiCall={handleApiCall} />
         </div>
-       
           { searchDisplay && 
-              <div className="search-container">
-                <h1>Search Results for 
-                  <span className="searchterm"> "{params.searchterm}"</span>
-                </h1>
-                { booksList.map( book => 
-                    <SearchedBook 
-                        key={uuidv4()}
-                        bookID={book.bookID} 
-                        title={book.title}
-                        subtitle={book.subtitle}
-                        authors={book.authors}
-                        textSnippet={book.textSnippet}
-                        description={book.description}
-                        link={book.link}
-                        image={book.image}
-                        changeBookNum={props.changeBookNum}   
-                        isbn={book.isbn}
-                        setNumber={props.setNumber}
-                    />
-                )}
-              </div>
+            <div className="search-container">
+              <h1>Search Results for 
+                <span className="searchterm"> "{params.searchterm}"</span>
+              </h1>
+              { booksList.map( book => 
+                  <SearchedBook 
+                    key={uuidv4()}
+                    bookID={book.bookID} 
+                    title={book.title}
+                    subtitle={book.subtitle}
+                    authors={book.authors}
+                    textSnippet={book.textSnippet}
+                    description={book.description}
+                    link={book.link}
+                    image={book.image}
+                    changeBookNum={props.changeBookNum}   
+                    isbn={book.isbn}
+                    setNumber={props.setNumber}
+                  />
+              )}
+            </div>
             }            
         </div>
     )

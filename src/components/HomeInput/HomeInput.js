@@ -17,7 +17,7 @@ function HomeInput(props){
   };
 
   return (
-    <div className="search-form-container">
+    <div className="form-container">
       <form onSubmit={handleSearch}>
         <input onChange={handleInputChange} type="text"/>
         <Link to={`/search/${inputText}`}>

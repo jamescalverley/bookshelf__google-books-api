@@ -1,11 +1,11 @@
 
-.search-form-container  {
+.form-container  {
   width: 100vw;
   height: auto;
   display: flex;
   justify-content: center;
 }
-.search-form-container form {
+.form-container form {
   width: 80%;
   height: fit-content;
   max-width: 800px;
@@ -15,19 +15,19 @@
   display: flex;
   justify-content: space-between;
 } 
-.search-form-container input { 
+.form-container input { 
   width: 100%;
   border: none;
   font-family: Montserrat;
   font-size: 21px;
 }
-.search-form-container input:focus { 
+.form-container input:focus { 
   border: none;
   outline-color: transparent;
   outline-style: none;
 }
 
-.search-form-container button { 
+.form-container button { 
   height: 50px;
   width: 200px;
   border-radius: 30.5px;
