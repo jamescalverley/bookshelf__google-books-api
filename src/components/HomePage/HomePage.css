@@ -18,8 +18,8 @@
   text-align: center;
 }
 .main-content-container {
-  padding: 0 6rem 8rem 6rem;
-  max-width: 1200px;
+  margin: auto;
+  max-width: 1130px;
 }
 .main-content-container h2 {
   width: 100%;

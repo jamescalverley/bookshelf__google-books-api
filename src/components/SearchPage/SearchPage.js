@@ -13,7 +13,6 @@ function SearchPage(props){
     const [booksList, setBooksList] = useState([]);
     const [searchDisplay, setSearchDisplay] = useState(false);
     
-
     async function handleApiCall(searchTerm){
       console.log("[handleApiCall]", searchTerm);
       try {
@@ -34,7 +33,6 @@ function SearchPage(props){
               }) 
           )
           setBooksList( checkedList );
-          console.log("SEARCH DISPLAY SET")
           setSearchDisplay(true);
       } catch (err) {
           console.log("ERROR", err);

@@ -8,8 +8,10 @@ const axios = require('axios');
 function BookDetails(props){
   const params = useParams();
   const ISBN = params.book;
+  const [bookDisplay, setBookDisplay] = useState(false);
   const [book, setBook] = useState({});
   const [saved, setSaved] = useState(false);
+
 
   function getUserID(){
     console.log("getting userID from local storage");
@@ -20,6 +22,7 @@ function BookDetails(props){
   async function getBookData(){
     try {
       const result = await axios.get(`/api/book/${ISBN}`);
+      console.log("result", result)
       const book = result.data.book;
       console.log("RESULT", book);
       setBook({
@@ -33,6 +36,7 @@ function BookDetails(props){
         image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
         isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : false
         });
+        setBookDisplay(true);
     } catch (err) {
       console.log("ERROR", err)
     };
@@ -65,28 +69,32 @@ function BookDetails(props){
   },[])
 
   return (
-    <div className="book-details-page">
-      <button className="backBtn" onClick={handleBack}>Back</button>
-      <div className="book-details-container">
-        <div className="book-details-image">
-          <img src={book.image} alt="book-cover"/>        
+    <>
+      { bookDisplay && 
+        <div className="book-details-page">
+          <button className="backBtn" onClick={handleBack}>Back</button>
+          <div className="book-details-container">
+            <div className="book-details-image">
+              <img src={book.image} alt="book-cover"/>        
+            </div>
+            <div className="book-details">
+              <h2>{book.title}</h2>
+              <h3>{book.subtitle}</h3>
+              <h4>{book.authors}</h4>
+              <p>{book.description}</p> 
+              <div className="book-links">
+                { !saved ? 
+                  <SaveBtn handleSave={handleSave} />
+                  :
+                  <Saved />
+                }
+                <a href={book.link} target="_blank" rel="noopener noreferrer">Preview</a>
+              </div>    
+            </div>
+          </div>
         </div>
-        <div className="book-details">
-          <h2>{book.title}</h2>
-          <h3>{book.subtitle}</h3>
-          <h4>{book.authors}</h4>
-          <p>{book.description}</p> 
-          <div className="book-links">
-            { !saved ? 
-              <SaveBtn handleSave={handleSave} />
-              :
-              <Saved />
-            }
-            <a href={book.link} target="_blank" rel="noopener noreferrer">Preview</a>
-          </div>    
-        </div>
-      </div>
-    </div>
+      }
+    </>
   )
 };
 

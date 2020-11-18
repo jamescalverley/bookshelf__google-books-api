@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './SearchedBook.css';
 import SaveBtn from '../SaveBtn/SaveBtn';
 import Saved from '../Saved/Saved';
@@ -7,18 +7,15 @@ const axios = require('axios');
 
 function SearchedBook( props ){
   
-  
   const [saved, setSaved] = useState(false);
-  const [bookData, setBookData] = useState({});
-
-
+  
   function getUserID(){
     console.log("getting userID from local storage");
     const localID = JSON.parse( localStorage.getItem("userID") );
     return localID 
   };
   
-  const passedData = {
+  const bookData = {
     bookID: props.bookID,
     title: props.title,
     subtitle: props.subtitle,
@@ -30,21 +27,15 @@ function SearchedBook( props ){
     isbn: props.isbn
   };
 
-  function bookInit(){
-    setBookData( ...passedData );
-  };
-
   async function saveBook(){
     try {
       const userID = await getUserID();
-      const result = await axios.post(`/api/savebook/${userID}`, passedData);
+      const result = await axios.post(`/api/savebook/${userID}`, bookData);
       console.log("Post Success", result);
     } catch (err) {
         console.log("POST ERROR", err);
     };
   };
-
-
 
   function handleSave(){
     console.log("handling save");
@@ -55,10 +46,6 @@ function SearchedBook( props ){
     //props.setNumber(prev => prev + 1);
     //props.setNumber();
   };
-
-  useEffect( () => {
-    //bookInit();
-  }, []);
 
   return (
     <div className="searched-book-container">

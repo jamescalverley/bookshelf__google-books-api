@@ -31,8 +31,9 @@ async function getBookDetails(req,res){
     const apiKey = process.env.API_KEY_GB;
     const ISBN = req.params.book;
     console.log("looking for book:".green, ISBN );
-    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${ISBN}&orderBy=newest&key=${apiKey}`;
-    const apiResult = await fetch(apiURL)
+    // const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${ISBN}&orderBy=newest&key=${apiKey}`;
+    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${ISBN}&key=${apiKey}`;
+    const apiResult = await fetch( apiURL )
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err))
     console.log("RESULT".blue, apiResult.items.length);
@@ -78,7 +79,6 @@ async function topBooksAPICall( isbn ){
     const apiResult = await fetch( apiURL )
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
-      console.log("TOP BOOKS".green, apiResult);
     return apiResult
   } catch (err) {
     console.log("ERROR", err)
@@ -89,14 +89,13 @@ async function topBooks(req,res){
   try {
     // hardcoded top books
     const bookISBNs = ['0525536299', '152475921X', '1459746392'];
-    console.log("looking for books:".green, bookISBNs );
     const top3Books = [];
     let i;
     for( i = 0 ; i < bookISBNs.length; i++) {
       const book = await topBooksAPICall( bookISBNs[i]);
       top3Books.push( book );
     }
-    console.log("top3Books array", top3Books.length);
+    console.log("TOP BOOKS".green, top3Books.length);
     return res.status(200).json({
       success: true, 
       data: top3Books
