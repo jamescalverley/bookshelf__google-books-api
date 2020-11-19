@@ -88,10 +88,10 @@ async function topBooksAPICall( isbn ){
 async function topBooks(req,res){
   try {
     // hardcoded top books
-    const bookISBNs = ['0525536299', '152475921X', '1459746392'];
+    const bookISBNs = ['1443455733', '1250114292', '1501175300'];
     const top3Books = [];
     let i;
-    for( i = 0 ; i < bookISBNs.length; i++) {
+    for ( i = 0 ; i < bookISBNs.length; i++) {
       const book = await topBooksAPICall( bookISBNs[i]);
       top3Books.push( book );
     }

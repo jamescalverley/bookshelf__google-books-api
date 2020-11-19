@@ -12,7 +12,8 @@ function SearchPage(props){
     const params = useParams();
     const [booksList, setBooksList] = useState([]);
     const [searchDisplay, setSearchDisplay] = useState(false);
-    
+    const [searchTerm, setSearchTerm] = useState();
+
     async function handleApiCall(searchTerm){
       console.log("[handleApiCall]", searchTerm);
       try {
@@ -42,6 +43,7 @@ function SearchPage(props){
     useEffect(() => {
       if( params.searchterm ){
         handleApiCall( params.searchterm);
+        setSearchTerm( params.searchterm.split('+').join(' ') )
       };
     }, [params.searchterm])
 
@@ -53,7 +55,7 @@ function SearchPage(props){
           { searchDisplay && 
             <div className="search-container">
               <h1>Search Results for 
-                <span className="searchterm"> "{params.searchterm}"</span>
+                <span className="searchterm"> "{searchTerm}"</span>
               </h1>
               { booksList.map( book => 
                   <SearchedBook 

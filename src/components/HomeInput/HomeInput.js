@@ -8,11 +8,10 @@ function HomeInput(props){
 
   function handleSearch(ev){
     ev.preventDefault();
-    console.log(`[handleSearch] --- search: ${inputText}`);
   };
 
   function handleInputChange(ev){
-    const searchText = ev.target.value;
+    const searchText = ev.target.value.replace(/\s/g, '+');
     setInputText(searchText);
   };
 
