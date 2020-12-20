@@ -1,4 +1,3 @@
-
 .navbar {
   width: 100vw;
   height: 94px;
@@ -38,6 +37,9 @@ nav a:hover {
 }
 .link {
   color: black;
+}
+.link span {
+  margin-right: 0.6rem;
 }
 .link:hover {
   text-decoration: none;

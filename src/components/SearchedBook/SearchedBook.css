@@ -1,6 +1,14 @@
 .searched-book-container {
   margin-top: 2rem;
   margin-bottom: 2rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.searched-book-info {
+  width: 100%;
 }
 .searched-book-link {
   color: #000000;
@@ -26,12 +34,6 @@
 .searched-book-link button:hover {
   border: solid #ED696A 1px;
   color: #ED696A;
-}
-.searched-book-info-container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: flex-start;
 }
 .searched-book-image {
   width: fit-content;

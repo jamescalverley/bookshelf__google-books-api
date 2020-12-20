@@ -26,7 +26,7 @@ function HomePage(props){
       try {
         const result = await axios.get('/api/featured');
         console.log(result)
-        const resultsList = result.data.data.results.books.slice(0,6);
+        const resultsList = result.data.data.results.books.slice(0,9);
         setFeaturedBooks( [...resultsList] );
         setApiBookDisplay(true);
       }
@@ -120,7 +120,7 @@ function HomePage(props){
                 </div>
               }
             </div>
-            <div className="nyt-container">
+            <div className="nyt-container-first">
                 <h2>NY Times Best Sellers - Non-Fiction</h2>
                 {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
                 { !nonFictionDisplay ? 
@@ -157,7 +157,7 @@ function HomePage(props){
                   </div>
                 }     
             </div> 
-            <div className="nyt-container">
+            <div className="nyt-container-second">
               <div className="nyt-header">
                 <h2>NY Times Best Sellers - Fiction</h2>
                 {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
