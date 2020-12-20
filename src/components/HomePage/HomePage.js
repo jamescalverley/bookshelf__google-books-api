@@ -20,6 +20,7 @@ function HomePage(props){
     const [apiBookDisplay, setApiBookDisplay] = useState(false);
     const [fictionDisplay, setFictionDisplay] = useState(false);
     const [nonFictionDisplay, setNonFictionDisplay] = useState(false);
+    const [topBooksDisplay, setTopBooksDisplay] = useState(false);
 
     async function getFeatured(){
       try {
@@ -38,7 +39,8 @@ function HomePage(props){
       try {
         const result = await axios.get('/api/topbooks');
         const resultsList = result.data.data;
-        setTopBooks([...resultsList])
+        setTopBooks([...resultsList]);
+        setTopBooksDisplay(true);
       }
        catch (err) {
         console.log("ERROR", err)
@@ -106,15 +108,17 @@ function HomePage(props){
                   )}
                 </div>
               </div>
-              <div className="topbooks-container">
-                <h2>Top Books</h2>
-                { topBooks.map( book => 
-                  <TopBook
-                    key={uuidv4()}
-                    book={book.items[0]}
-                  />
-                )}
-              </div>
+              { topBooksDisplay &&
+                <div className="topbooks-container">
+                  <h2>Top Books</h2>
+                  { topBooks.map( book => 
+                    <TopBook
+                      key={uuidv4()}
+                      book={book.items[0]}
+                    />
+                  )}
+                </div>
+              }
             </div>
             <div className="nyt-container">
                 <h2>NY Times Best Sellers - Non-Fiction</h2>
