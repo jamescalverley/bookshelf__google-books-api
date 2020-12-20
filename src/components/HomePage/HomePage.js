@@ -24,7 +24,6 @@ function HomePage(props){
     async function getFeatured(){
       try {
         const result = await axios.get('/api/featured');
-        console.log(result)
         const resultsList = result.data.data.results.books.slice(0,6);
         setFeaturedBooks( [...resultsList] );
         setApiBookDisplay(true);
@@ -50,7 +49,6 @@ function HomePage(props){
         const result = await axios.get('/api/nytnonfiction');
         const resultsList = result.data.data.results.books;
         const nytTop5 = resultsList.slice(0,5);
-        console.log("NYT", nytTop5)
         setNytNonFiction([...resultsList]);
         setT5NonFiction([...nytTop5]);
       } catch (err) {
@@ -180,6 +178,5 @@ function HomePage(props){
     )
 };
 
-const memoHomePage = React.memo( HomePage );
-export default memoHomePage;
-//export default SearchPage;
+
+export default React.memo(HomePage);

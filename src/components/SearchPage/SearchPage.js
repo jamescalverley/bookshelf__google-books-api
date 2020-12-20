@@ -6,20 +6,20 @@ import SearchedBook from '../SearchedBook/SearchedBook';
 import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
-function SearchPage(props){
-  console.log("*****searchpage render")
+function SearchPage( { setBook } ){
+  
+  console.log("Render --- SearchPAGE");
 
     const params = useParams();
     const [booksList, setBooksList] = useState([]);
     const [searchDisplay, setSearchDisplay] = useState(false);
     const [searchTerm, setSearchTerm] = useState();
-
+    
     async function handleApiCall(searchTerm){
       console.log("[handleApiCall]", searchTerm);
       try {
           const result = await axios.get(`/api/search/${searchTerm}`)
           const resultsList = result.data.books;
-          console.log("LIST", resultsList); 
           let checkedList = [];
           resultsList.map( book => checkedList.push( {
               bookID: book.id ? book.id : null,
@@ -41,14 +41,18 @@ function SearchPage(props){
     };
 
     useEffect(() => {
+      console.log("useEffect")
       if( params.searchterm ){
-        handleApiCall( params.searchterm);
-        setSearchTerm( params.searchterm.split('+').join(' ') )
+        console.log("handleApiCall")
+        //handleApiCall( params.searchterm);
+        //setSearchTerm( params.searchterm.split('+').join(' ') )
       };
     }, [params.searchterm])
 
     return ( 
       <div className="search-page">
+        
+        <button onClick={setBook}>++ bookcount</button>
         <div className="search-header-container">
           <SearchInput apiCall={handleApiCall} />
         </div>
@@ -67,10 +71,8 @@ function SearchPage(props){
                     textSnippet={book.textSnippet}
                     description={book.description}
                     link={book.link}
-                    image={book.image}
-                    changeBookNum={props.changeBookNum}   
+                    image={book.image}  
                     isbn={book.isbn}
-                    setNumber={props.setNumber}
                   />
               )}
             </div>
@@ -79,11 +81,4 @@ function SearchPage(props){
     )
 };
 
-const memoSearchPage = React.memo( SearchPage, (prevProps, nextProps) => {
-  if( prevProps.booksList !== nextProps.booksList){
-    return false
-  }
-    return true
-} );
-export default memoSearchPage;
-//export default SearchPage;
+export default React.memo(SearchPage);

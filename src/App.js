@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ErrorBoundary from './components/errors/ErrorBoundary';
@@ -10,30 +10,27 @@ import BookDetails from './components/BookDetails/BookDetails';
 const axios = require('axios');
 
 function App() {
+
+  console.log("Render --- APP");
+
+  const [bookCount, setBookCount] = useState(0);
+  const setBook = useCallback( () => {
+    setBookCount( bc => bc + 1 )
+  }, [setBookCount]);
   
-  // const [number, setNumber] = useState(0);
-
-  // const numberInc = useCallback( () => {
-  //   setNumber(prev => prev + 1)
-  // }, [setNumber]);
-
   async function getUserID(){
     const result = await axios.get('/api/user/setID');
     console.log(result);
     const userID = result.data.userID;
-    console.log("userID ---> ", userID);
     return userID
   };
 
   async function checkLocalstorage(){
     const localID = localStorage.getItem("userID");
-    console.log(`checking local storage ${localID}`);
     if( localID === null ){
-      console.log("setting userID")
       const userID = JSON.stringify( await getUserID() );
       localStorage.setItem( "userID", userID );
     } else {
-      console.log("userID is present")
       return 
     };
   };
@@ -44,45 +41,50 @@ function App() {
   }, []); 
 
   return (
+
+
+    //* ErrorBoundary removed
+    <Router>
+      <div className="App">
+        <NavBar bookCount={bookCount} />
+          <button onClick={ () => setBookCount(c => c + 1)}>APP COUNT</button>
+        <Route exact path={"/"}>
+          <HomePage />
+        </Route>      
+        <Route path={"/search/:searchterm?"}>
+          <SearchPage setBook={setBook} />
+        </Route>
+        <Route exact path={"/savedbooks"}>
+          <SavedPage />
+        </Route>
+        <Route path={"/book/:book"}>
+          <BookDetails />
+        </Route>
+      </div>
+    </Router>
+
+
+
+    //* original Router
     // <Router>
     //   <div className="App">
-    //     <NavBar number={number} />
+    //     <NavBar bookCount={bookCount} />
     //     <ErrorBoundary>
     //       <Route exact path={"/"}>
     //         <HomePage />
     //       </Route>      
     //       <Route path={"/search/:searchterm?"}>
-    //         <SearchPage setNumber={numberInc} />
+    //         <SearchPage setBook={setBook} />
     //       </Route>
     //       <Route exact path={"/savedbooks"}>
-    //         <SavedPage setNumber={setNumber} number={number} />
+    //         <SavedPage />
     //       </Route>
     //       <Route path={"/book/:book"}>
-    //         <BookDetails setNumber={setNumber} />
+    //         <BookDetails />
     //       </Route>
     //     </ErrorBoundary>
     //   </div>
     // </Router>
-
-  <Router>
-  <div className="App">
-    <NavBar />
-    <ErrorBoundary>
-      <Route exact path={"/"}>
-        <HomePage />
-      </Route>      
-      <Route path={"/search/:searchterm?"}>
-        <SearchPage />
-      </Route>
-      <Route exact path={"/savedbooks"}>
-        <SavedPage />
-      </Route>
-      <Route path={"/book/:book"}>
-        <BookDetails />
-      </Route>
-    </ErrorBoundary>
-  </div>
-  </Router>
     
   );
 }

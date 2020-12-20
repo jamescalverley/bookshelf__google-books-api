@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './SearchedBook.css';
 import SaveBtn from '../SaveBtn/SaveBtn';
 import Saved from '../Saved/Saved';
@@ -6,8 +6,14 @@ import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 function SearchedBook( props ){
+
+  console.log("Render --- SearchedBOOK");
   
   const [saved, setSaved] = useState(false);
+
+  const onSave = useCallback( () => {
+    setSaved(true);
+  }, [setSaved]);
   
   function getUserID(){
     console.log("getting userID from local storage");
@@ -38,11 +44,9 @@ function SearchedBook( props ){
   };
 
   function handleSave(){
-    console.log("handling save");
     saveBook();
-    console.log("setting SAVED");
     setSaved(true);
-    console.log("---save set", saved)
+    //props.incCounter();
     //props.setNumber(prev => prev + 1);
     //props.setNumber();
   };
@@ -56,7 +60,10 @@ function SearchedBook( props ){
         <div className="searched-book-info">
           <div className="save-button-container">
             { !saved ? 
-                <SaveBtn handleSave={handleSave} />
+                <SaveBtn 
+                  handleSave={handleSave}
+                  onSave={onSave}
+                />
                 :
                 <Saved />
             }
@@ -75,8 +82,4 @@ function SearchedBook( props ){
   )
 };
 
-
-
-//const memoSearchedBook = React.memo( SearchedBook );
-//export default memoSearchedBook
 export default SearchedBook;

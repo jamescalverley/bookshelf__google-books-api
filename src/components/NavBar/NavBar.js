@@ -6,6 +6,8 @@ import { NavLink, Link } from 'react-router-dom';
 
 function NavBar(props){
 
+  console.log("Render --- NavBar");
+
   return (
     <div className="navbar">
       <Link to="/" className="link">
@@ -33,7 +35,7 @@ function NavBar(props){
             className="link"
             activeClassName="active"  
           >
-            Saved Books
+            Saved Books -- {props.bookCount}
             {/* <SavedBookNum number={props.number}/> */}
           </NavLink>
         </p>
@@ -42,4 +44,4 @@ function NavBar(props){
     )
 };
 
-export default NavBar;
+export default React.memo(NavBar);

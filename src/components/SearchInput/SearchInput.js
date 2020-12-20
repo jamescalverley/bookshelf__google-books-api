@@ -4,6 +4,8 @@ import './SearchInput.css';
 
 function HomeInput(props){
 
+  console.log("Render --- SearchINPUT");
+
   const [inputText, setInputText] = useState("");
 
   function handleSearch(ev){
@@ -32,4 +34,4 @@ function HomeInput(props){
   )
 };
 
-export default HomeInput;
+export default React.memo(HomeInput);
