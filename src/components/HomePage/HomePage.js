@@ -51,7 +51,7 @@ function HomePage(props){
       try {
         const result = await axios.get('/api/nytnonfiction');
         const resultsList = result.data.data.results.books;
-        const nytTop5 = resultsList.slice(0,5);
+        const nytTop5 = resultsList.slice(0,6);
         console.log("NYT", nytTop5)
         setNytNonFiction([...resultsList]);
         setT5NonFiction([...nytTop5]);
@@ -63,7 +63,7 @@ function HomePage(props){
       try {
         const result = await axios.get('/api/nytfiction');
         const resultsList = result.data.data.results.books;
-        const nytTop5 = resultsList.slice(0,5);
+        const nytTop5 = resultsList.slice(0,6);
         setNytFiction([...resultsList]);
         setT5Fiction([...nytTop5]);
       } catch (err) {
@@ -85,7 +85,7 @@ function HomePage(props){
     }, [])
 
     return ( 
-      <div className="search-page">
+      <div className="home-page">
         <div className="hero-container">
           <div className="headline">
               Find your next great book.
@@ -121,6 +121,27 @@ function HomePage(props){
               }
             </div>
             <div className="nyt-container-first">
+              <div className="nyt-header">
+                <h2>NY Times Best Sellers - Fiction</h2>
+                {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
+              </div>
+              <div className="nyt-results top5">
+                { t5Fiction.map( nytbook => 
+                  <NyTimesBook 
+                    key={uuidv4()}
+                    title={nytbook.title}
+                    author={nytbook.author}
+                    description={nytbook.description}
+                    rank={nytbook.rank}
+                    weeks={nytbook.weeks_on_list}
+                    image={nytbook.book_image}
+                    isbn={nytbook.isbns[0].isbn10}
+                    isbnP={nytbook.primary_isbn10}
+                  />
+                )}
+              </div>
+            </div>
+            <div className="nyt-container-second">
                 <h2>NY Times Best Sellers - Non-Fiction</h2>
                 {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
                 { !nonFictionDisplay ? 
@@ -157,27 +178,7 @@ function HomePage(props){
                   </div>
                 }     
             </div> 
-            <div className="nyt-container-second">
-              <div className="nyt-header">
-                <h2>NY Times Best Sellers - Fiction</h2>
-                {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
-              </div>
-              <div className="nyt-results top5">
-                { t5Fiction.map( nytbook => 
-                  <NyTimesBook 
-                    key={uuidv4()}
-                    title={nytbook.title}
-                    author={nytbook.author}
-                    description={nytbook.description}
-                    rank={nytbook.rank}
-                    weeks={nytbook.weeks_on_list}
-                    image={nytbook.book_image}
-                    isbn={nytbook.isbns[0].isbn10}
-                    isbnP={nytbook.primary_isbn10}
-                  />
-                )}
-              </div>
-            </div>
+            
           </div> 
         }     
       </div>

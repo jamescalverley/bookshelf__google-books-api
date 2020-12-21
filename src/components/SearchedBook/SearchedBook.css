@@ -1,6 +1,5 @@
 .searched-book-container {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin: 3rem 0;
   width: 100%;
   display: flex;
   flex-wrap: nowrap;

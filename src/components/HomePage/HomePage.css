@@ -1,4 +1,4 @@
-.search-page {
+.home-page {
   height: 100%;
   justify-content: center;
   padding-bottom: 200px;
@@ -18,9 +18,11 @@
   line-height: 53px;
   text-align: center;
 }
+
 .main-content-container {
   margin: auto;
   max-width: 1130px;
+  padding: 0 3rem;
 }
 .main-content-container h2 {
   width: 100%;
@@ -36,6 +38,7 @@
 .highlighted-books {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin-bottom: 2rem;
 }
 .featured-container {
@@ -52,15 +55,18 @@
 }
 .topbooks-container {
   width: 45%;
-  padding: 0 2rem 0 2rem;
+  height: fit-content;
+  padding: 0.5rem 2rem 0 2rem;
   background-color: #FFF3ED;
-  border-radius: 3%;
+  border-radius: 20px;
 }
 .nyt-container-first {
   margin-top: 100px;
+  text-align: center;
 }
 .nyt-container-second {
   margin-top: 50px;
+  text-align: center;
 }
 .nyt-header button {
   background-color: #FFFFFF;
@@ -79,7 +85,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   text-align: center;
 }
 .search-container {
@@ -93,6 +99,40 @@
   letter-spacing: 0;
   line-height: 48px;
 }
+
+@media (max-width: 800px) {
+  .featured-container {
+    width: 100%;
+    padding: 0 1.6rem 2rem 1.6rem;
+    margin: auto;
+  }
+  .featured-header {
+    text-align: center;
+  }
+  .featured-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+  }
+  .featured-book {
+    margin: 0;
+  }
+  .topbooks-container {
+    width: 80%;
+    margin: auto;
+    padding: 1rem 2rem 1rem 3rem;
+    background-color: #FFF3ED;
+    border-radius: 3%;
+  }
+} 
+@media (max-width: 578px) {
+  .headline {
+    color: red;
+  }
+}
+
 
 
 

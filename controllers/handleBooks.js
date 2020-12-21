@@ -172,7 +172,6 @@ async function getSavedBooks(req,res){
 
 async function saveBook(req,res){
   console.log("USER ID: ", req.params )
-  console.log(req.body);
   try {
     const bookData = {
       savedBy: req.params.userID,

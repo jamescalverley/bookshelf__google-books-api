@@ -6,6 +6,13 @@
 .topbook-link {
   display: flex;
   flex-direction: row;
+  color: #000000;
+  padding: 0;
+  margin: 0;
+}
+.topbook-link:hover {
+  color: #000000;
+  text-decoration: none;
 }
 .topbook-image img {
   width: 140px;
@@ -16,7 +23,6 @@
   margin-bottom: 0.5rem;
 }
 .topbook-image:hover {
-  /* transform: rotate(2deg);  */
   transform: scale(1.02);
 }
 .topbook:hover {
@@ -51,14 +57,22 @@
   margin-top: 1rem;
 }
 
+@media (max-width: 1000px) {
+  .topbook-link {
+    flex-direction: column;
+  }
+  .topbook-image img {
+    margin-left: 2rem;
+  }
+}
+@media (max-width: 800px) {
+  .topbook-link {
+    flex-direction: row;
+  }
+  .topbook-image img {
+    margin-left: 0;
+  }
+}
 
-.topbook-link {
-  color: #000000;
-  padding: 0;
-  margin: 0;
-}
-.topbook-link:hover {
-  color: #000000;
-  text-decoration: none;
-}
+
   
