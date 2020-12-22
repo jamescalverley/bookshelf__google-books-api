@@ -4,7 +4,7 @@
   padding-bottom: 200px;
 }
 .hero-container {
-  padding: 220px 0 200px 0;
+  padding: 220px 4rem 200px 4rem;
 }
 .headline {
   height: 106px;
@@ -55,7 +55,7 @@
 .topbooks-container {
   width: 45%;
   height: fit-content;
-  padding: 0.5rem 2rem 0 2rem;
+  padding: 0.5rem 2rem 1rem 2rem;
   background-color: #FFF3ED;
   border-radius: 10px;
 }
@@ -98,6 +98,11 @@
   letter-spacing: 0;
   line-height: 48px;
 }
+@media (max-width: 1000px) {
+  .topbooks-container h2 {
+    padding: 1rem 2rem 1rem 2rem;
+  }
+}
 
 @media (max-width: 800px) {
   .featured-container {
@@ -118,13 +123,23 @@
     margin: 0;
   }
   .topbooks-container {
-    width: 80%;
+    width: 100%;
     margin: auto;
     padding: 1rem 2rem 1rem 2rem;
     border-radius: 10px;
   }
+  .topbooks-container h2 {
+    padding: 1rem 0 2rem 0;
+  }
 } 
 @media (max-width: 578px) {
+  .hero-container {
+    padding: 4rem 0 2rem 0;
+  }
+  .headline {
+    font-size: 36px;
+    padding: 0 2rem;
+  }
   .main-content-container {
     padding: 0.5rem;
   }
@@ -137,13 +152,9 @@
   .topbooks-container h2 {
     text-align: center;
   }
-  
   .nyt-container-first {
     margin-top: 50px;
   }
-  
-  
-  
 }
 
 

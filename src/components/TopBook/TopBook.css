@@ -65,9 +65,11 @@
     margin-left: 2rem;
   }
 }
-@media (max-width: 768) {
+@media (max-width: 800px) {
   .topbook-link {
     flex-direction: row;
+    height: auto;
+    margin-bottom: 2rem; 
   }
   .topbook-image img {
     margin-left: 0;
@@ -78,6 +80,11 @@
 @media (max-width: 578px) {
   .topbook {
     margin: 1rem 0;
+  }
+  .topbook-link {
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 2rem; 
   }
   .topbook-image {
     width: fit-content;
