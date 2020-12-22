@@ -1,11 +1,10 @@
 p {
   margin: 0;
 }
-
 .navbar {
   width: 100vw;
   height: 94px;
-  padding: 0 4rem;
+  padding: 0 6rem 0 4rem;
   box-shadow: 0 8px 14px 2px rgba(109,114,120,0.23);
 }
 .navbar-container {

@@ -1,7 +1,7 @@
 .topbook {
   width: 100%;
   height: auto;
-  margin: 0.5rem 1.8rem 0.5rem 0;
+  margin: 0;
 }
 .topbook-link {
   display: flex;
@@ -17,7 +17,7 @@
 .topbook-image img {
   width: 140px;
   height: 200px;
-  border-radius: 5%;
+  border-radius: 10px;
   border: none;
   transition: transform 2s ease-in-out;
   margin-bottom: 0.5rem;
@@ -65,12 +65,30 @@
     margin-left: 2rem;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 768) {
   .topbook-link {
     flex-direction: row;
   }
   .topbook-image img {
     margin-left: 0;
+    width: 112px;
+    height: 160px;
+  }
+}
+@media (max-width: 578px) {
+  .topbook {
+    margin: 1rem 0;
+  }
+  .topbook-image {
+    width: fit-content;
+    margin: auto;
+  }
+  .topbook-image img {
+    margin: auto;
+  }
+  .topbook-info {
+    padding: 1rem 0;
+    
   }
 }
 

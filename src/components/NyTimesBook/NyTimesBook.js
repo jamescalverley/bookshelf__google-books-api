@@ -12,22 +12,19 @@ function NyTimesBook(props){
   const isbn = props.isbn || props.isbnP
   
   return (
-    <div className="nyt-book">
-      <Link className="nyt-book-link" to={`book/${isbn}`}>
-        <div className="nyt-image">
-          <img className="nyt-image" src={props.image} alt="book-cover"/>        
-        </div>
-        {/* <div className="book-metrics">
-          <p>Rank: {props.rank}</p>
-          <p>Weeks on List: {props.weeks}</p>
-        </div> */}
-        <div className="nyt-book-info">
-          <h5>{displayTitle}</h5>
-          <p>{props.author}</p>
-        </div>
-      </Link>  
-      
-    </div>
+    <Link className="nyt-book nyt-book-link" to={`book/${isbn}`}>
+      <div className="nyt-image">
+        <img className="nyt-image" src={props.image} alt="book-cover"/>        
+      </div>
+      {/* <div className="book-metrics">
+        <p>Rank: {props.rank}</p>
+        <p>Weeks on List: {props.weeks}</p>
+      </div> */}
+      <div className="nyt-book-info">
+        <h5>{displayTitle}</h5>
+        <p>{props.author}</p>
+      </div>
+    </Link>  
   )
 };
 
