@@ -1,5 +1,7 @@
 .book-details-page {
   padding: 3rem 8rem 3rem 8rem;
+  max-width: 1200px;
+  margin: auto;
 }
 .backBtn  {
   margin-bottom: 2rem;
@@ -58,6 +60,7 @@
   margin-top: 1rem;
 }
 .book-links {
+  padding: 2rem 0;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -68,4 +71,33 @@
   line-height: 26px;
   font-family: Lato;
   margin-left: 1rem;
+}
+
+@media (max-width: 1000px) {
+  .book-details-page {
+    padding: 3rem 6rem 3rem 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .book-details-container {
+    flex-direction: column;
+  }
+  .book-details-image {
+    padding:  0 0 2rem 0;
+  }
+  .book-details {
+    margin: 0;
+  }
+}
+
+@media (max-width: 578px) {
+  .book-details-page {
+    padding: 2rem;
+  }
+  .book-details-image img {
+    width: 112px;
+    height: 160px;
+  }
+
 }

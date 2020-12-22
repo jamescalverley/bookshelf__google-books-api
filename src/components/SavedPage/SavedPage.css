@@ -1,5 +1,7 @@
 .savedpage {
-  padding: 4rem;
+  padding: 3rem 4rem;
+  max-width: 1200px;
+  margin: auto;
 }
 .savedpage h2 {
   color: #222222;
@@ -8,9 +10,22 @@
   font-weight: bold;
   letter-spacing: 0;
   line-height: 48px;
+  margin-left: 1rem;
 }
 .saved-books-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+@media (max-width: 1000px) {
+  .savedpage {
+    padding: 3rem 2rem;
+  }
+}
+
+@media (max-width: 578px) {
+  .savedpage {
+    padding: 2rem 1rem;
+  }
 }
