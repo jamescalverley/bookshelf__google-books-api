@@ -53,20 +53,14 @@ function SearchedBook( props ){
         <img src={props.image} alt="book-cover"/>        
       </div>
       <div className="searched-book-info">
-        <div className="save-button-container">
-          { !saved ? 
-              <SaveBtn handleSave={handleSave} />
-              :
-              <Saved />
-          }
-        </div>
         <h2>{props.title}</h2>
         <h3>{props.authors[0]}</h3>
         <p>{props.textSnippet}</p>
-        <div className="searched-book-links">
-          <Link to={`/book/${bookData.isbn}`} className="searched-book-link">
-            <button>Book Details</button>
+        <div className="searched-book-link">
+          <Link to={`/book/${bookData.isbn}`}>
+            <button className="book-details-btn">Book Details</button>
           </Link>
+          { !saved ? <SaveBtn handleSave={handleSave} /> : <Saved /> }
         </div>
       </div>
     </div>

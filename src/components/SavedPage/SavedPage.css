@@ -1,9 +1,12 @@
 .savedpage {
   padding: 3rem 4rem;
   max-width: 1200px;
+  height: 100vh;
   margin: auto;
+  background-color: #f7f3f2;
+  background-color: #FFFFFF;
 }
-.savedpage h2 {
+.savedpage h1 {
   color: #222222;
   font-family: "Playfair Display";
   font-size: 36px;
@@ -12,15 +15,20 @@
   line-height: 48px;
   margin-left: 1rem;
 }
-.saved-books-container {
+.flex-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-bottom: 4rem;
 }
 
-@media (max-width: 1000px) {
-  .savedpage {
-    padding: 3rem 2rem;
+@media (max-width: 800px) {
+  .savedpage h1 {
+    text-align: center;
+    margin-left: 0;
+  }
+  .flex-container {
+    justify-content: center;
   }
 }
 

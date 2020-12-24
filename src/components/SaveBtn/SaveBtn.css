@@ -1,6 +1,6 @@
 .save-button {
-  height: auto;
-  width: auto;
+  max-height: 30px;
+  width: fit-content;
   padding: 0.2rem 1rem 0.2rem 1rem;
   border-radius: 30.5px;
   background-color: #FFFFFF;
@@ -10,7 +10,6 @@
   font-weight: bold;
   font-size: 14px;
   letter-spacing: 0;
-  float: inline-end;
 }
 .save-button:hover {
   background-color: #ED696A;

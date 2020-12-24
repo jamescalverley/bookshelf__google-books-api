@@ -24,10 +24,15 @@ function HomeInput(props){
     <div className="search-form-container">
       <form onSubmit={handleSearch}>
         <input id="searchInput" onChange={handleInputChange} type="text"/>
-        <Link to={`/search/${inputText}`} onClick={clearForm}>
+        <Link className="main-btn" to={`/search/${inputText}`} onClick={clearForm}>
           <button>Search</button>
         </Link>
       </form>
+      <div className="mobile-btn">
+        <Link to={`/search/${inputText}`}>
+          <button>Search</button>
+        </Link>
+      </div>
     </div>
   )
 };

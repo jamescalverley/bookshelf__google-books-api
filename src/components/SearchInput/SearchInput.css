@@ -7,7 +7,7 @@
   margin: auto;
   width: 80%;
   height: fit-content;
-  max-width: 700px;
+  max-width: 800px;
   background-color: #FFFFFF;
   box-shadow: 0 8px 14px 2px rgba(109,114,120,0.23);
   padding: 0.8rem 1.5rem 0.8rem 2rem;
@@ -26,10 +26,9 @@
   outline-color: transparent;
   outline-style: none;
 }
-
 .search-form-container button { 
   height: 35px;
-  width: 160px;
+  width: 140px;
   border-radius: 30.5px;
   background-color: #ED696A;
   border: none;
@@ -39,4 +38,27 @@
   font-weight: bold;
   letter-spacing: 0;
 }
+.mobile-btn {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .search-form-container form {
+    width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .main-btn { 
+    display: none;
+  }
+  .mobile-btn {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 1rem auto;
+  }
+}
+
+
 

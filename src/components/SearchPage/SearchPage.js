@@ -49,6 +49,11 @@ function SearchPage(props){
 
     return ( 
       <div className="search-page">
+        { !searchDisplay &&
+          <div className="no-search">
+           <h1>Search for your favourite book.</h1>
+         </div>
+        }
         <div className="search-header-container">
           <SearchInput apiCall={handleApiCall} />
         </div>

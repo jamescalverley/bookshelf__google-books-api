@@ -47,8 +47,8 @@ function SavedPage (props){
     <div className="savedpage">
       { booksDisplay > 0 ? 
         <div>
-          <h2>Saved Books</h2>
-          <div className="saved-books-container">
+          <h1>Saved Books</h1>
+          <div className="flex-container">
             { booksList.map( book => 
               <SavedBook 
                 key={uuidv4()}
@@ -70,10 +70,6 @@ function SavedPage (props){
         : 
         <NoBooks />
       }
-
-
-      
-     
     </div>
   ); 
 };

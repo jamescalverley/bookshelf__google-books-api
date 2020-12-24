@@ -1,71 +1,42 @@
 .saved-book-container {
-  width: auto;
-  max-width: 400px;
+  width: 180px;
   height: auto;
-  padding: 2rem 2rem 2rem 2rem;
+  padding: 1rem 1rem;
   border-radius: 3%;
-  margin: 1rem;
-  background-color: #f7f3f2;
-  border-radius: 22.33px;
-  box-shadow: 20px 26px 16px 0 rgba(0,0,0,0.21);
-  /* border: solid black 1px; */
+  background-color: #FFFFFF;
 }
-.saved-book-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.saved-book-image {
-  margin-right: 1rem;
+.remove-button button {
+  border: none;
+  font-family: "Open Sans";
+  font-size: 14px;
+  letter-spacing: 0;
+  color: #DF3713;
+  background-color: #FFFFFF;
+  transform: translateX( 104px );
 }
 .saved-book-image img {
-  width: 120px;
+  width: 112px;
   height: 160px;
   border-radius: 5%;
 }
 .saved-book-info h2 {
   color: #333333;
   font-family: Lato;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
-  line-height: 34px;
-  margin: 0;
+  line-height: 20px;
+  margin: 0.7rem 0 0.3rem 0;
   padding: 0;
 }
 .saved-book-info h3 {
   color: #333333;
   font-family: Lato;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 18px;
   margin: 0;
   padding: 0;
 }
-.saved-book-link button {
-  height: auto;
-  width: auto;
-  margin-top: 1rem;
-  padding: 0.2rem 1rem 0.2rem 1rem;
-  border-radius: 30.5px;
-  background-color: #f7f3f2;
-  border: solid #000000 1px;
-  color: #000000;
-  font-family: "Open Sans";
-  font-size: 14px;
-  letter-spacing: 0;
+.saved-book-link:hover {
+  text-decoration: none;
 }
-.saved-book-link button:hover {
-  border: solid #ED696A 1px;
-  color: #ED696A;
-}
-.remove-button button {
-  border: none;
-  background-color: #f7f3f2;
-  font-family: "Open Sans";
-  font-size: 14px;
-  letter-spacing: 0;
-  color: #DF3713;
-  margin-top: 2rem;
-}
-.remove-button button:hover {
-  font-weight: bold;
-}
+
