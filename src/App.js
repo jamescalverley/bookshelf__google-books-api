@@ -26,6 +26,7 @@ function App() {
   };
 
   async function checkLocalstorage(){
+    console.log("USER ID _____")
     const localID = localStorage.getItem("userID");
     console.log(`checking local storage ${localID}`);
     if( localID === null ){
@@ -44,46 +45,25 @@ function App() {
   }, []); 
 
   return (
-    // <Router>
-    //   <div className="App">
-    //     <NavBar number={number} />
-    //     <ErrorBoundary>
-    //       <Route exact path={"/"}>
-    //         <HomePage />
-    //       </Route>      
-    //       <Route path={"/search/:searchterm?"}>
-    //         <SearchPage setNumber={numberInc} />
-    //       </Route>
-    //       <Route exact path={"/savedbooks"}>
-    //         <SavedPage setNumber={setNumber} number={number} />
-    //       </Route>
-    //       <Route path={"/book/:book"}>
-    //         <BookDetails setNumber={setNumber} />
-    //       </Route>
-    //     </ErrorBoundary>
-    //   </div>
-    // </Router>
-
-  <Router>
-  <div className="App">
-    <NavBar />
-    <ErrorBoundary>
-      <Route exact path={"/"}>
-        <HomePage />
-      </Route>      
-      <Route path={"/search/:searchterm?"}>
-        <SearchPage />
-      </Route>
-      <Route exact path={"/savedbooks"}>
-        <SavedPage />
-      </Route>
-      <Route path={"/book/:book"}>
-        <BookDetails />
-      </Route>
-    </ErrorBoundary>
-  </div>
-  </Router>
-    
+    <Router>
+      <div className="App">
+        <NavBar />
+        <ErrorBoundary>
+          <Route exact path={"/"}>
+            <HomePage />
+          </Route>      
+          <Route path={"/search/:searchterm?"}>
+            <SearchPage />
+          </Route>
+          <Route exact path={"/savedbooks"}>
+            <SavedPage />
+          </Route>
+          <Route path={"/book/:book"}>
+            <BookDetails />
+          </Route>
+        </ErrorBoundary>
+      </div>
+    </Router>
   );
 }
 

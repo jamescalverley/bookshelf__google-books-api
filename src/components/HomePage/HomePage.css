@@ -98,13 +98,14 @@
   letter-spacing: 0;
   line-height: 48px;
 }
-@media (max-width: 1000px) {
-  .topbooks-container h2 {
-    padding: 1rem 2rem 1rem 2rem;
+
+@media (max-width: 1200px) {
+  .main-content-container {
+    padding: 0 5rem;
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .featured-container {
     width: 100%;
     padding: 0 1.6rem 2rem 1.6rem;
@@ -132,6 +133,7 @@
     padding: 1rem 0 2rem 0;
   }
 } 
+
 @media (max-width: 578px) {
   .hero-container {
     padding: 4rem 0 2rem 0;

@@ -10,10 +10,11 @@ function SavedPage (props){
   const [booksList, setBooksList] = useState([]);
   const [booksDisplay, setBooksDisplay] = useState(0);
   const [loading, setLoading] = useState(true);
+  
 
   function getUserID(){
-    console.log("getting userID from local storage");
     const localID = JSON.parse( localStorage.getItem("userID") );
+    console.log("getting userID from local storage", localID);
     return localID 
 };
 

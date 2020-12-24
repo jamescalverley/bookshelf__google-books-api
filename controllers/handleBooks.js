@@ -204,7 +204,8 @@ async function deleteBook(req,res){
     const deleteID = req.params.deleteID;
     console.log("DELETE".red, deleteID)
     const deleteBook = await SavedBooks.deleteOne({ _id: deleteID });
-    console.log("SUCCESS".green, deleteBook.deletedCount )
+    console.log("SUCCESS".green, deleteBook.deletedCount );
+    console.log("HELLO");
   return res.status(200).json({
     success: true,
     message: `Book: ${deleteID} deleted`

@@ -51,7 +51,7 @@ function HomePage(props){
       try {
         const result = await axios.get('/api/nytnonfiction');
         const resultsList = result.data.data.results.books;
-        const nytTop5 = resultsList.slice(0,6);
+        const nytTop5 = resultsList.slice(0,10);
         console.log("NYT", nytTop5)
         setNytNonFiction([...resultsList]);
         setT5NonFiction([...nytTop5]);
@@ -63,7 +63,7 @@ function HomePage(props){
       try {
         const result = await axios.get('/api/nytfiction');
         const resultsList = result.data.data.results.books;
-        const nytTop5 = resultsList.slice(0,6);
+        const nytTop5 = resultsList.slice(0,10);
         setNytFiction([...resultsList]);
         setT5Fiction([...nytTop5]);
       } catch (err) {

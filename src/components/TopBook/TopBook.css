@@ -59,14 +59,6 @@
 
 @media (max-width: 1000px) {
   .topbook-link {
-    flex-direction: column;
-  }
-  .topbook-image img {
-    margin-left: 2rem;
-  }
-}
-@media (max-width: 800px) {
-  .topbook-link {
     flex-direction: row;
     height: auto;
     margin-bottom: 2rem; 
@@ -77,6 +69,7 @@
     height: 160px;
   }
 }
+
 @media (max-width: 578px) {
   .topbook {
     margin: 1rem 0;
