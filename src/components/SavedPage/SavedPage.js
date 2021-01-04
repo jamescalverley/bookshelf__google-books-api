@@ -7,7 +7,6 @@ const axios = require('axios');
 
 function SavedPage (props){
   const [booksList, setBooksList] = useState([]);
-  const [booksDisplay, setBooksDisplay] = useState(0);
   const [loading, setLoading] = useState(true);
   
   function getUserID(){
@@ -21,8 +20,6 @@ function SavedPage (props){
       const result = await axios.get(`/api/savedbooks/${userID}`);
       const savedBooks = result.data.savedBooks;
       setBooksList([...savedBooks]);
-      const bookCount = savedBooks.length;
-      setBooksDisplay( bookCount );
       setLoading(false);
     } catch (err) {
       console.log("ERROR", err);
@@ -32,7 +29,7 @@ function SavedPage (props){
   useEffect( () => {
     getSavedBooks();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [booksDisplay])
+  }, [])
 
   if (loading) {
     return (
@@ -42,7 +39,7 @@ function SavedPage (props){
 
   return (
     <div className="savedpage">
-      { booksDisplay > 0 ? 
+      { booksList.length > 0 ? 
         <div>
           <h1>Saved Books</h1>
           <div className="flex-container">
@@ -58,7 +55,8 @@ function SavedPage (props){
                 infoLink={book.infoLink}   
                 image={book.image}
                 isbn={book.isbn}
-                setBooksDisplay={setBooksDisplay}
+                setBooksList={setBooksList}
+                booksList={booksList}
               />)
             }
           </div>
@@ -69,6 +67,5 @@ function SavedPage (props){
     </div>
   ); 
 };
-const memoSavedPage = React.memo( SavedPage );
-export default memoSavedPage;
-//export default SavedPage;
+
+export default SavedPage;
