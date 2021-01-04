@@ -24,7 +24,7 @@ router
   .get( getSearchResults )
 
 router 
-  .route('/book/:book')
+  .route('/book/:isbn')
   .get( getBookDetails )
 
 router 

@@ -10,18 +10,15 @@ function SavedBook(props){
 
   async function deleteBook(){
     try {
-      const result = await axios.delete(`/api/delete/${bookData.deleteID}`);
-      console.log(result);
+      await axios.delete(`/api/delete/${bookData.deleteID}`);
     } catch (err) {
       console.log("ERROR", err);
     };
   };
 
   function handleDelete(){
-    console.log("DELETE BOOK --", bookData);
     deleteBook();
     setDisplay(false);
-    //props.setNumber(prev => prev - 1);
     props.setBooksDisplay(prev => prev - 1)
   };
 

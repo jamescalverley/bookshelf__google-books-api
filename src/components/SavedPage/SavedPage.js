@@ -6,20 +6,16 @@ import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
 function SavedPage (props){
-  console.log("SavedPage loading")
   const [booksList, setBooksList] = useState([]);
   const [booksDisplay, setBooksDisplay] = useState(0);
   const [loading, setLoading] = useState(true);
   
-
   function getUserID(){
     const localID = JSON.parse( localStorage.getItem("userID") );
-    console.log("getting userID from local storage", localID);
     return localID 
-};
+  };
 
   async function getSavedBooks(){
-    console.log("[getSavedBooks] ----");
     try {
       const userID = await getUserID();
       const result = await axios.get(`/api/savedbooks/${userID}`);
@@ -62,7 +58,6 @@ function SavedPage (props){
                 infoLink={book.infoLink}   
                 image={book.image}
                 isbn={book.isbn}
-                setNumber={props.setNumber}
                 setBooksDisplay={setBooksDisplay}
               />)
             }

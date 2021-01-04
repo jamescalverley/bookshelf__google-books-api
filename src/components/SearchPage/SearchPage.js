@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
 function SearchPage(props){
-  console.log("*****searchpage render")
 
     const params = useParams();
     const [booksList, setBooksList] = useState([]);
@@ -15,11 +14,9 @@ function SearchPage(props){
     const [searchTerm, setSearchTerm] = useState();
 
     async function handleApiCall(searchTerm){
-      console.log("[handleApiCall]", searchTerm);
       try {
           const result = await axios.get(`/api/search/${searchTerm}`)
           const resultsList = result.data.books;
-          console.log("LIST", resultsList); 
           let checkedList = [];
           resultsList.map( book => checkedList.push( {
               bookID: book.id ? book.id : null,
@@ -73,9 +70,7 @@ function SearchPage(props){
                     description={book.description}
                     link={book.link}
                     image={book.image}
-                    changeBookNum={props.changeBookNum}   
                     isbn={book.isbn}
-                    setNumber={props.setNumber}
                   />
               )}
             </div>

@@ -10,7 +10,6 @@ function SearchedBook( props ){
   const [saved, setSaved] = useState(false);
   
   function getUserID(){
-    console.log("getting userID from local storage");
     const localID = JSON.parse( localStorage.getItem("userID") );
     return localID 
   };
@@ -30,22 +29,17 @@ function SearchedBook( props ){
   async function saveBook(){
     try {
       const userID = await getUserID();
-      const result = await axios.post(`/api/savebook/${userID}`, bookData);
-      console.log("Post Success", result);
+      await axios.post(`/api/savebook/${userID}`, bookData);
     } catch (err) {
         console.log("POST ERROR", err);
     };
   };
 
   function handleSave(){
-    console.log("handling save");
     saveBook();
-    console.log("setting SAVED");
     setSaved(true);
-    console.log("---save set", saved)
-    //props.setNumber(prev => prev + 1);
-    //props.setNumber();
   };
+
 
   return (
     <div className="searched-book-container">

@@ -25,8 +25,8 @@ function HomePage(props){
     async function getFeatured(){
       try {
         const result = await axios.get('/api/featured');
-        console.log(result)
         const resultsList = result.data.data.results.books.slice(0,9);
+        console.log(resultsList)
         setFeaturedBooks( [...resultsList] );
         setApiBookDisplay(true);
       }
@@ -50,9 +50,9 @@ function HomePage(props){
     async function getNytNonFiction(){
       try {
         const result = await axios.get('/api/nytnonfiction');
+        console.log(result)
         const resultsList = result.data.data.results.books;
         const nytTop5 = resultsList.slice(0,10);
-        console.log("NYT", nytTop5)
         setNytNonFiction([...resultsList]);
         setT5NonFiction([...nytTop5]);
       } catch (err) {
@@ -63,6 +63,7 @@ function HomePage(props){
       try {
         const result = await axios.get('/api/nytfiction');
         const resultsList = result.data.data.results.books;
+        console.log(resultsList);
         const nytTop5 = resultsList.slice(0,10);
         setNytFiction([...resultsList]);
         setT5Fiction([...nytTop5]);

@@ -1,42 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import './BookDetails.css';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import SaveBtn from '../SaveBtn/SaveBtn';
 import Saved from '../Saved/Saved';
 const axios = require('axios');
 
 function BookDetails(props){
+  console.log("bookDetails render")
   const params = useParams();
+  console.log(params)
   const ISBN = params.book;
+  console.log(ISBN)
+
   const [bookDisplay, setBookDisplay] = useState(false);
+  const [noBookDisplay, setNoBookDisplay] = useState(false);
   const [book, setBook] = useState({});
   const [saved, setSaved] = useState(false);
 
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+
+  const title = useQuery();
+
 
   function getUserID(){
-    console.log("getting userID from local storage");
     const localID = JSON.parse( localStorage.getItem("userID") );
     return localID 
   };
 
   async function getBookData(){
     try {
-      const result = await axios.get(`/api/book/${ISBN}`);
-      console.log("result", result)
-      const book = result.data.book;
-      console.log("RESULT", book);
-      setBook({
-        bookID: book.id ? book.id : null,
-        title: book.volumeInfo.title ? book.volumeInfo.title : "",
-        subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : "",
-        authors: book.volumeInfo.authors ? book.volumeInfo.authors[0] : "",
-        textSnippet: book.searchInfo ? book.searchInfo.textSnippet : "",
-        description: book.volumeInfo.description ? book.volumeInfo.description : "", 
-        link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
-        image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
-        isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : false
-        });
-        setBookDisplay(true);
+      const result = await axios.get(`/api/book/${ISBN}?${title}`);
+      const foundBook = result.data.book.searchResult;
+      const book = result.data.book.book;
+    
+      if ( foundBook ){
+        setBook({
+          bookID: book.id ? book.id : null,
+          title: book.volumeInfo.title ? book.volumeInfo.title : "",
+          subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : "",
+          authors: book.volumeInfo.authors ? book.volumeInfo.authors[0] : "",
+          textSnippet: book.searchInfo ? book.searchInfo.textSnippet : "",
+          description: book.volumeInfo.description ? book.volumeInfo.description : "", 
+          link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
+          image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
+          isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : false
+          });
+          setBookDisplay(true);
+      } else {
+          setNoBookDisplay(true);
+      }
     } catch (err) {
       console.log("ERROR", err)
     };
@@ -55,7 +69,6 @@ function BookDetails(props){
   function handleSave(){
     saveBook();
     setSaved(true);
-    //props.setNumber(prev => prev + 1)
   };
 
   let history = useHistory();
@@ -93,6 +106,9 @@ function BookDetails(props){
             </div>
           </div>
         </div>
+      }
+      { noBookDisplay &&
+        <h1>Book Not Found!!</h1>
       }
     </>
   )

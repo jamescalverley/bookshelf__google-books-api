@@ -26,22 +26,42 @@ async function getSearchResults(req,res){
   }
 };
 
+async function checkResults( isbn, title, bookArr ){
+  console.log(`CHECKING --- ${isbn} - ${title} -- ${bookArr.length} books`);
+  let returnBook = { searchResult: false };
+  console.log("return book", returnBook)
+  await bookArr.forEach( book => {
+    console.log(book.volumeInfo.title);
+    console.log(book.volumeInfo.industryIdentifiers);
+    if ( book.volumeInfo.title.toLowerCase() === title ){
+      console.log( `__TITLE Match ${book.volumeInfo.title.toLowerCase()} = to ${title}`);
+      returnBook = { searchResult: true, book };
+    }
+  })
+  if ( returnBook === undefined ){
+    console.log("no book found ------", returnBook);
+    return returnBook
+  } else {
+    console.log("FOUND");
+  }
+  return returnBook
+};
+
 async function getBookDetails(req,res){
   try {
     const apiKey = process.env.API_KEY_GB;
-    const ISBN = req.params.book;
-    console.log("looking for book:".green, ISBN );
-    // const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${ISBN}&orderBy=newest&key=${apiKey}`;
-    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${ISBN}&key=${apiKey}`;
+    const isbn = req.params.isbn;
+    const title = req.query.title;
+    console.log(`ISBN: ${isbn} Title: ${title}`)
+    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${isbn}&key=${apiKey}`;
     const apiResult = await fetch( apiURL )
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err))
-    console.log("RESULT".blue, apiResult.items.length);
+    const detailsResult = await checkResults(isbn, title, apiResult.items);
     return res.status(200).json({
       success: true,
       message: "BOOK FOUND",
-      count: apiResult.items.length,
-      book: apiResult.items[0]
+      book: detailsResult
     })
   } catch (err) {
       return res.status(500).json({
@@ -205,7 +225,6 @@ async function deleteBook(req,res){
     console.log("DELETE".red, deleteID)
     const deleteBook = await SavedBooks.deleteOne({ _id: deleteID });
     console.log("SUCCESS".green, deleteBook.deletedCount );
-    console.log("HELLO");
   return res.status(200).json({
     success: true,
     message: `Book: ${deleteID} deleted`
@@ -248,4 +267,7 @@ module.exports = {
   deleteBook, 
   bookCount 
 };
+
+
+
 

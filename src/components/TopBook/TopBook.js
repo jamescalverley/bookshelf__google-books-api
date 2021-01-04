@@ -5,9 +5,10 @@ import './TopBook.css';
 function TopBook( {book} ){
 
   const isbn = book.volumeInfo.industryIdentifiers[0].identifier || book.volumeInfo.industryIdentifiers[1].identifier;
+  const title = book.volumeInfo.title.toLowerCase();
 
   return (
-    <Link className="topbook topbook-link" to={`book/${isbn}`}>
+    <Link className="topbook topbook-link" to={`book/${isbn}?title=${title}`}>
       <div className="topbook-image">
         <img className="topbook-image" src={book.volumeInfo.imageLinks.thumbnail} alt="book-cover"/>        
       </div>

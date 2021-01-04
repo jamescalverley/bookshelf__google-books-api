@@ -11,30 +11,19 @@ const axios = require('axios');
 
 function App() {
   
-  // const [number, setNumber] = useState(0);
-
-  // const numberInc = useCallback( () => {
-  //   setNumber(prev => prev + 1)
-  // }, [setNumber]);
-
   async function getUserID(){
     const result = await axios.get('/api/user/setID');
-    console.log(result);
     const userID = result.data.userID;
     console.log("userID ---> ", userID);
     return userID
   };
 
   async function checkLocalstorage(){
-    console.log("USER ID _____")
     const localID = localStorage.getItem("userID");
-    console.log(`checking local storage ${localID}`);
     if( localID === null ){
-      console.log("setting userID")
       const userID = JSON.stringify( await getUserID() );
       localStorage.setItem( "userID", userID );
     } else {
-      console.log("userID is present")
       return 
     };
   };

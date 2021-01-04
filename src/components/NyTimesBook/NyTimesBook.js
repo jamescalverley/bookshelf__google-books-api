@@ -9,10 +9,11 @@ function NyTimesBook(props){
   .map( (word) =>  word.charAt(0).toUpperCase() + word.substring(1) )
   .join(' ')
 
-  const isbn = props.isbn || props.isbnP
+  const isbn = props.isbn || props.isbnP;
+  const title = props.title.toLowerCase().replace(/\s/g, '+');
   
   return (
-    <Link className="nyt-book nyt-book-link" to={`book/${isbn}`}>
+    <Link className="nyt-book nyt-book-link" to={`book/${isbn}?title=${title}`}>
       <div className="nyt-image">
         <img className="nyt-image" src={props.image} alt="book-cover"/>        
       </div>
