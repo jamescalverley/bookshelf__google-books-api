@@ -1,14 +1,14 @@
 .topbook {
   width: 100%;
   height: auto;
-  margin: 0;
+  margin: 0.5rem 0;
 }
 .topbook-link {
   display: flex;
   flex-direction: row;
   color: #000000;
   padding: 0;
-  margin: 0;
+  margin: 0.5rem 0;
 }
 .topbook-link:hover {
   color: #000000;
@@ -19,11 +19,7 @@
   height: 200px;
   border-radius: 10px;
   border: none;
-  transition: transform 2s ease-in-out;
   margin-bottom: 0.5rem;
-}
-.topbook-image:hover {
-  transform: scale(1.02);
 }
 .topbook:hover {
   cursor: pointer;

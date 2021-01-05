@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import './HomeInput.css';
+import {motion} from 'framer-motion';
 
 function HomeInput(props){
 
@@ -20,12 +21,12 @@ function HomeInput(props){
       <form onSubmit={handleSearch}>
         <input onChange={handleInputChange} type="text"/>
         <Link className="main-btn" to={`/search/${inputText}`}>
-          <button>Search</button>
+          <motion.button whileHover={{ scale: 1.1 }}>Search</motion.button>
         </Link>
       </form>
       <div className="mobile-btn">
         <Link to={`/search/${inputText}`}>
-          <button>Search</button>
+          <motion.button whileHover={{ scale: 1.1 }}>Search</motion.button>
         </Link>
       </div>
       

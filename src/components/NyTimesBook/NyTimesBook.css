@@ -19,12 +19,7 @@
   height: 200px;
   border-radius: 10px;
   border: none;
-  transition: transform 2s ease-in-out;
   margin-bottom: 0.5rem;
-}
-.nyt-image:hover {
-  /* transform: rotate(2deg);  */
-  transform: scale(1.02);
 }
 .nyt-book:hover {
   cursor: pointer;

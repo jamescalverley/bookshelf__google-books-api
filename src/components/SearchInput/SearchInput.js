@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import './SearchInput.css';
+import {motion} from 'framer-motion';
 
 function SearchInput(props){
 
@@ -25,12 +26,12 @@ function SearchInput(props){
       <form onSubmit={handleSearch}>
         <input id="searchInput" onChange={handleInputChange} type="text"/>
         <Link className="main-btn" to={`/search/${inputText}`} onClick={clearForm}>
-          <button>Search</button>
+          <motion.button whileHover={{ scale: 1.1 }}>Search</motion.button>
         </Link>
       </form>
       <div className="mobile-btn">
         <Link to={`/search/${inputText}`}>
-          <button>Search</button>
+          <motion.button whileHover={{ scale: 1.1 }}>Search</motion.button>
         </Link>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import './NyTimesBook.css';
 import { Link } from 'react-router-dom';
+import {motion} from 'framer-motion';
 
 function NyTimesBook(props){
 
@@ -14,9 +15,9 @@ function NyTimesBook(props){
   
   return (
     <Link className="nyt-book nyt-book-link" to={`book/${isbn}?title=${title}`}>
-      <div className="nyt-image">
+      <motion.div className="nyt-image" whileHover={{ scale: 1.08 }}>
         <img className="nyt-image" src={props.image} alt="book-cover"/>        
-      </div>
+      </motion.div>
       {/* <div className="book-metrics">
         <p>Rank: {props.rank}</p>
         <p>Weeks on List: {props.weeks}</p>

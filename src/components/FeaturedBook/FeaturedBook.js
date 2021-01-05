@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from "framer-motion"
 import './FeaturedBook.css';
 
 function FeaturedBook( {book} ){
@@ -8,11 +9,14 @@ function FeaturedBook( {book} ){
   const title = book.title.toLowerCase().replace(/\s/g, '+');
 
   return (
-    <Link className="featured-book featured-link" to={`book/${isbn}?title=${title}`}>
-      <div className="featured-image">
-        <img className="featured-image" src={book.book_image} alt="book-cover"/>        
-      </div>
-    </Link>  
+    <motion.div className="featured-book" whileHover={{ scale: 1.08 }}>
+      <Link className="featured-link" to={`book/${isbn}?title=${title}`}>
+        <div className="featured-image">
+          <img className="featured-image" src={book.book_image} alt="book-cover"/>        
+        </div>
+     </Link>  
+    </motion.div>
+    
   )
 };
 

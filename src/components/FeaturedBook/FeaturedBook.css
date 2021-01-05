@@ -7,14 +7,11 @@
   height: 200px;
   border-radius: 10px;
   border: none;
-  transition: transform 2s ease-in-out;
 }
 .featured-book:hover {
   cursor: pointer;
 }
-.featured-image:hover {
-  transform: scale(1.02);
-}
+
 @media (max-width: 768px) {
   .featured-book {
     margin: 0;
