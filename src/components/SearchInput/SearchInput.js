@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import './SearchInput.css';
 
-function HomeInput(props){
+function SearchInput(props){
 
   const [inputText, setInputText] = useState("");
 
@@ -37,4 +37,4 @@ function HomeInput(props){
   )
 };
 
-export default HomeInput;
+export default SearchInput;

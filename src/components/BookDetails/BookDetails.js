@@ -6,11 +6,9 @@ import Saved from '../Saved/Saved';
 const axios = require('axios');
 
 function BookDetails(props){
-  console.log("bookDetails render")
+ 
   const params = useParams();
-  console.log(params)
   const ISBN = params.book;
-  console.log(ISBN)
 
   const [bookDisplay, setBookDisplay] = useState(false);
   const [noBookDisplay, setNoBookDisplay] = useState(false);
@@ -22,7 +20,6 @@ function BookDetails(props){
   }
 
   const title = useQuery();
-
 
   function getUserID(){
     const localID = JSON.parse( localStorage.getItem("userID") );

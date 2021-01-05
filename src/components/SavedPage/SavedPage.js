@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './SavedPage.css';
 import SavedBook from '../SavedBook/SavedBook';
 import NoBooks from '../NoBooks/NoBooks';
+import DeleteToast from '../DeleteToast/DeleteToast';
 import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
 function SavedPage (props){
   const [booksList, setBooksList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [toastShow, setToastShow] = useState(false);
   
   function getUserID(){
     const localID = JSON.parse( localStorage.getItem("userID") );
@@ -41,6 +43,7 @@ function SavedPage (props){
     <div className="savedpage">
       { booksList.length > 0 ? 
         <div>
+          <DeleteToast show={toastShow} setShow={setToastShow}/>
           <h1>Saved Books</h1>
           <div className="flex-container">
             { booksList.map( book => 
@@ -57,9 +60,11 @@ function SavedPage (props){
                 isbn={book.isbn}
                 setBooksList={setBooksList}
                 booksList={booksList}
+                setShow={setToastShow}
               />)
             }
           </div>
+
         </div>
         : 
         <NoBooks />

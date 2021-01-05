@@ -29,21 +29,15 @@ async function getSearchResults(req,res){
 async function checkResults( isbn, title, bookArr ){
   console.log(`CHECKING --- ${isbn} - ${title} -- ${bookArr.length} books`);
   let returnBook = { searchResult: false };
-  console.log("return book", returnBook)
   await bookArr.forEach( book => {
-    console.log(book.volumeInfo.title);
-    console.log(book.volumeInfo.industryIdentifiers);
     if ( book.volumeInfo.title.toLowerCase() === title ){
       console.log( `__TITLE Match ${book.volumeInfo.title.toLowerCase()} = to ${title}`);
       returnBook = { searchResult: true, book };
     }
   })
   if ( returnBook === undefined ){
-    console.log("no book found ------", returnBook);
     return returnBook
-  } else {
-    console.log("FOUND");
-  }
+  } 
   return returnBook
 };
 
@@ -79,6 +73,7 @@ async function featuredBooks(req,res){
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
       console.log("FEATURED BOOKS".green, apiResult.num_results);
+      console.log("FEATURED", apiResult.last_modified)
     return res.status(200).json({
       success: true, 
       data: apiResult
@@ -137,6 +132,7 @@ async function nytNonFiction(req,res){
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
       console.log("NYT NONFICTION".green, apiResult.num_results);
+      console.log("Non-Fiction", apiResult.last_modified);
     return res.status(200).json({
       success: true, 
       data: apiResult
@@ -158,6 +154,7 @@ async function nytFiction(req, res){
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
       console.log("NYT FICTION".green, apiResult.num_results);
+      console.log("Fiction", apiResult.last_modified);
     return res.status(200).json({
       success: true, 
       data: apiResult

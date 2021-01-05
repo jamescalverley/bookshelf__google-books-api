@@ -18,7 +18,7 @@ function NavBar(){
             </svg>
           </div>
         </Link>
-        <nav>
+        <div className="nav-links">
           <p href='./search'>
             <NavLink 
               to="/search" 
@@ -44,7 +44,7 @@ function NavBar(){
               {/* <SavedBookNum number={props.number}/> */}
             </NavLink>
           </p>
-        </nav>
+        </div>
       </div>
     </div>
   )

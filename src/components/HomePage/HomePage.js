@@ -17,18 +17,17 @@ function HomePage(props){
     const [nytFiction, setNytFiction] = useState([]);
     const [t5Fiction, setT5Fiction] = useState([]);
     // display states
-    const [apiBookDisplay, setApiBookDisplay] = useState(false);
+    const [featuredDisplay, setFeaturedDisplay] = useState(false);
+    const [topBooksDisplay, setTopBooksDisplay] = useState(false);
     const [fictionDisplay, setFictionDisplay] = useState(false);
     const [nonFictionDisplay, setNonFictionDisplay] = useState(false);
-    const [topBooksDisplay, setTopBooksDisplay] = useState(false);
 
     async function getFeatured(){
       try {
         const result = await axios.get('/api/featured');
         const resultsList = result.data.data.results.books.slice(0,9);
-        console.log(resultsList)
         setFeaturedBooks( [...resultsList] );
-        setApiBookDisplay(true);
+        setFeaturedDisplay(true);
       }
        catch (err) {
         console.log("ERROR", err)
@@ -55,6 +54,7 @@ function HomePage(props){
         const nytTop5 = resultsList.slice(0,10);
         setNytNonFiction([...resultsList]);
         setT5NonFiction([...nytTop5]);
+        setNonFictionDisplay(true);
       } catch (err) {
           console.log("ERROR", err)
       } 
@@ -63,10 +63,10 @@ function HomePage(props){
       try {
         const result = await axios.get('/api/nytfiction');
         const resultsList = result.data.data.results.books;
-        console.log(resultsList);
         const nytTop5 = resultsList.slice(0,10);
         setNytFiction([...resultsList]);
         setT5Fiction([...nytTop5]);
+        setFictionDisplay(true);
       } catch (err) {
           console.log("ERROR", err)
       }
@@ -77,6 +77,23 @@ function HomePage(props){
     // function handleDisplayChange(){
     //   setNonFictionDisplay(prev => !prev);
     // };
+
+    function setAPITimeStamp(){
+      localStorage.setItem("API_TIMESTAMP", Date.now() );
+    };
+
+    function checkAPITimeStamp(){
+      console.log("checking time stamp");
+      const apiCallTime = localStorage.getItem("API_TIMESTAMP");
+      const timeBetween = ( Date.now() - apiCallTime ) / 1000;
+      console.log("Time between", timeBetween);
+      if ( timeBetween > 20 ){
+        console.log("call API");
+        setAPITimeStamp();
+      } else {
+        console.log("Dont call API ")
+      }
+    };
 
     useEffect(() => {
       getTopBooks();
@@ -93,7 +110,7 @@ function HomePage(props){
           </div>
           <HomeInput />
         </div>
-        { apiBookDisplay &&
+        { featuredDisplay &&
           <div className="main-content-container">
             <div className="highlighted-books">
               <div className="featured-container">
@@ -121,13 +138,33 @@ function HomePage(props){
                 </div>
               }
             </div>
-            <div className="nyt-container-first">
-              <div className="nyt-header">
-                <h2>NY Times Best Sellers - Fiction</h2>
-                {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
+            { fictionDisplay &&
+               <div className="nyt-container-first">
+               <h2>NY Times Best Sellers - Fiction</h2>
+               {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
+               <div className="nyt-results top5">
+                 { t5Fiction.map( nytbook => 
+                   <NyTimesBook 
+                     key={uuidv4()}
+                     title={nytbook.title}
+                     author={nytbook.author}
+                     description={nytbook.description}
+                     rank={nytbook.rank}
+                     weeks={nytbook.weeks_on_list}
+                     image={nytbook.book_image}
+                     isbn={nytbook.isbns[0].isbn10}
+                     isbnP={nytbook.primary_isbn10}
+                   />
+                 )}
+               </div>
               </div>
+            }
+           { nonFictionDisplay &&
+            <div className="nyt-container-second">
+              <h2>NY Times Best Sellers - Non-Fiction</h2>
+              {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
               <div className="nyt-results top5">
-                { t5Fiction.map( nytbook => 
+                { t5NonFiction.map( nytbook => 
                   <NyTimesBook 
                     key={uuidv4()}
                     title={nytbook.title}
@@ -141,44 +178,8 @@ function HomePage(props){
                   />
                 )}
               </div>
-            </div>
-            <div className="nyt-container-second">
-                <h2>NY Times Best Sellers - Non-Fiction</h2>
-                {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
-                { !nonFictionDisplay ? 
-                  <div className="nyt-results top5">
-                    { t5NonFiction.map( nytbook => 
-                      <NyTimesBook 
-                        key={uuidv4()}
-                        title={nytbook.title}
-                        author={nytbook.author}
-                        description={nytbook.description}
-                        rank={nytbook.rank}
-                        weeks={nytbook.weeks_on_list}
-                        image={nytbook.book_image}
-                        isbn={nytbook.isbns[0].isbn10}
-                        isbnP={nytbook.primary_isbn10}
-                      />
-                    )}
-                  </div>
-                  : 
-                  <div className="nyt-results all">
-                    { nytNonFiction.map( nytbook => 
-                      <NyTimesBook 
-                        key={uuidv4()}
-                        title={nytbook.title}
-                        author={nytbook.author}
-                        description={nytbook.description}
-                        rank={nytbook.rank}
-                        weeks={nytbook.weeks_on_list}
-                        image={nytbook.book_image}
-                        isbn={nytbook.isbns[0].isbn10}
-                        isbnP={nytbook.primary_isbn10}
-                      />
-                    )}
-                  </div>
-                }     
             </div> 
+           }
             
           </div> 
         }     

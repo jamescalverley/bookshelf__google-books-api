@@ -24,7 +24,7 @@ p {
   color: #ED696A;
   margin-right: 0.5rem;
 }
-nav {
+.nav-links {
   height: auto;
   display: flex;
   flex-direction: row;
@@ -36,11 +36,14 @@ nav {
   line-height: 27px;
   margin: auto 0;
 }
-nav a {
+.nav-links p {
+  margin: 0;
+}
+.nav-links a {
   margin-left: 1rem;
   text-decoration: none;
 }
-nav a:hover {
+.nav-links a:hover {
   text-decoration: none;
   color: #ED696A;
 }
