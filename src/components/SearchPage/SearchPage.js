@@ -13,6 +13,14 @@ function SearchPage(props){
     const [searchDisplay, setSearchDisplay] = useState(false);
     const [searchTerm, setSearchTerm] = useState();
 
+    function convertText( text ){
+      const converted = text
+        .replace(/<[^>]+>|&nbsp/g, "")
+        .replace(/&#39;/g, "'")
+        .replace(/&quot;/g, '"')
+        return converted
+    }; 
+
     async function handleApiCall(searchTerm){
       try {
           const result = await axios.get(`/api/search/${searchTerm}`)
@@ -23,7 +31,7 @@ function SearchPage(props){
               title: book.volumeInfo.title ? book.volumeInfo.title : "",
               subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : "",
               authors: book.volumeInfo.authors ? book.volumeInfo.authors : [],
-              textSnippet: book.searchInfo ? book.searchInfo.textSnippet : "",
+              textSnippet: book.searchInfo ? convertText( book.searchInfo.textSnippet ) : "",
               description: book.volumeInfo.description ? book.volumeInfo.description : "", 
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
               image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
@@ -42,6 +50,7 @@ function SearchPage(props){
         handleApiCall( params.searchterm);
         setSearchTerm( params.searchterm.split('+').join(' ') )
       };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params.searchterm])
 
     return ( 
@@ -55,7 +64,9 @@ function SearchPage(props){
           <SearchInput apiCall={handleApiCall} />
         </div>
           { searchDisplay && 
+            
             <div className="search-container">
+              {/* <h1>{displayText}</h1> */}
               <h1>Search Results for 
                 <span className="searchterm"> "{searchTerm}"</span>
               </h1>

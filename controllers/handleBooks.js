@@ -7,12 +7,13 @@ async function getSearchResults(req,res){
     const apiKey = process.env.API_KEY_GB;
     const searchTerm = req.params.searchterm;
     console.log(`Search for: ${searchTerm}`.blue);
-    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&orderBy=newest&key=${apiKey}`;
+    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&orderBy=relevance&key=${apiKey}`;
     const apiResult = await fetch(apiURL)
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
     console.log(`Success -- Result Count ${apiResult.items.length}`.green);
     const booksResult = apiResult.items;
+    booksResult.forEach( book => console.log(book.volumeInfo.title))
     return res.status(200).json({ 
       success: true, 
       searchTerm: searchTerm,

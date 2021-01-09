@@ -8,6 +8,9 @@ const axios = require('axios');
 function SearchedBook( props ){
   
   const [saved, setSaved] = useState(false);
+
+  const isbn = props.isbn || props.isbnP;
+  const title = props.title.toLowerCase().replace(/\s/g, '+');
   
   function getUserID(){
     const localID = JSON.parse( localStorage.getItem("userID") );
@@ -40,7 +43,6 @@ function SearchedBook( props ){
     setSaved(true);
   };
 
-
   return (
     <div className="searched-book-container">
       <div className="searched-book-image">
@@ -51,7 +53,7 @@ function SearchedBook( props ){
         <h3>{props.authors[0]}</h3>
         <p>{props.textSnippet}</p>
         <div className="searched-book-link">
-          <Link to={`/book/${bookData.isbn}`}>
+          <Link to={`/book/${isbn}?title=${title}`}>
             <button className="book-details-btn">Book Details</button>
           </Link>
           { !saved ? <SaveBtn handleSave={handleSave} /> : <Saved /> }
