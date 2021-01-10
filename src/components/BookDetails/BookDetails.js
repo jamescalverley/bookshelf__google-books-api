@@ -3,6 +3,7 @@ import './BookDetails.css';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import SaveBtn from '../SaveBtn/SaveBtn';
 import Saved from '../Saved/Saved';
+import {motion} from 'framer-motion';
 const axios = require('axios');
 
 function BookDetails(props){
@@ -105,7 +106,21 @@ function BookDetails(props){
         </div>
       }
       { noBookDisplay &&
-        <h1>Book Not Found!!</h1>
+        <div className="book-details-page">
+          <div className="nobook-container">
+            <h1>Book Details Not Available</h1>
+            <motion.button 
+              onClick={handleBack}
+              whileHover={{ scale: 1.25, color: '#FFF', backgroundColor: '#ED696A'  }}
+            >
+              Back
+            </motion.button>
+          </div>
+        </div>
+        
+      
+       
+
       }
     </>
   )

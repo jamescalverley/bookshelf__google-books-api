@@ -22,11 +22,14 @@ function HomePage(props){
     const [fictionDisplay, setFictionDisplay] = useState(false);
     const [nonFictionDisplay, setNonFictionDisplay] = useState(false);
 
+    console.log("FEATURED", featuredBooks)
+
     async function getFeatured(){
       try {
         const result = await axios.get('/api/featured');
+        console.log(result)
         const resultsList = result.data.data.results.books.slice(0,9);
-        setFeaturedBooks( [...resultsList] );
+        setFeaturedBooks( resultsList  );
         setFeaturedDisplay(true);
       }
        catch (err) {
@@ -49,7 +52,6 @@ function HomePage(props){
     async function getNytNonFiction(){
       try {
         const result = await axios.get('/api/nytnonfiction');
-        console.log(result)
         const resultsList = result.data.data.results.books;
         const nytTop5 = resultsList.slice(0,10);
         setNytNonFiction([...resultsList]);

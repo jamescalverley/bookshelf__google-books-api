@@ -72,6 +72,32 @@
   font-family: Lato;
   margin-left: 1rem;
 }
+.nobook-container {
+  text-align: center;
+  padding: 4rem 0;
+}
+.nobook-container h1 {
+  color: #333333;
+  font-family: "Playfair Display";
+  font-size: 48px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 48px;
+  margin-bottom: 3rem;
+}
+.nobook-container button {
+  max-height: 30px;
+  width: fit-content;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  border-radius: 30.5px;
+  background-color: #FFFFFF;
+  border: solid #ED696A 1px;
+  color: #ED696A;
+  font-family: "Open Sans";
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0;
+}
 
 @media (max-width: 1000px) {
   .book-details-page {
