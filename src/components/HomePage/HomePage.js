@@ -24,11 +24,24 @@ function HomePage(props){
 
     console.log("FEATURED", featuredBooks)
 
+    // async function getFeatured(){
+    //   try {
+    //     const result = await axios.get('/api/featured');
+    //     console.log(result)
+    //     const resultsList = result.data.data.results.books.slice(0,9);
+    //     setFeaturedBooks( resultsList  );
+    //     setFeaturedDisplay(true);
+    //   }
+    //    catch (err) {
+    //     console.log("ERROR", err)
+    //   };
+    // };
+
     async function getFeatured(){
       try {
-        const result = await axios.get('/api/featured');
+        const result = await axios.get('/api/nyt/nytbookdata');
         console.log(result)
-        const resultsList = result.data.data.results.books.slice(0,9);
+        const resultsList = result.data.books.slice(0,9);
         setFeaturedBooks( resultsList  );
         setFeaturedDisplay(true);
       }
@@ -79,23 +92,6 @@ function HomePage(props){
     // function handleDisplayChange(){
     //   setNonFictionDisplay(prev => !prev);
     // };
-
-    function setAPITimeStamp(){
-      localStorage.setItem("API_TIMESTAMP", Date.now() );
-    };
-
-    function checkAPITimeStamp(){
-      console.log("checking time stamp");
-      const apiCallTime = localStorage.getItem("API_TIMESTAMP");
-      const timeBetween = ( Date.now() - apiCallTime ) / 1000;
-      console.log("Time between", timeBetween);
-      if ( timeBetween > 20 ){
-        console.log("call API");
-        setAPITimeStamp();
-      } else {
-        console.log("Dont call API ")
-      }
-    };
 
     useEffect(() => {
       getTopBooks();

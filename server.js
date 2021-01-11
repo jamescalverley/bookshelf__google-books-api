@@ -18,8 +18,11 @@ app.use('/', express.static('build'));
 
 const bookSearch = require('./routes/books');
 const localstorageSet = require('./routes/localstorage');
+const nytAPI = require('./routes/nytbookdata') 
+
 app.use('/api/', bookSearch);
-app.use('/api/user', localstorageSet)
+app.use('/api/user', localstorageSet);
+app.use('/api/nyt', nytAPI );
 
 app.listen(PORT, () => {
   console.log(`App running at http://localhost:${PORT}`.bold.cyan)
