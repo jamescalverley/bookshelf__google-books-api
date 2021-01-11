@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import React, { useEffect, useState} from 'react';
 import './HomePage.css';
 import HomeInput from '../HomeInput/HomeInput';
@@ -9,95 +9,26 @@ import NyTimesBook from '../NyTimesBook/NyTimesBook';
 const axios = require('axios');
 
 function HomePage(props){
-    // book states
-    const [featuredBooks, setFeaturedBooks] = useState([]);
-    const [topBooks, setTopBooks] = useState([]);
-    const [nytNonFiction, setNytNonFiction] = useState([]);
-    const [t5NonFiction, setT5NonFiction] = useState([]);
-    const [nytFiction, setNytFiction] = useState([]);
-    const [t5Fiction, setT5Fiction] = useState([]);
-    // display states
-    const [featuredDisplay, setFeaturedDisplay] = useState(false);
-    const [topBooksDisplay, setTopBooksDisplay] = useState(false);
-    const [fictionDisplay, setFictionDisplay] = useState(false);
-    const [nonFictionDisplay, setNonFictionDisplay] = useState(false);
-
-    console.log("FEATURED", featuredBooks)
-
-    // async function getFeatured(){
-    //   try {
-    //     const result = await axios.get('/api/featured');
-    //     console.log(result)
-    //     const resultsList = result.data.data.results.books.slice(0,9);
-    //     setFeaturedBooks( resultsList  );
-    //     setFeaturedDisplay(true);
-    //   }
-    //    catch (err) {
-    //     console.log("ERROR", err)
-    //   };
-    // };
-
-    async function getFeatured(){
+  
+    const [bookData, setBookData] = useState({});
+    const [allBooksDisplay, setAllBooksDisplay] = useState(false);
+    
+    async function getAllBookData(){
       try {
         const result = await axios.get('/api/nyt/nytbookdata');
-        console.log(result)
-        const resultsList = result.data.books.slice(0,9);
-        setFeaturedBooks( resultsList  );
-        setFeaturedDisplay(true);
-      }
-       catch (err) {
-        console.log("ERROR", err)
+        console.log("BOOK DATA", result);
+        if ( result.data.success === true ){
+          setBookData( result.data.books );
+          setAllBooksDisplay(true);
+        }
+      } catch (err) {
+          console.log("ERROR", err);
       };
     };
-
-    async function getTopBooks(){
-      try {
-        const result = await axios.get('/api/topbooks');
-        const resultsList = result.data.data;
-        setTopBooks([...resultsList]);
-        setTopBooksDisplay(true);
-      }
-       catch (err) {
-        console.log("ERROR", err)
-      };
-    };
-
-    async function getNytNonFiction(){
-      try {
-        const result = await axios.get('/api/nytnonfiction');
-        const resultsList = result.data.data.results.books;
-        const nytTop5 = resultsList.slice(0,10);
-        setNytNonFiction([...resultsList]);
-        setT5NonFiction([...nytTop5]);
-        setNonFictionDisplay(true);
-      } catch (err) {
-          console.log("ERROR", err)
-      } 
-    };
-    async function getNytFiction(){
-      try {
-        const result = await axios.get('/api/nytfiction');
-        const resultsList = result.data.data.results.books;
-        const nytTop5 = resultsList.slice(0,10);
-        setNytFiction([...resultsList]);
-        setT5Fiction([...nytTop5]);
-        setFictionDisplay(true);
-      } catch (err) {
-          console.log("ERROR", err)
-      }
-    };
-
-    // view all button hidden for now
-
-    // function handleDisplayChange(){
-    //   setNonFictionDisplay(prev => !prev);
-    // };
+    console.log("bookData STATE", bookData)
 
     useEffect(() => {
-      getTopBooks();
-      getFeatured();
-      getNytNonFiction();
-      getNytFiction();
+      getAllBookData();
     }, [])
 
     return ( 
@@ -108,7 +39,7 @@ function HomePage(props){
           </div>
           <HomeInput />
         </div>
-        { featuredDisplay &&
+        { allBooksDisplay &&
           <div className="main-content-container">
             <div className="highlighted-books">
               <div className="featured-container">
@@ -116,7 +47,7 @@ function HomePage(props){
                   <h2>Featured Books</h2>
                 </div>
                 <div className="featured-flex">
-                  { featuredBooks.map( book => 
+                  { bookData.featured.map( book => 
                     <FeaturedBook 
                       key={uuidv4()}
                       book={book}
@@ -124,24 +55,20 @@ function HomePage(props){
                   )}
                 </div>
               </div>
-              { topBooksDisplay &&
-                <div className="topbooks-container">
-                  <h2>Top Books</h2>
-                  { topBooks.map( book => 
-                    <TopBook
-                      key={uuidv4()}
-                      book={book.items[0]}
-                    />
-                  )}
-                </div>
-              }
+              <div className="topbooks-container">
+                <h2>Top Books</h2>
+                { bookData.topBooks.map( book => 
+                  <TopBook
+                    key={uuidv4()}
+                    book={book}
+                  />
+                )}
+              </div>
             </div>
-            { fictionDisplay &&
                <div className="nyt-container-first">
                <h2>NY Times Best Sellers - Fiction</h2>
-               {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
                <div className="nyt-results top5">
-                 { t5Fiction.map( nytbook => 
+                 { bookData.fiction.map( nytbook => 
                    <NyTimesBook 
                      key={uuidv4()}
                      title={nytbook.title}
@@ -156,13 +83,10 @@ function HomePage(props){
                  )}
                </div>
               </div>
-            }
-           { nonFictionDisplay &&
             <div className="nyt-container-second">
               <h2>NY Times Best Sellers - Non-Fiction</h2>
-              {/* <button onClick={handleDisplayChange}>{ !nonFictionDisplay ? "View All" : "View Less" }</button> */}
               <div className="nyt-results top5">
-                { t5NonFiction.map( nytbook => 
+                { bookData.nonfiction.map( nytbook => 
                   <NyTimesBook 
                     key={uuidv4()}
                     title={nytbook.title}
@@ -177,14 +101,10 @@ function HomePage(props){
                 )}
               </div>
             </div> 
-           }
-            
           </div> 
         }     
       </div>
     )
 };
 
-const memoHomePage = React.memo( HomePage );
-export default memoHomePage;
-//export default SearchPage;
+export default HomePage;
