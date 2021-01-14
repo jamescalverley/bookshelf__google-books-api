@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 function SearchedBook( props ){
-  
+
   const [saved, setSaved] = useState(false);
 
-  const isbn = props.isbn || props.isbnP;
-  const title = props.title.toLowerCase().replace(/\s/g, '+');
+  const isbn10 = props.isbn[0].identifier;
+  const isbn13 = props.isbn[1].identifier;
+  const title = props.title.toLowerCase();
   
   function getUserID(){
     const localID = JSON.parse( localStorage.getItem("userID") );
@@ -53,7 +54,7 @@ function SearchedBook( props ){
         <h3>{props.authors[0]}</h3>
         <p>{props.textSnippet}</p>
         <div className="searched-book-link">
-          <Link to={`/book/${isbn}?title=${title}`}>
+          <Link to={`/book/${title}?isbn10=${isbn10}&isbn13=${isbn13}`}>
             <button className="book-details-btn">Book Details</button>
           </Link>
           { !saved ? <SaveBtn handleSave={handleSave} /> : <Saved /> }

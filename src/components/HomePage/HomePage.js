@@ -16,7 +16,6 @@ function HomePage(props){
     async function getAllBookData(){
       try {
         const result = await axios.get('/api/nyt/nytbookdata');
-        console.log("BOOK DATA", result);
         if ( result.data.success === true ){
           setBookData( result.data.books );
           setAllBooksDisplay(true);
@@ -25,7 +24,6 @@ function HomePage(props){
           console.log("ERROR", err);
       };
     };
-    console.log("bookData STATE", bookData)
 
     useEffect(() => {
       getAllBookData();
@@ -71,14 +69,7 @@ function HomePage(props){
                  { bookData.fiction.map( nytbook => 
                    <NyTimesBook 
                      key={uuidv4()}
-                     title={nytbook.title}
-                     author={nytbook.author}
-                     description={nytbook.description}
-                     rank={nytbook.rank}
-                     weeks={nytbook.weeks_on_list}
-                     image={nytbook.book_image}
-                     isbn={nytbook.isbns[0].isbn10}
-                     isbnP={nytbook.primary_isbn10}
+                     book={nytbook}
                    />
                  )}
                </div>
@@ -89,14 +80,7 @@ function HomePage(props){
                 { bookData.nonfiction.map( nytbook => 
                   <NyTimesBook 
                     key={uuidv4()}
-                    title={nytbook.title}
-                    author={nytbook.author}
-                    description={nytbook.description}
-                    rank={nytbook.rank}
-                    weeks={nytbook.weeks_on_list}
-                    image={nytbook.book_image}
-                    isbn={nytbook.isbns[0].isbn10}
-                    isbnP={nytbook.primary_isbn10}
+                    book={nytbook}
                   />
                 )}
               </div>

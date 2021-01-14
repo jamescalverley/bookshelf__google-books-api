@@ -5,12 +5,13 @@ import {motion} from 'framer-motion';
 
 function TopBook( {book} ){
 
-  const isbn = book.volumeInfo.industryIdentifiers[0].identifier || book.volumeInfo.industryIdentifiers[1].identifier;
+  const isbn10 = book.volumeInfo.industryIdentifiers[0].identifier;
+  const isbn13 = book.volumeInfo.industryIdentifiers[1].identifier;
   const title = book.volumeInfo.title.toLowerCase();
 
   return (
     
-      <Link className="topbook topbook-link" to={`book/${isbn}?title=${title}`}>
+      <Link className="topbook topbook-link" to={`book/${title}?isbn10=${isbn10}&isbn13=${isbn13}`}>
         <motion.div className="topbook-image" whileHover={{ scale: 1.04 }}>
           <img className="topbook-image" src={book.volumeInfo.imageLinks.thumbnail} alt="book-cover"/>        
         </motion.div>

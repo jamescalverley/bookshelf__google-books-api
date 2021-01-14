@@ -41,8 +41,7 @@ const BookSchema = new Schema({
     required: true
   },
   isbn: {
-    type: String, 
-    trim: true 
+    type: Array
   },
   savedBy: {
     type: String,

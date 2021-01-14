@@ -24,7 +24,6 @@ async function nytFeaturedAPICall(){
     const apiResult = await fetch( apiURLs.featured )
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
-    console.log(`FEATURED -- ${apiResult.status} -- results: ${apiResult.num_results}  -- modified: ${apiResult.last_modified}`);
     nytBooks.featured = apiResult.results.books.slice(0,9);
   } catch (err) {
       console.log("ERROR".red, err)
@@ -41,7 +40,6 @@ async function nytTopBooksAPICall(){
       const apiResult = await fetch( apiURL )
         .then(res => res.json())
         .catch(err => console.log("ERROR".red, err));
-      console.log(`TOPBOOK ${i} -- ${apiResult.items[0].volumeInfo.title}`);
       nytBooks.topBooks.push( apiResult.items[0] )
     } catch (err) {
         console.log("ERROR".red, err)
@@ -54,7 +52,6 @@ async function nytFictionAPICall(){
     const apiResult = await fetch( apiURLs.fiction )
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
-    console.log(`FICTION -- ${apiResult.status} -- results: ${apiResult.num_results}  -- modified: ${apiResult.last_modified}`);
     nytBooks.fiction = apiResult.results.books.slice(0,10);
   } catch (err) {
       console.log("ERROR".red, err)
@@ -66,7 +63,6 @@ async function nytNonFictionAPICall(){
     const apiResult = await fetch( apiURLs.nonfiction )
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
-    console.log(`NON-FICTION -- ${apiResult.status} -- results: ${apiResult.num_results}  -- modified: ${apiResult.last_modified}`);
     nytBooks.nonfiction = apiResult.results.books.slice(0,10); 
   } catch (err) {
       console.log("ERROR".red, err);
@@ -79,6 +75,7 @@ setTimeout( () => {
   nytFictionAPICall();
   nytNonFictionAPICall();
   nytTopBooksAPICall();
+  console.log("NYT API calls".blue);
 }, 2000 );
 
 // calls NYT Books API every 24 hours

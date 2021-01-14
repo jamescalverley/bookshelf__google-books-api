@@ -28,12 +28,11 @@ async function getSearchResults(req,res){
 };
 
 async function checkResults( isbn, title, bookArr ){
-  console.log(`CHECKING --- ${isbn} - ${title} -- ${bookArr.length} books`);
   let returnBook = { searchResult: false };
   await bookArr.forEach( book => {
     if ( book.volumeInfo.title.toLowerCase() === title ){
-      console.log( `__TITLE Match ${book.volumeInfo.title.toLowerCase()} = to ${title}`);
       returnBook = { searchResult: true, book };
+      console.log("Book Found".green, book.volumeInfo.title)
     }
   })
   if ( returnBook === undefined ){
@@ -45,19 +44,34 @@ async function checkResults( isbn, title, bookArr ){
 async function getBookDetails(req,res){
   try {
     const apiKey = process.env.API_KEY_GB;
-    const isbn = req.params.isbn;
-    const title = req.query.title;
-    console.log(`ISBN: ${isbn} Title: ${title}`)
-    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${isbn}&key=${apiKey}`;
+    const paramTitle = req.params.title;
+    const isbn10 = req.query.isbn10;
+    const isbn13 = req.query.isbn13;
+    const title = paramTitle.replace(/[^a-z]/g, " ");
+    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${isbn10}&key=${apiKey}`;
     const apiResult = await fetch( apiURL )
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err))
-    const detailsResult = await checkResults(isbn, title, apiResult.items);
-    return res.status(200).json({
-      success: true,
-      message: "BOOK FOUND",
-      book: detailsResult
-    })
+    const detailsResult = await checkResults(isbn10, title, apiResult.items);
+    // checks if book was found with isbn10, if not calls API again with isbn13
+    if ( detailsResult.searchResult === true ){
+      return res.status(200).json({
+        success: true,
+        message: "BOOK FOUND",
+        book: detailsResult
+      })
+    } else {
+      const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${isbn13}&key=${apiKey}`;
+      const apiResult = await fetch( apiURL )
+      .then(res => res.json())
+      .catch(err => console.log("ERROR".red, err))
+      const detailsResult = await checkResults(isbn13, title, apiResult.items);
+      return res.status(200).json({
+        success: true,
+        message: "BOOK FOUND",
+        book: detailsResult
+      })
+    }
   } catch (err) {
       return res.status(500).json({
         success: false,
@@ -202,6 +216,7 @@ async function saveBook(req,res){
       image: req.body.image,
       isbn: req.body.isbn
     };
+    console.log(bookData)
     const savedBook = await SavedBooks.create(bookData);
     console.log(`Success -- book saved: ${savedBook._id} - ${savedBook.bookID}`.cyan);
     return res.status(200).json({

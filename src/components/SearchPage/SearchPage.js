@@ -35,7 +35,7 @@ function SearchPage(props){
               description: book.volumeInfo.description ? book.volumeInfo.description : "", 
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
               image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
-              isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : false
+              isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers : ["", ""]
               }) 
           )
           setBooksList( checkedList );
@@ -74,6 +74,7 @@ function SearchPage(props){
                   <SearchedBook 
                     key={uuidv4()}
                     bookID={book.bookID} 
+                    book={book}
                     title={book.title}
                     subtitle={book.subtitle}
                     authors={book.authors}

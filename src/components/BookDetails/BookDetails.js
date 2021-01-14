@@ -9,8 +9,8 @@ const axios = require('axios');
 function BookDetails(props){
  
   const params = useParams();
-  const ISBN = params.book;
-
+  const title = params.book;
+  
   const [bookDisplay, setBookDisplay] = useState(false);
   const [noBookDisplay, setNoBookDisplay] = useState(false);
   const [book, setBook] = useState({});
@@ -18,10 +18,10 @@ function BookDetails(props){
 
   function useQuery() {
     return new URLSearchParams(useLocation().search);
-  }
+  };
 
-  const title = useQuery();
-
+  let isbnQuery = useQuery();
+  
   function getUserID(){
     const localID = JSON.parse( localStorage.getItem("userID") );
     return localID 
@@ -29,10 +29,9 @@ function BookDetails(props){
 
   async function getBookData(){
     try {
-      const result = await axios.get(`/api/book/${ISBN}?${title}`);
+      const result = await axios.get(`/api/book/${title}?${isbnQuery}`);
       const foundBook = result.data.book.searchResult;
       const book = result.data.book.book;
-    
       if ( foundBook ){
         setBook({
           bookID: book.id ? book.id : null,
@@ -43,7 +42,7 @@ function BookDetails(props){
           description: book.volumeInfo.description ? book.volumeInfo.description : "", 
           link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
           image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
-          isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers[0].identifier : false
+          isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers : false
           });
           setBookDisplay(true);
       } else {

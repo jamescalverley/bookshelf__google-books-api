@@ -52,10 +52,7 @@ function SavedPage (props){
                 dbID={book._id}
                 bookID={book.bookID} 
                 title={book.title}
-                authors={book.authors}
-                textSnippet={book.textSnippet}
-                description={book.description}
-                infoLink={book.infoLink}   
+                authors={book.authors} 
                 image={book.image}
                 isbn={book.isbn}
                 setBooksList={setBooksList}
