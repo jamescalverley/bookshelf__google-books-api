@@ -23,7 +23,7 @@ async function getSearchResults(req,res){
       return res.status(500).json({
         success: false,
         message: "SERVER ERROR -- getSearchResults", 
-        error: err})
+        error: err })
   }
 };
 
@@ -76,113 +76,40 @@ async function getBookDetails(req,res){
       return res.status(500).json({
         success: false,
         message: "SERVER ERROR -- getBookDetails", 
-        error: err})
+        error: err })
   }
 };
 
-async function featuredBooks(req,res){
+async function checkIfSaved(req,res){
+  console.log(`Checking if in DB - ${req.params.title}`);
+  console.log(req.query)
   try {
-    const apiKey = process.env.API_KEY_NY;
-    const apiURL = `https://api.nytimes.com/svc/books/v3/lists/current/mass-market-paperback.json?api-key=${apiKey}`;
-    const apiResult = await fetch( apiURL )
-      .then(res => res.json())
-      .catch(err => console.log("ERROR".red, err));
-      console.log("FEATURED BOOKS".green, apiResult.num_results);
-      console.log("FEATURED", apiResult.last_modified)
-    return res.status(200).json({
-      success: true, 
-      data: apiResult
-    })
-  } catch (err) {
-    return res.status(500).json({
-      success: false, 
-      message: "SERVER ERROR -- featuredBooks", 
-      error: err
-    })
-  };
-};
-
-async function topBooksAPICall( isbn ){
-  try {
-    const apiKey = process.env.API_KEY_GB;
-    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${isbn}&orderBy=newest&key=${apiKey}`;
-    const apiResult = await fetch( apiURL )
-      .then(res => res.json())
-      .catch(err => console.log("ERROR".red, err));
-    return apiResult
-  } catch (err) {
-    console.log("ERROR", err)
-  }
-};
-
-async function topBooks(req,res){
-  try {
-    // hardcoded top books
-    const bookISBNs = ['1443455733', '1250114292', '1501175300'];
-    const top3Books = [];
-    let i;
-    for ( i = 0 ; i < bookISBNs.length; i++) {
-      const book = await topBooksAPICall( bookISBNs[i]);
-      top3Books.push( book );
+    const title = req.params.title;
+    const userID = req.query.userID;
+    console.log(`Searching for: ${title} saved by: ${userID}`)
+    const savedBook = await SavedBooks.find( { "savedBy": userID,"title": title });
+    console.log("DB check", savedBook);
+    if ( savedBook.length > 0 ){
+      console.log("Book Present".green);
+      return res.status(200).json({
+        success: true,
+        bookSaved: true
+      })
+    } else {
+      console.log("Book not found".red)
+      return res.status(200).json({
+        success: true,
+        bookSaved: false
+      })
     }
-    console.log("TOP BOOKS".green, top3Books.length);
-    return res.status(200).json({
-      success: true, 
-      data: top3Books
-    })
   } catch (err) {
     return res.status(500).json({
-      success: false, 
-      message: "SERVER ERROR -- featuredBooks", 
-      error: err
-    })
+      success: false,
+      message: "SERVER ERROR -- checkIfSaved", 
+      error: err })
   };
 };
 
-async function nytNonFiction(req,res){
-  try {
-    const apiKey = process.env.API_KEY_NY;
-    const apiURL = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-nonfiction.json?api-key=${apiKey}`;
-    const apiResult = await fetch( apiURL )
-      .then(res => res.json())
-      .catch(err => console.log("ERROR".red, err));
-      console.log("NYT NONFICTION".green, apiResult.num_results);
-      console.log("Non-Fiction", apiResult.last_modified);
-    return res.status(200).json({
-      success: true, 
-      data: apiResult
-    })
-  } catch (err) {
-    return res.status(500).json({
-      success: false, 
-      message: "SERVER ERROR -- nytNonFiction", 
-      error: err
-    })
-  }; 
-};
-
-async function nytFiction(req, res){
-  try {
-    const apiKey = process.env.API_KEY_NY;
-    const apiURL = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${apiKey}`;
-    const apiResult = await fetch( apiURL )
-      .then(res => res.json())
-      .catch(err => console.log("ERROR".red, err));
-      console.log("NYT FICTION".green, apiResult.num_results);
-      console.log("Fiction", apiResult.last_modified);
-    return res.status(200).json({
-      success: true, 
-      data: apiResult
-    })
-  } catch (err) {
-    return res.status(500).json({
-      success: false, 
-      message: "SERVER ERROR -- nytFiction", 
-      error: err
-    })
-
-  }
-};
 
 async function getSavedBooks(req,res){
   console.log(`USER ID >>> ${req.params.userID}`)
@@ -198,7 +125,7 @@ async function getSavedBooks(req,res){
     return res.status(500).json({
       success: false,
       message: "SERVER ERROR -- getSavedBooks", 
-      error: err})
+      error: err })
   };
 };
 
@@ -227,7 +154,7 @@ async function saveBook(req,res){
     return res.status(500).json({
       success: false,
       message: "SERVER ERROR -- saveBook", 
-      error: err})
+      error: err })
   };
 };
 
@@ -246,7 +173,7 @@ async function deleteBook(req,res){
     return res.status(500).json({
       success: false,
       message: "SERVER ERROR -- saveBook", 
-      error: err})
+      error: err })
   };
 };
 
@@ -264,17 +191,14 @@ async function bookCount(req,res){
     return res.status(500).json({
       success: false,
       message: "SERVER ERROR -- bookCount", 
-      error: err})
+      error: err })
   }
 };
 
 module.exports = { 
   getSearchResults, 
   getBookDetails, 
-  featuredBooks,
-  topBooks,
-  nytNonFiction, 
-  nytFiction, 
+  checkIfSaved,
   getSavedBooks, 
   saveBook, 
   deleteBook, 

@@ -1,23 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { nytNonFiction, nytFiction, getSearchResults, getBookDetails, saveBook, deleteBook, getSavedBooks, bookCount, featuredBooks, topBooks } = require('../controllers/handleBooks');
-
-router 
-  .route('/featured')
-  .get( featuredBooks )
-
-router 
-  .route('/topbooks')
-  .get( topBooks )
-  
-router 
-  .route('/nytnonfiction')
-  .get( nytNonFiction )
-
-router 
-  .route('/nytfiction')
-  .get( nytFiction )
+const { getSearchResults, getBookDetails, checkIfSaved, saveBook, deleteBook, getSavedBooks, bookCount } = require('../controllers/handleBooks');
 
 router
   .route('/search/:searchterm')
@@ -26,6 +10,10 @@ router
 router 
   .route('/book/:title')
   .get( getBookDetails )
+
+router
+  .route('/checkdb/:title')
+  .get( checkIfSaved )
 
 router 
   .route('/savebook/:userID')

@@ -7,7 +7,7 @@ import {motion} from 'framer-motion';
 const axios = require('axios');
 
 function BookDetails(props){
- 
+
   const params = useParams();
   const title = params.book;
   
@@ -31,18 +31,19 @@ function BookDetails(props){
     try {
       const result = await axios.get(`/api/book/${title}?${isbnQuery}`);
       const foundBook = result.data.book.searchResult;
-      const book = result.data.book.book;
+      const apiBook = result.data.book.book;
       if ( foundBook ){
+        checkDB( apiBook.volumeInfo.title, apiBook.volumeInfo.industryIdentifiers );
         setBook({
-          bookID: book.id ? book.id : null,
-          title: book.volumeInfo.title ? book.volumeInfo.title : "",
-          subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : "",
-          authors: book.volumeInfo.authors ? book.volumeInfo.authors[0] : "",
-          textSnippet: book.searchInfo ? book.searchInfo.textSnippet : "",
-          description: book.volumeInfo.description ? book.volumeInfo.description : "", 
-          link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
-          image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
-          isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers : false
+          bookID: apiBook.id ? apiBook.id : null,
+          title: apiBook.volumeInfo.title ? apiBook.volumeInfo.title : "",
+          subtitle: apiBook.volumeInfo.subtitle ? apiBook.volumeInfo.subtitle : "",
+          authors: apiBook.volumeInfo.authors ? apiBook.volumeInfo.authors[0] : "",
+          textSnippet: apiBook.searchInfo ? apiBook.searchInfo.textSnippet : "",
+          description: apiBook.volumeInfo.description ? apiBook.volumeInfo.description : "", 
+          link: apiBook.volumeInfo.infoLink ? apiBook.volumeInfo.infoLink : "",
+          image: apiBook.volumeInfo.imageLinks ? apiBook.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
+          isbn: apiBook.volumeInfo.industryIdentifiers ? apiBook.volumeInfo.industryIdentifiers : false
           });
           setBookDisplay(true);
       } else {
@@ -51,6 +52,26 @@ function BookDetails(props){
     } catch (err) {
       console.log("ERROR", err)
     };
+  };
+
+  async function checkDB( title, isbns ){
+    try {
+      if ( isbns.length > 0 ){
+        const isbn10 = isbns[0].identifier;
+        const isbn13 = isbns[1].identifier;
+        const userID = await getUserID();
+        console.log(`isbns present ${isbn10} & ${isbn13}`);
+        console.log(`Checking --- ${title}`);
+        const result = await axios.get(`/api/checkdb/${title}?isbn10=${isbn10}&isbn13=${isbn13}&userID=${userID}`);
+        console.log("CHECK-DB", result);
+        if( result.data.bookSaved ){
+          console.log("SAVED IN DB");
+          setSaved(true)
+        }
+      }
+    } catch (err) {
+        console.log("ERROR", err)
+    }
   };
 
   async function saveBook(){
@@ -75,6 +96,7 @@ function BookDetails(props){
   
   useEffect( () => {
     getBookData();
+    checkDB( title, isbnQuery );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 

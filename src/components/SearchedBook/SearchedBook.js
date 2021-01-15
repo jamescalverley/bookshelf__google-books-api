@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchedBook.css';
 import SaveBtn from '../SaveBtn/SaveBtn';
 import Saved from '../Saved/Saved';
@@ -30,6 +30,23 @@ function SearchedBook( props ){
     isbn: props.isbn
   };
 
+  async function checkDB( title, isbns ){
+    try {
+        // const isbn10 = isbns[0].identifier;
+        // const isbn13 = isbns[1].identifier;
+        const userID = await getUserID();
+        //console.log(`isbns present ${isbn10} & ${isbn13}`);
+        // const result = await axios.get(`/api/checkdb/${title}?isbn10=${isbn10}&isbn13=${isbn13}&userID=${userID}`);
+        const result = await axios.get(`/api/checkdb/${title}?userID=${userID}`);
+        console.log("CHECK-DB", result);
+        if( result.data.bookSaved ){
+          setSaved(true)
+        } 
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+  };
+
   async function saveBook(){
     try {
       const userID = await getUserID();
@@ -43,6 +60,13 @@ function SearchedBook( props ){
     saveBook();
     setSaved(true);
   };
+
+  const testISBN = 12345;
+
+  useEffect( () => {
+    checkDB( props.title, testISBN );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="searched-book-container">
@@ -63,8 +87,6 @@ function SearchedBook( props ){
     </div>
   )
 };
-
-
 
 //const memoSearchedBook = React.memo( SearchedBook );
 //export default memoSearchedBook
