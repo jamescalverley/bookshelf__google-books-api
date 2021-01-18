@@ -81,22 +81,27 @@ async function getBookDetails(req,res){
 };
 
 async function checkIfSaved(req,res){
-  console.log(`Checking if in DB - ${req.params.title}`);
-  console.log(req.query)
+  
   try {
     const title = req.params.title;
     const userID = req.query.userID;
-    console.log(`Searching for: ${title} saved by: ${userID}`)
-    const savedBook = await SavedBooks.find( { "savedBy": userID,"title": title });
-    console.log("DB check", savedBook);
-    if ( savedBook.length > 0 ){
+    const author = req.query.author
+    console.log("------- START -------")
+    console.log(`Searching for: ${title} saved by: ${userID}`);
+    console.log("QUERY: ", req.query)
+    const result = await SavedBooks.find( { "savedBy": userID, "title": title, "authors": author });
+    console.log("DB check -- results: ", result.length);
+    result.forEach( book => {
+      console.log("ISBN", book.isbn)
+    })
+    if ( result.length > 0 ){
       console.log("Book Present".green);
       return res.status(200).json({
         success: true,
-        bookSaved: true
+        bookSaved: true,
+        data: result
       })
     } else {
-      console.log("Book not found".red)
       return res.status(200).json({
         success: true,
         bookSaved: false
@@ -109,7 +114,6 @@ async function checkIfSaved(req,res){
       error: err })
   };
 };
-
 
 async function getSavedBooks(req,res){
   console.log(`USER ID >>> ${req.params.userID}`)
@@ -141,7 +145,9 @@ async function saveBook(req,res){
       description: req.body.description,
       link: req.body.link,
       image: req.body.image,
-      isbn: req.body.isbn
+      isbn: req.body.isbn,
+      isbn13: req.body.isbn13,
+      isbn10: req.body.isbn10
     };
     console.log(bookData)
     const savedBook = await SavedBooks.create(bookData);

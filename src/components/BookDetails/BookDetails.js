@@ -9,6 +9,7 @@ const axios = require('axios');
 function BookDetails(props){
 
   const params = useParams();
+  let isbnQuery = useQuery();
   const title = params.book;
   
   const [bookDisplay, setBookDisplay] = useState(false);
@@ -19,8 +20,6 @@ function BookDetails(props){
   function useQuery() {
     return new URLSearchParams(useLocation().search);
   };
-
-  let isbnQuery = useQuery();
   
   function getUserID(){
     const localID = JSON.parse( localStorage.getItem("userID") );
@@ -32,8 +31,9 @@ function BookDetails(props){
       const result = await axios.get(`/api/book/${title}?${isbnQuery}`);
       const foundBook = result.data.book.searchResult;
       const apiBook = result.data.book.book;
+      console.log("BOOK DATA", apiBook)
       if ( foundBook ){
-        checkDB( apiBook.volumeInfo.title, apiBook.volumeInfo.industryIdentifiers );
+        checkDB( apiBook.volumeInfo.title, apiBook.volumeInfo.authors[0]);
         setBook({
           bookID: apiBook.id ? apiBook.id : null,
           title: apiBook.volumeInfo.title ? apiBook.volumeInfo.title : "",
@@ -43,7 +43,9 @@ function BookDetails(props){
           description: apiBook.volumeInfo.description ? apiBook.volumeInfo.description : "", 
           link: apiBook.volumeInfo.infoLink ? apiBook.volumeInfo.infoLink : "",
           image: apiBook.volumeInfo.imageLinks ? apiBook.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
-          isbn: apiBook.volumeInfo.industryIdentifiers ? apiBook.volumeInfo.industryIdentifiers : false
+          isbn: apiBook.volumeInfo.industryIdentifiers ? apiBook.volumeInfo.industryIdentifiers : false,
+          isbn13: apiBook.volumeInfo.industryIdentifiers ? apiBook.volumeInfo.industryIdentifiers[0].identifier : 0,
+          isbn10: apiBook.volumeInfo.industryIdentifiers ? apiBook.volumeInfo.industryIdentifiers[1].identifier : 0
           });
           setBookDisplay(true);
       } else {
@@ -54,31 +56,23 @@ function BookDetails(props){
     };
   };
 
-  async function checkDB( title, isbns ){
+  async function checkDB( title, author ){
     try {
-      if ( isbns.length > 0 ){
-        const isbn10 = isbns[0].identifier;
-        const isbn13 = isbns[1].identifier;
-        const userID = await getUserID();
-        console.log(`isbns present ${isbn10} & ${isbn13}`);
-        console.log(`Checking --- ${title}`);
-        const result = await axios.get(`/api/checkdb/${title}?isbn10=${isbn10}&isbn13=${isbn13}&userID=${userID}`);
-        console.log("CHECK-DB", result);
-        if( result.data.bookSaved ){
-          console.log("SAVED IN DB");
-          setSaved(true)
-        }
+      console.log("AUTHOR", author)
+      const userID = await getUserID();
+      const result = await axios.get(`/api/checkdb/${title}?userID=${userID}&author=${author}`);
+      if ( result.data.bookSaved ){
+        setSaved(true);
       }
     } catch (err) {
-        console.log("ERROR", err)
+      console.log("ERROR", err)
     }
   };
 
   async function saveBook(){
     try {
       const userID = await getUserID();
-      // eslint-disable-next-line no-unused-vars
-      const result = await axios.post(`/api/savebook/${userID}`, book);
+      await axios.post(`/api/savebook/${userID}`, book);
     } catch (err) {
         console.log("POST ERROR", err)
     };
@@ -96,7 +90,7 @@ function BookDetails(props){
   
   useEffect( () => {
     getBookData();
-    checkDB( title, isbnQuery );
+    //checkDB( title, book.authors[0] )
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
@@ -138,10 +132,6 @@ function BookDetails(props){
             </motion.button>
           </div>
         </div>
-        
-      
-       
-
       }
     </>
   )

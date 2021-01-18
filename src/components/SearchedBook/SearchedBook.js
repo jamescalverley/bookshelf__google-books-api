@@ -8,10 +8,11 @@ const axios = require('axios');
 function SearchedBook( props ){
 
   const [saved, setSaved] = useState(false);
-
-  const isbn10 = props.isbn[0].identifier;
-  const isbn13 = props.isbn[1].identifier;
+  const isbn13 = props.isbn.length > 0 && props.isbn[0].type === "ISBN_13" ? props.isbn[0].identifier : 0;
+  const isbn10 = props.isbn.length > 1 && props.isbn[1].type === "ISBN_10" ? props.isbn[1].identifier : 0;
   const title = props.title.toLowerCase();
+
+  console.log(`Title: ${props.title} isbn13: ${isbn13} isbn10: ${isbn10}`)
   
   function getUserID(){
     const localID = JSON.parse( localStorage.getItem("userID") );
@@ -27,21 +28,19 @@ function SearchedBook( props ){
     description: props.description, 
     link: props.link,
     image: props.image,
-    isbn: props.isbn
+    isbn: props.isbn, 
+    isbn13: isbn13,
+    isbn10: isbn10
   };
 
-  async function checkDB( title, isbns ){
+  async function checkDB( title, author ){
     try {
-        // const isbn10 = isbns[0].identifier;
-        // const isbn13 = isbns[1].identifier;
+        // pass user ID as props from search page -- only calls once vs. 10 times
         const userID = await getUserID();
-        //console.log(`isbns present ${isbn10} & ${isbn13}`);
-        // const result = await axios.get(`/api/checkdb/${title}?isbn10=${isbn10}&isbn13=${isbn13}&userID=${userID}`);
-        const result = await axios.get(`/api/checkdb/${title}?userID=${userID}`);
-        console.log("CHECK-DB", result);
-        if( result.data.bookSaved ){
-          setSaved(true)
-        } 
+        const result = await axios.get(`/api/checkdb/${title}?userID=${userID}&author=${author}`);
+        if ( result.data.bookSaved ){
+          setSaved(true);
+        }
     } catch (err) {
         console.log("ERROR", err)
     }
@@ -61,10 +60,8 @@ function SearchedBook( props ){
     setSaved(true);
   };
 
-  const testISBN = 12345;
-
   useEffect( () => {
-    checkDB( props.title, testISBN );
+    checkDB( props.title, bookData.authors );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -88,6 +85,5 @@ function SearchedBook( props ){
   )
 };
 
-//const memoSearchedBook = React.memo( SearchedBook );
-//export default memoSearchedBook
 export default SearchedBook;
+

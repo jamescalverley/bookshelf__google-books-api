@@ -67,6 +67,9 @@
   margin-top: 50px;
   text-align: center;
 }
+.nyt-container-first h2, .nyt-container-second h2 {
+  margin-bottom: 2rem;
+}
 .nyt-header button {
   background-color: #FFFFFF;
   padding: 0.3rem;
