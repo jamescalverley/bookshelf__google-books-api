@@ -8,9 +8,10 @@ const axios = require('axios');
 function SavedBook(props){
 
   const bookData = { deleteID: props.dbID };
-  const isbn10 = props.isbn[0].identifier;
-  const isbn13 = props.isbn[1].identifier;
-  const title = props.title.toLowerCase()
+  const isbn10 = props.isbn10;
+  const isbn13 = props.isbn13;
+  const title = props.title.toLowerCase();
+  const urlTitle = title.replace(/\s/g, '+');
 
   async function deleteBook(){
     try {
@@ -36,7 +37,7 @@ function SavedBook(props){
             </svg>
           </button>
         </motion.div>
-        <Link to={`/book/${title}?isbn10=${isbn10}&isbn13=${isbn13}`} className="saved-book-link">
+        <Link to={`/book/${urlTitle}?isbn10=${isbn10}&isbn13=${isbn13}`} className="saved-book-link">
           <motion.div className="saved-book-image" whileHover={{ scale: 1.05 }}>
             <img src={props.image} alt="book-cover"/>
           </motion.div>

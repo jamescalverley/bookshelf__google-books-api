@@ -25,6 +25,7 @@ function SearchPage(props){
       try {
           const result = await axios.get(`/api/search/${searchTerm}`)
           const resultsList = result.data.books;
+          console.log(resultsList)
           let checkedList = [];
           resultsList.map( book => checkedList.push( {
               bookID: book.id ? book.id : null,
@@ -35,7 +36,7 @@ function SearchPage(props){
               description: book.volumeInfo.description ? book.volumeInfo.description : "", 
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
               image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://via.placeholder.com/150",
-              isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers : ["", ""]
+              isbn: book.volumeInfo.industryIdentifiers ? book.volumeInfo.industryIdentifiers : [0,0]
               }) 
           )
           setBooksList( checkedList );
