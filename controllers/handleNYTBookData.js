@@ -8,9 +8,34 @@ const apiKeys = {
 
 let nytBooks = {
   featured: [], 
-  topBooks: [], 
   fiction: [],
-  nonfiction: []
+  nonfiction: [],
+  topBooks: [
+    {
+      title: "The Glass Hotel",
+      author: "Emily St. John Mandel",  
+      isbn10: "1443455733",
+      isbn13: "9781443455732", 
+      textSnippet: "Weaving together the lives of these characters, The Glass Hotel moves between the ship, the skyscrapers of Manhattan and the wilderness of remote British Columbia, painting a breathtaking picture of greed and guilt, fantasy and delusion, ...", 
+      thumbnail: "http://books.google.com/books/content?id=EpaUxQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    }, 
+    {
+      title: "Humans", 
+      author: "Brnadon Stanton", 
+      isbn10: "1250114292", 
+      isbn13: "9781250114297", 
+      textSnippet: "Humans is the definitive catalogue of these travels. The faces and locations will vary from page to page, but the stories will feel deeply familiar.", 
+      thumbnail: "http://books.google.com/books/content?id=_CtVzQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    {
+      title: "Home Body", 
+      author: "Rupi Kaur", 
+      isbn10: "1501175300", 
+      isbn13: "9781501175305", 
+      textSnippet: "From the #1 New York Times bestselling author of milk and honey and the sun and her flowers comes her greatly anticipated third collection of poetry. rupi kaur constantly embraces growth, and in home body, she walks readers through a ...", 
+      thumbnail: "http://books.google.com/books/content?id=xwvBzQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    }
+  ], 
 };
 
 const apiURLs = {
@@ -30,22 +55,22 @@ async function nytFeaturedAPICall(){
   };
 };
 
-async function nytTopBooksAPICall(){
-  const GB_API = process.env.API_KEY_GB
-  const bookISBNs = ['1443455733', '1250114292', '1501175300'];
-  let i;
-  for ( i = 0; i < bookISBNs.length; i++) {
-    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${bookISBNs[i]}&orderBy=newest&key=${GB_API}`;
-    try {
-      const apiResult = await fetch( apiURL )
-        .then(res => res.json())
-        .catch(err => console.log("ERROR".red, err));
-      nytBooks.topBooks.push( apiResult.items[0] )
-    } catch (err) {
-        console.log("ERROR".red, err)
-    };
-  };
-};
+// async function nytTopBooksAPICall(){
+//   const GB_API = process.env.API_KEY_GB
+//   const bookISBNs = ['1443455733', '1250114292', '1501175300'];
+//   let i;
+//   for ( i = 0; i < bookISBNs.length; i++) {
+//     const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${bookISBNs[i]}&orderBy=newest&key=${GB_API}`;
+//     try {
+//       const apiResult = await fetch( apiURL )
+//         .then(res => res.json())
+//         .catch(err => console.log("ERROR".red, err));
+//       nytBooks.topBooks.push( apiResult.items[0] )
+//     } catch (err) {
+//         console.log("ERROR".red, err)
+//     };
+//   };
+// };
 
 async function nytFictionAPICall(){
   try {
@@ -74,7 +99,7 @@ setTimeout( () => {
   nytFeaturedAPICall();
   nytFictionAPICall();
   nytNonFictionAPICall();
-  nytTopBooksAPICall();
+  //nytTopBooksAPICall();
   console.log("NYT API calls".blue);
 }, 2000 );
 
@@ -83,7 +108,7 @@ setInterval( () => {
   nytFeaturedAPICall();
   nytFictionAPICall();
   nytNonFictionAPICall();
-  nytTopBooksAPICall();
+  //nytTopBooksAPICall();
 }, 60000*60*24 );
 
 async function getNYTBookData(req,res){

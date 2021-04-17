@@ -29,13 +29,6 @@ async function getSearchResults(req,res){
 
 async function checkResults( isbn, title, bookArr ){
   let returnBook = { searchResult: false };
-  console.log("-----check results------")
-  console.log("ISBN ", isbn)
-  console.log("TITLE ", title)
-  bookArr.forEach( book => console.log(book.volumeInfo.title))
-
-
-  console.log("-----check results------")
   await bookArr.forEach( book => {
     if ( book.volumeInfo.title.toLowerCase() === title ){
       returnBook = { searchResult: true, book };
@@ -55,8 +48,6 @@ async function getBookDetails(req,res){
     const isbn10 = req.query.isbn10;
     const isbn13 = req.query.isbn13;
     const title = paramTitle.replace(/[+]/g, " ");
-
-    console.log(`Book Details --- ${title} -- isbn10: ${isbn10} isbn13: ${isbn13}`)
     const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${isbn10}&key=${apiKey}`;
     const apiResult = await fetch( apiURL )
       .then(res => res.json())
@@ -64,7 +55,6 @@ async function getBookDetails(req,res){
     const detailsResult = await checkResults(isbn10, title, apiResult.items);
     // checks if book was found with isbn10, if not calls API again with isbn13
     if ( detailsResult.searchResult === true ){
-      console.log("isbn10 worked")
       return res.status(200).json({
         success: true,
         message: "BOOK FOUND",
@@ -76,15 +66,6 @@ async function getBookDetails(req,res){
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err))
       const detailsResult = await checkResults(isbn13, title, apiResult.items);
-      console.log("isbn13 needed")
-      console.log("detailsResult", detailsResult)
-      // console.log("API RESULT", apiResult)
-      console.log(apiResult.items[0].volumeInfo.industryIdentifiers)
-      apiResult.items.forEach(item => {
-        console.log( item.volumeInfo.title)
-      })
-      
-      
       return res.status(200).json({
         success: true,
         message: "BOOK FOUND",
@@ -163,7 +144,6 @@ async function saveBook(req,res){
       isbn13: req.body.isbn13,
       isbn10: req.body.isbn10
     };
-    console.log(bookData)
     const savedBook = await SavedBooks.create(bookData);
     console.log(`Success -- book saved: ${savedBook._id} - ${savedBook.bookID}`.cyan);
     return res.status(200).json({
