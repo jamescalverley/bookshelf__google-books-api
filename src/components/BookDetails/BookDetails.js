@@ -28,6 +28,8 @@ function BookDetails(props){
 
   async function getBookData(){
     try {
+      console.log("AXIOS CALL --title ", title)
+      console.log("AXIOS CALL --isbn ", isbnQuery)
       const result = await axios.get(`/api/book/${title}?${isbnQuery}`);
       const foundBook = result.data.book.searchResult;
       const apiBook = result.data.book.book;

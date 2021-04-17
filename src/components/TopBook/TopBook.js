@@ -7,7 +7,7 @@ function TopBook( {book} ){
 
   const isbn10 = book.volumeInfo.industryIdentifiers[0].identifier;
   const isbn13 = book.volumeInfo.industryIdentifiers[1].identifier;
-  const title = book.volumeInfo.title.toLowerCase();
+  const title = book.volumeInfo.title.replace(/\s/g, '+').toLowerCase();
 
   return (
     

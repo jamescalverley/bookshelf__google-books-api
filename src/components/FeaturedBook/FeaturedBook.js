@@ -7,7 +7,7 @@ function FeaturedBook( {book} ){
 
   const isbn10 = book.primary_isbn10 || book.isbn[0].isbn10;
   const isbn13 = book.primary_isbn13 || book.isbn[0].isbn13;
-  const title = book.title.toLowerCase();
+  const title = book.title.replace(/\s/g, '+').toLowerCase();
 
   return (
     <motion.div className="featured-book" whileHover={{ scale: 1.08 }}>
