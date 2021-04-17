@@ -28,12 +28,9 @@ function BookDetails(props){
 
   async function getBookData(){
     try {
-      console.log("AXIOS CALL --title ", title)
-      console.log("AXIOS CALL --isbn ", isbnQuery)
       const result = await axios.get(`/api/book/${title}?${isbnQuery}`);
       const foundBook = result.data.book.searchResult;
       const apiBook = result.data.book.book;
-      console.log("BOOK DATA", apiBook)
       if ( foundBook ){
         checkDB( apiBook.volumeInfo.title, apiBook.volumeInfo.authors[0]);
         setBook({
@@ -60,7 +57,6 @@ function BookDetails(props){
 
   async function checkDB( title, author ){
     try {
-      console.log("AUTHOR", author)
       const userID = await getUserID();
       const result = await axios.get(`/api/checkdb/${title}?userID=${userID}&author=${author}`);
       if ( result.data.bookSaved ){

@@ -14,11 +14,9 @@ function SavedBookNum(props){
   };
 
   async function getBookNumber(){
-    console.log("getting book count -------")
     const userID = await getUserID();
     const result = await axios.get(`/api/bookcount/${userID}`);
     const count = result.data.bookCount;
-    console.log(`--BOOK COUNT-- ${count}`);
     setBookCount(count);
   };
 

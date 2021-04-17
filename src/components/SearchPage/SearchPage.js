@@ -25,7 +25,6 @@ function SearchPage(props){
       try {
           const result = await axios.get(`/api/search/${searchTerm}`)
           const resultsList = result.data.books;
-          console.log(resultsList)
           let checkedList = [];
           resultsList.map( book => checkedList.push( {
               bookID: book.id ? book.id : null,

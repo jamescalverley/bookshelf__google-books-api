@@ -21,7 +21,6 @@ function SavedPage (props){
       const userID = await getUserID();
       const result = await axios.get(`/api/savedbooks/${userID}`);
       const savedBooks = result.data.savedBooks;
-      console.log("SAVED BOOKS ", savedBooks)
       setBooksList([...savedBooks]);
       setLoading(false);
     } catch (err) {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const fetch = require('node-fetch');
 const SavedBooks = require('../db/models/BookSchema');
 require('dotenv').config();
@@ -6,14 +7,11 @@ async function getSearchResults(req,res){
   try {
     const apiKey = process.env.API_KEY_GB;
     const searchTerm = req.params.searchterm;
-    console.log(`Search for: ${searchTerm}`.blue);
     const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&orderBy=relevance&key=${apiKey}`;
     const apiResult = await fetch(apiURL)
       .then(res => res.json())
       .catch(err => console.log("ERROR".red, err));
-    console.log(`Success -- Result Count ${apiResult.items.length}`.green);
     const booksResult = apiResult.items;
-    booksResult.forEach( book => console.log(book.volumeInfo.title))
     return res.status(200).json({ 
       success: true, 
       searchTerm: searchTerm,
@@ -32,7 +30,6 @@ async function checkResults( isbn, title, bookArr ){
   await bookArr.forEach( book => {
     if ( book.volumeInfo.title.toLowerCase() === title ){
       returnBook = { searchResult: true, book };
-      console.log("Book Found".green, book.volumeInfo.title)
     }
   })
   if ( returnBook === undefined ){
@@ -86,11 +83,7 @@ async function checkIfSaved(req,res){
     const userID = req.query.userID;
     const author = req.query.author
     const result = await SavedBooks.find( { "savedBy": userID, "title": title, "authors": author });
-    result.forEach( book => {
-      console.log("ISBN", book.isbn)
-    })
     if ( result.length > 0 ){
-      console.log("Book Present".green);
       return res.status(200).json({
         success: true,
         bookSaved: true,
@@ -111,11 +104,9 @@ async function checkIfSaved(req,res){
 };
 
 async function getSavedBooks(req,res){
-  console.log(`USER ID >>> ${req.params.userID}`)
   try {
     const userID = req.params.userID;
     const savedBooks = await SavedBooks.find( { "savedBy": userID });
-    console.log("Saved Books: ".green, savedBooks.length)
     return res.status(200).json({
       success: true,
       savedBooks: savedBooks
@@ -129,7 +120,6 @@ async function getSavedBooks(req,res){
 };
 
 async function saveBook(req,res){
-  console.log("USER ID: ", req.params )
   try {
     const bookData = {
       savedBy: req.params.userID,
@@ -145,7 +135,6 @@ async function saveBook(req,res){
       isbn10: req.body.isbn10
     };
     const savedBook = await SavedBooks.create(bookData);
-    console.log(`Success -- book saved: ${savedBook._id} - ${savedBook.bookID}`.cyan);
     return res.status(200).json({
       success: true,
       data: savedBook
@@ -159,12 +148,9 @@ async function saveBook(req,res){
 };
 
 async function deleteBook(req,res){
-  console.log(req.params)
   try {
     const deleteID = req.params.deleteID;
-    console.log("DELETE".red, deleteID)
     const deleteBook = await SavedBooks.deleteOne({ _id: deleteID });
-    console.log("SUCCESS".green, deleteBook.deletedCount );
   return res.status(200).json({
     success: true,
     message: `Book: ${deleteID} deleted`
@@ -178,11 +164,9 @@ async function deleteBook(req,res){
 };
 
 async function bookCount(req,res){
-  console.log(req.params);
   try {
     const userID = req.params.userID;
     const dbCount = await SavedBooks.find({ "savedBy" : userID }).countDocuments();
-    console.log("Result found");
     return res.status(200).json({
       success: true,
       bookCount: dbCount

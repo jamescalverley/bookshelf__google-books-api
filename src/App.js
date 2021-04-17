@@ -14,7 +14,6 @@ function App() {
   async function getUserID(){
     const result = await axios.get('/api/user/setID');
     const userID = result.data.userID;
-    console.log("userID ---> ", userID);
     return userID
   };
 

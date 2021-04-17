@@ -13,9 +13,6 @@ function HomePage(props){
     const [bookData, setBookData] = useState({});
     const [allBooksDisplay, setAllBooksDisplay] = useState(false);
 
-    console.log("bookData", bookData);
-    console.log("allBooksDisplay", allBooksDisplay);
-    
     async function getAllBookData(){
       try {
         const result = await axios.get('/api/nyt/nytbookdata');

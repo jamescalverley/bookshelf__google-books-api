@@ -12,8 +12,6 @@ function SearchedBook( props ){
   const isbn10 = props.isbn.length > 1 && props.isbn[1].type === "ISBN_10" ? props.isbn[1].identifier : 0;
   const title = props.title.toLowerCase();
 
-  console.log(`Title: ${props.title} isbn13: ${isbn13} isbn10: ${isbn10}`)
-  
   function getUserID(){
     const localID = JSON.parse( localStorage.getItem("userID") );
     return localID 
