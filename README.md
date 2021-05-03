@@ -12,5 +12,7 @@ Utilizing the New York Times API, the app is able to display current curated bes
 
 React, HTML/CSS, JavaScript, Node.js, MongoDB, Mongoose, REST API, Google Books API, New York Times API, LocalStorage
 
+### Licence
+[MIT](https://choosealicense.com/licenses/mit/)
 
 
