@@ -22,7 +22,7 @@ function SavedPage (props){
       const result = await axios.get(`/api/savedbooks/${userID}`);
       const savedBooks = result.data.savedBooks;
       setBooksList([...savedBooks]);
-      setLoading(false);
+      setTimeout( () => setLoading(false), 1200);
     } catch (err) {
       console.log("ERROR", err);
     };
@@ -35,7 +35,9 @@ function SavedPage (props){
 
   if (loading) {
     return (
-      <></>
+      <div className="loading-view">
+        <h1>loading your bookshelf...</h1>
+      </div>
     );
   };
 

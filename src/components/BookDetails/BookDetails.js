@@ -93,7 +93,7 @@ function BookDetails(props){
   },[])
 
   return (
-    <>
+    <div>
       { bookDisplay && 
         <div className="book-details-page">
           <button className="backBtn" onClick={handleBack}>Back</button>
@@ -131,7 +131,7 @@ function BookDetails(props){
           </div>
         </div>
       }
-    </>
+    </div>
   )
 };
 
