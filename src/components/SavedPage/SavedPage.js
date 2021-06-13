@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './SavedPage.css';
 import SavedBook from '../SavedBook/SavedBook';
 import NoBooks from '../NoBooks/NoBooks';
@@ -10,22 +10,60 @@ function SavedPage (props){
   const [booksList, setBooksList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [toastShow, setToastShow] = useState(false);
-  
+  const [userID, setUserID] = useState("");
+  const [bookshelfName, setBookshelfName] = useState("");
+  const [shareLink, setShareLink] = useState("");
+  const shareInputRef = useRef(null);
+
   function getUserID(){
-    const localID = JSON.parse( localStorage.getItem("userID") );
-    return localID 
+    return JSON.parse( localStorage.getItem("userID") );
+  };
+
+  function getBookshelfName(){
+    return JSON.parse( localStorage.getItem("bookshelfName"));
+  };
+
+  function setLocalName(){
+    localStorage.setItem("bookshelfName", JSON.stringify( bookshelfName ))
   };
 
   async function getSavedBooks(){
     try {
-      const userID = await getUserID();
-      const result = await axios.get(`/api/savedbooks/${userID}`);
+      const localID = await getUserID();
+      setUserID( localID );
+      const result = await axios.get(`/api/savedbooks/${localID}`);
       const savedBooks = result.data.savedBooks;
       setBooksList([...savedBooks]);
-      setTimeout( () => setLoading(false), 1200);
+      const localName = await getBookshelfName();
+      setBookshelfName( localName );
+
+      setTimeout( () => setLoading(false), 1000);
     } catch (err) {
       console.log("ERROR", err);
     };
+  };
+  
+  function handleInputChange(ev){
+    setBookshelfName( ev.target.value);
+    if ( shareLink.length > 0 ) setShareLink("")
+  };
+
+  function handleShareLink( direction ){
+    const urlName = bookshelfName.length !== 0 ? ( "?name=" + bookshelfName.replace(/\s/g, '+') ) : "";
+    switch ( direction ) {
+      case "share":
+        setShareLink( `https://bookshelf.jcdev.ca/shared/${userID}${urlName}`);
+        break 
+      case "close":
+        setShareLink("")
+        break 
+      default: 
+    }
+  };
+
+  function copyText(){
+    shareInputRef.current.select();
+    document.execCommand('copy');
   };
 
   useEffect( () => {
@@ -46,7 +84,34 @@ function SavedPage (props){
       { booksList.length > 0 ? 
         <div>
           <DeleteToast show={toastShow} setShow={setToastShow}/>
-          <h1>Saved Books</h1>
+          <div className="saved-header">
+            <input 
+              type="text"
+              placeholder="Add bookshelf name" 
+              value={bookshelfName} 
+              onChange={handleInputChange}
+              onBlur={setLocalName}
+            >
+            </input>
+            { shareLink.length === 0 ?
+              <button value="share" onClick={ (ev) => { handleShareLink( ev.target.value) }}>share</button>
+              : 
+              <button value="close" onClick={ (ev) => { handleShareLink( ev.target.value )}}>close</button>
+            }
+            
+          </div>
+          { shareLink.length > 0 &&
+            <div className="share-link">
+              <input 
+                type="text"
+                ref={shareInputRef}
+                value={shareLink}
+                readOnly 
+              >
+              </input>
+              <button onClick={copyText}>copy</button>
+            </div>
+          }
           <div className="flex-container">
             { booksList.map( book => 
               <SavedBook 
