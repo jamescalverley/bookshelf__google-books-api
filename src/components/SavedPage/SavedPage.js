@@ -49,10 +49,10 @@ function SavedPage (props){
   };
 
   function handleShareLink( direction ){
-    const urlName = bookshelfName.length !== 0 ? ( "?name=" + bookshelfName.replace(/\s/g, '+') ) : "";
+    const urlName = bookshelfName.length !== 0 ? (bookshelfName.replace(/\s/g, '+') ) : "a+bookshelf";
     switch ( direction ) {
       case "share":
-        setShareLink( `https://bookshelf.jcdev.ca/shared/${userID}${urlName}`);
+        setShareLink( `localhost:3000/shared/${userID}/${urlName}`);
         break 
       case "close":
         setShareLink("")

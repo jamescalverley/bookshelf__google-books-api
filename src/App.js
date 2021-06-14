@@ -7,6 +7,7 @@ import HomePage from './components/HomePage/HomePage';
 import SearchPage from './components/SearchPage/SearchPage';
 import SavedPage from './components/SavedPage/SavedPage';
 import BookDetails from './components/BookDetails/BookDetails';
+import SharedPage from './components/SharedPage/SharedPage';
 const axios = require('axios');
 
 function App() {
@@ -48,6 +49,9 @@ function App() {
           </Route>
           <Route path={"/book/:book"}>
             <BookDetails />
+          </Route>
+          <Route path={"/shared/:sharedFromID/:bookshelfName"}>
+            <SharedPage />
           </Route>
         </ErrorBoundary>
       </div>

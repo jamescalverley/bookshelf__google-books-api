@@ -11,7 +11,7 @@ function BookDetails(props){
   const params = useParams();
   let isbnQuery = useQuery();
   const title = params.book;
-  
+
   const [bookDisplay, setBookDisplay] = useState(false);
   const [noBookDisplay, setNoBookDisplay] = useState(false);
   const [book, setBook] = useState({});
