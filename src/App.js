@@ -3,11 +3,11 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ErrorBoundary from './components/errors/ErrorBoundary';
 import NavBar from './components/NavBar/NavBar';
-import HomePage from './components/HomePage/HomePage';
-import SearchPage from './components/SearchPage/SearchPage';
-import SavedPage from './components/SavedPage/SavedPage';
+import HomePage from './pages/HomePage/HomePage';
+import SearchPage from './pages/SearchPage/SearchPage';
+import SavedPage from './pages/SavedPage/SavedPage';
 import BookDetails from './components/BookDetails/BookDetails';
-import SharedPage from './components/SharedPage/SharedPage';
+import SharedPage from './pages/SharedPage/SharedPage';
 const axios = require('axios');
 
 function App() {

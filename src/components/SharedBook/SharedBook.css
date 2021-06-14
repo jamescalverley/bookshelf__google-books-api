@@ -10,6 +10,7 @@
   width: 112px;
   height: 160px;
   border-radius: 5%;
+  box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
 }
 .shared-book-info h2 {
   color: #333333;

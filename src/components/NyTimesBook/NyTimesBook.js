@@ -19,10 +19,6 @@ function NyTimesBook( {book} ){
       <motion.div className="nyt-image" whileHover={{ scale: 1.08 }}>
         <img className="nyt-image" src={book.book_image} alt="book-cover"/>        
       </motion.div>
-      {/* <div className="book-metrics">
-        <p>Rank: {props.rank}</p>
-        <p>Weeks on List: {props.weeks}</p>
-      </div> */}
       <div className="nyt-book-info">
         <h5>{displayTitle}</h5>
         <p>{book.author}</p>

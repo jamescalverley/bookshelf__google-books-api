@@ -52,6 +52,10 @@
   font-weight: bold;
   letter-spacing: 0;
 }
+.saved-header button:hover {
+  border: 2px solid #ED696A;
+  color: #ED696A
+}
 .saved-header button:focus {
   outline-color: transparent;
   outline-style: none;

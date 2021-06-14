@@ -1,11 +1,11 @@
 
 import React, { useEffect, useState} from 'react';
 import './HomePage.css';
-import HomeInput from '../HomeInput/HomeInput';
+import HomeInput from '../../components/HomeInput/HomeInput';
 import { v4 as uuidv4 } from 'uuid';
-import FeaturedBook from '../FeaturedBook/FeaturedBook';
-import TopBook from '../TopBook/TopBook';
-import NyTimesBook from '../NyTimesBook/NyTimesBook';
+import FeaturedBook from '../../components/FeaturedBook/FeaturedBook';
+import TopBook from '../../components/TopBook/TopBook';
+import NyTimesBook from '../../components/NyTimesBook/NyTimesBook';
 const axios = require('axios');
 
 function HomePage(props){

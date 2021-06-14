@@ -15,20 +15,25 @@
   letter-spacing: 0;
   line-height: 48px;
 }
-
-.exploreBtn button{ 
+.exploreBtn button{  
   height: 50px;
   width: fit-content;
   padding: 0 2rem;
   border-radius: 30.5px;
   background-color: #ED696A;
-  border: none;
+  border: 2px solid #ED696A;
   color: #FFFFFF;
   font-family: "Open Sans";
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 0;
 }
+.exploreBtn button:hover {
+  background-color: transparent;
+  color: #ED696A;
+}
+
+
 .flex-container__shared {
   display: flex;
   flex-direction: row;

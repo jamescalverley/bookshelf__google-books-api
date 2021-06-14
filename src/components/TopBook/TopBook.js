@@ -10,7 +10,6 @@ function TopBook( {book} ){
   const title = book.title.replace(/\s/g, '+').toLowerCase();
 
   return (
-    
       <Link className="topbook topbook-link" to={`book/${title}?isbn10=${isbn10}&isbn13=${isbn13}`}>
         <motion.div className="topbook-image" whileHover={{ scale: 1.04 }}>
           <img className="topbook-image" src={book.thumbnail} alt="book-cover"/>        
@@ -21,7 +20,6 @@ function TopBook( {book} ){
           <p>{book.textSnippet}</p>
         </div>
       </Link>  
-    
   )
 };
 

@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './SavedPage.css';
-import SavedBook from '../SavedBook/SavedBook';
-import NoBooks from '../NoBooks/NoBooks';
-import DeleteToast from '../DeleteToast/DeleteToast';
+import SavedBook from '../../components/SavedBook/SavedBook';
+import NoBooks from '../../components/NoBooks/NoBooks';
+import DeleteToast from '../../components/DeleteToast/DeleteToast';
+import { motion } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
@@ -94,9 +95,9 @@ function SavedPage (props){
             >
             </input>
             { shareLink.length === 0 ?
-              <button value="share" onClick={ (ev) => { handleShareLink( ev.target.value) }}>share</button>
+              <motion.button whileHover={{scale: 1.02}} value="share" onClick={ (ev) => { handleShareLink( ev.target.value) }}>share</motion.button>
               : 
-              <button value="close" onClick={ (ev) => { handleShareLink( ev.target.value )}}>close</button>
+              <motion.button whileHover={{scale: 1.02}} value="close" onClick={ (ev) => { handleShareLink( ev.target.value )}}>X</motion.button>
             }
             
           </div>
@@ -121,13 +122,13 @@ function SavedPage (props){
                 title={book.title}
                 authors={book.authors} 
                 image={book.image}
-                //isbn={book.isbn}
                 isbn10={book.isbn10}
                 isbn13={book.isbn13}
                 setBooksList={setBooksList}
                 booksList={booksList}
                 setShow={setToastShow}
-              />)
+              />
+              )
             }
           </div>
 

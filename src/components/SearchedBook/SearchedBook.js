@@ -33,7 +33,6 @@ function SearchedBook( props ){
 
   async function checkDB( title, author ){
     try {
-        // pass user ID as props from search page -- only calls once vs. 10 times
         const userID = await getUserID();
         const result = await axios.get(`/api/checkdb/${title}?userID=${userID}&author=${author}`);
         if ( result.data.bookSaved ){

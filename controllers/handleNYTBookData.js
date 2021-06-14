@@ -21,7 +21,7 @@ let nytBooks = {
     }, 
     {
       title: "Humans", 
-      author: "Brnadon Stanton", 
+      author: "Brandon Stanton", 
       isbn10: "1250114292", 
       isbn13: "9781250114297", 
       textSnippet: "Humans is the definitive catalogue of these travels. The faces and locations will vary from page to page, but the stories will feel deeply familiar.", 
@@ -54,23 +54,6 @@ async function nytFeaturedAPICall(){
       console.log("ERROR".red, err)
   };
 };
-
-// async function nytTopBooksAPICall(){
-//   const GB_API = process.env.API_KEY_GB
-//   const bookISBNs = ['1443455733', '1250114292', '1501175300'];
-//   let i;
-//   for ( i = 0; i < bookISBNs.length; i++) {
-//     const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${bookISBNs[i]}&orderBy=newest&key=${GB_API}`;
-//     try {
-//       const apiResult = await fetch( apiURL )
-//         .then(res => res.json())
-//         .catch(err => console.log("ERROR".red, err));
-//       nytBooks.topBooks.push( apiResult.items[0] )
-//     } catch (err) {
-//         console.log("ERROR".red, err)
-//     };
-//   };
-// };
 
 async function nytFictionAPICall(){
   try {

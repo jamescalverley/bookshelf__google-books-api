@@ -1,8 +1,8 @@
 import React, { useEffect, useState} from 'react';
 import './SearchPage.css';
 import { useParams } from 'react-router-dom';
-import SearchInput from '../SearchInput/SearchInput';
-import SearchedBook from '../SearchedBook/SearchedBook';
+import SearchInput from '../../components/SearchInput/SearchInput';
+import SearchedBook from '../../components/SearchedBook/SearchedBook';
 import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
@@ -66,7 +66,6 @@ function SearchPage(props){
           { searchDisplay && 
             
             <div className="search-container">
-              {/* <h1>{displayText}</h1> */}
               <h1>Search Results for 
                 <span className="searchterm"> "{searchTerm}"</span>
               </h1>

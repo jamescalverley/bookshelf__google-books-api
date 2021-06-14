@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams,   } from 'react-router-dom';
 import './SharedPage.css';
-import SharedBook from '../SharedBook/SharedBook';
+import SharedBook from '../../components/SharedBook/SharedBook';
+import { motion } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 const axios = require('axios');
 
@@ -42,7 +43,7 @@ function SharedPage() {
         )}
       </div>
       <a className="exploreBtn" href={homepage}>
-        <button>Discover more books</button>
+        <motion.button whileHover={{ scale: 1.06 }}>Discover more books</motion.button>
       </a>
       
     </div>

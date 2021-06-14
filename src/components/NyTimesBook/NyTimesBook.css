@@ -20,6 +20,7 @@
   border-radius: 10px;
   border: none;
   margin-bottom: 0.5rem;
+  box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
 }
 .nyt-book:hover {
   cursor: pointer;
